@@ -35,7 +35,7 @@ public class MainBaseAdapter extends BaseAdapter{
 				Context.LAYOUT_INFLATER_SERVICE);
 	}
 
-	public void addItem(final Map item){
+	public void addItem(final Map<String, Object> item){
 //		logPrint.Debug("====addItem ..item = " + item);
 		mData.add(item);
 		notifyDataSetChanged();
@@ -43,30 +43,31 @@ public class MainBaseAdapter extends BaseAdapter{
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		logPrint.Debug("====getCount === mData.size() = " + mData.size());
+//		logPrint.Debug("====getCount === mData.size() = " + mData.size());
 		return mData.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
 		// TODO Auto-generated method stub
-		logPrint.Debug("====getItem === mData.get(position) = " + mData.get(position));
+//		logPrint.Debug("====getItem === mData.get(position) = " + mData.get(position));
 		return mData.get(position);
 	}
 
 	@Override
 	public long getItemId(int position) {
 		// TODO Auto-generated method stub
-		logPrint.Debug("====getItemId === position = " + position);
+//		logPrint.Debug("====getItemId === position = " + position);
 		return position;
 	}
 
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
-//		logPrint.Debug("====getView; position = " + position + "; convertView = " + convertView);
+		
+		logPrint.Debug("====getView; position = " + position + "; convertView = " + convertView);
 		ViewHolder holder = null;
-		// 节省避免重复findViewById而导致的性能下降
+		// Optimize the speed
 		if(convertView == null){
 			convertView = mInflater.inflate(R.layout.item, null);
 			holder = new ViewHolder();
@@ -90,9 +91,9 @@ public class MainBaseAdapter extends BaseAdapter{
 //				logPrint.Debug("====onCheckedChanged==== buttonView = " + buttonView
 //						+ "; isChecked = " + isChecked);
 				if(isChecked){
-					logPrint.Debug("===== delete the item task ， position = " + position);
+					logPrint.Debug("===== delete the item task = position = " + position);
 					if(position < 0 || position >= mData.size()){
-						logPrint.Debug("===== out of positio = " + position);
+						logPrint.Debug("===== out of position = " + position);
 					} else {
 						mData.remove(position);
 						notifyDataSetChanged();

@@ -33,7 +33,13 @@
             android:layout_gravity="center_vertical"/>
     </LinearLayout>
     
-    <ListView
+<!--     <ListView -->
+<!--         android:id="@+id/main_list" -->
+<!--         android:layout_width="match_parent" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:layout_below="@id/ly_addtask"/> -->
+<!-- 自定义List，添加下拉添加功能 -->
+	<com.dreamfly.timeschedule.maininterface.MyListView
         android:id="@+id/main_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

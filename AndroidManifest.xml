@@ -31,6 +31,9 @@
             android:name="com.dreamfly.timeschedule.maininterface.MainInterface"
             android:theme="@android:style/Theme.Light.NoTitleBar"
             android:windowSoftInputMode="stateHidden"/>
+         <activity
+             android:name="com.dreamfly.timeschedule.maininterface.AddTask"
+             android:theme="@android:style/Theme.Light.NoTitleBar"/>
     </application>
 
 </manifest>

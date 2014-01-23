@@ -121,7 +121,6 @@ public class MainActivity extends Activity implements OnClickListener, OnPageCha
 		Log.d(TAG, "===onPageScrollStateChanged====arg0 = " + arg0 + "; mCount = " + mCount);
 		// 向右滑onPageScrolled持续超过3次后，再执行动作
 		if(arg0 == 0 && mCount > 3){
-			Toast.makeText(this, "进入首页", Toast.LENGTH_SHORT).show();
 			Intent intent = new Intent();
 //			intent.setClass(MainActivity.this, MainListInterface.class);
 			intent.setClass(MainActivity.this, MainInterface.class);
