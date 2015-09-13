@@ -112,7 +112,6 @@ public class MainActivity extends Activity implements OnClickListener, OnPageCha
 		Log.d(TAG, "===onPageScrollStateChanged====arg0 = " + arg0 + "; mCount = " + mCount);
 		if(arg0 == 0 && mCount > 3){
 			Intent intent = new Intent();
-//			intent.setClass(MainActivity.this, MainListInterface.class);
 			intent.setClass(MainActivity.this, MainInterface.class);
 			startActivity(intent);
 			overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
@@ -136,7 +135,6 @@ public class MainActivity extends Activity implements OnClickListener, OnPageCha
 	public void onPageSelected(int arg0) {
 		// TODO Auto-generated method stub
 		Log.d(TAG, "====onPageSelected==== arg0 = " + arg0);
-		// ���õ�ǰ�㱻ѡ��
 		setCurDot(arg0);
 	}
 

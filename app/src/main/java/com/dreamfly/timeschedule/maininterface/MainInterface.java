@@ -37,16 +37,13 @@ public class MainInterface extends Activity{
 		setClickListener();
 		// create adapt
 		mAdapter = new MainBaseAdapter(this);
+		// For test
 //		for(int i = 0; i < 10; i++){
 //			mAdapter.addItem("item " + i);
 //		}
 		mListView.setAdapter(mAdapter);
 		mListView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 					
-					/**
-					 * arg2  item click??
-					 * arg3  item click??
-					 * */
 					@Override
 					public void onItemSelected(AdapterView<?> arg0, View arg1,
 							int arg2, long arg3) {
