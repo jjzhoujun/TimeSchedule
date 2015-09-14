@@ -67,7 +67,10 @@ public final class R {
     public static final class string {
         public static final int action_settings=0x7f070000;
         public static final int app_name=0x7f070001;
-        public static final int hello_world=0x7f070002;
+        public static final int str_import_not_urgent=0x7f070002;
+        public static final int str_import_urgent=0x7f070003;
+        public static final int str_not_import_not_urgent=0x7f070004;
+        public static final int str_not_import_urgent=0x7f070005;
     }
     public static final class style {
         /**  API 11 theme customizations can go here. 

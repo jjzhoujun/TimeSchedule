@@ -3,6 +3,9 @@
 
     <string name="app_name">TimeSchedule</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="str_import_urgent">Import, Urgent</string>
+    <string name="str_import_not_urgent">Import, Not Urgent</string>
+    <string name="str_not_import_urgent">Not Import, Urgent</string>
+    <string name="str_not_import_not_urgent">Not Import, Not Urgent</string>
 
 </resources>

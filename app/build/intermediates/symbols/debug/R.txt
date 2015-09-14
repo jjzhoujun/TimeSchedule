@@ -42,6 +42,9 @@ int layout showlisthead 0x7f030004
 int menu main 0x7f080000
 int string action_settings 0x7f070000
 int string app_name 0x7f070001
-int string hello_world 0x7f070002
+int string str_import_not_urgent 0x7f070002
+int string str_import_urgent 0x7f070003
+int string str_not_import_not_urgent 0x7f070004
+int string str_not_import_urgent 0x7f070005
 int style AppBaseTheme 0x7f060000
 int style AppTheme 0x7f060001

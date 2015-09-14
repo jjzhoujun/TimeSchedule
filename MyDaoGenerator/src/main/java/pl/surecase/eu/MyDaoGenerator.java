@@ -30,11 +30,12 @@ public class MyDaoGenerator {
     private static void initUserBean(Schema schema) {
 
         // Common table
-        Entity userBean = schema.addEntity("TS"); // Table Name Entity..
-        userBean.setTableName("_table_common"); // 可以对表重命名
+        Entity userBean = schema.addEntity("TSBox"); // Table Name Entity..
+        userBean.setTableName("_tl_time_schedule"); // 可以对表重命名
         userBean.addLongProperty("id").primaryKey().index(); // Primary key, index.
         userBean.addBooleanProperty("b_finish");
         userBean.addStringProperty("s_title");
         userBean.addIntProperty("i_status");
+        userBean.addStringProperty("s_start_time");
     }
 }

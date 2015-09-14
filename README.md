@@ -8,4 +8,8 @@
 
 *Author*: Jayden
 
-*Platform*: Android
+*Verions:*
+
+2014-01-29    V1.0.0  初始化对应的控件，ViewPager控制前面翻页效果.
+2015-09-13    V2.0.0  将Android Eclipse编辑方式换成AndroidStudio.
+2015-09-15    V2.1.0  利用开源数据库GreenDao,借此借此偶尔看看。

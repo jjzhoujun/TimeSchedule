@@ -2,7 +2,7 @@ package com.dreamfly.debuginfo;
 
 import android.util.Log;
 
-public class logPrint {
+public class LogPrint {
 	public static boolean debug = true;
 	public static boolean warning = true;
 	public static boolean fatal = true;
