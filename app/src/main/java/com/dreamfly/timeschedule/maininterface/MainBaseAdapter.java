@@ -74,9 +74,15 @@ public class MainBaseAdapter extends BaseAdapter{
 		} else {
 			holder = (ViewHolder)convertView.getTag();
 		}
-		holder.TxtHeading.setText(mData.get(position).getS_titile());
-		holder.TxtStateinfo.setText(CommonUtils.getInstance(mContext).getTaskStatus(mData.get(position).getI_status()));
-		holder.TxtTime.setText(mData.get(position).getS_start_time());
+		String title = mData.get(position).getS_titile();
+		String status = CommonUtils.getInstance(mContext).getTaskStatus(mData.get(position).getI_status());
+		String s_time = mData.get(position).getS_start_time();
+
+		LogPrint.Debug("===>>>>S_title => " + title + "; status = " + status + "; s_time = " + s_time);
+
+		holder.TxtHeading.setText(title);
+		holder.TxtStateinfo.setText(status);
+		holder.TxtTime.setText(s_time);
 		holder.checkBox.setChecked(false);
 		holder.checkBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			

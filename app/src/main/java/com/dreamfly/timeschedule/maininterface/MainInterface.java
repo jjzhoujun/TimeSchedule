@@ -1,10 +1,5 @@
 package com.dreamfly.timeschedule.maininterface;
 
-import java.text.SimpleDateFormat;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -19,11 +14,10 @@ import com.dreamfly.debuginfo.LogPrint;
 import com.dreamfly.timeschedule.R;
 import com.dreamfly.timeschedule.maininterface.MyListView.OnRefreshListener;
 import com.dreamfly.timeschedule.model.TimeStruct;
-import com.dreamfly.timeschedule.utils.greendao.TSDatabaseMgr;
 import com.dreamfly.timeschedule.utils.greendao.TSDatabaseMgrMul;
-import com.dreamfly.timeschedule.utils.greendao.TSRepository;
 
-import greendao.TSBox;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 public class MainInterface extends Activity{
 	
@@ -146,19 +140,12 @@ public class MainInterface extends Activity{
 						} else {
 							SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd  hh:mm:ss");     
 							String date = sDateFormat.format(new java.util.Date()); 
-//							TSDatabaseMgrMul tsDatabaseMgrMul = new TSDatabaseMgrMul(getApplicationContext()); // Memory leak??
-//							tsDatabaseMgrMul.newDataBase();
-//							tsDatabaseMgrMul.setTSFinish(false);
-//                            tsDatabaseMgrMul.setTSTitle(mEditText.getText().toString());
-//							tsDatabaseMgrMul.setTSStatus(0);
-//							tsDatabaseMgrMul.setTSStartTime(date);
-//							mAdapter.addItem(tsDatabaseMgrMul);
-							TimeStruct timeStruct = new TimeStruct(); // Memory leak??
+							TimeStruct timeStruct = new TimeStruct();
 							timeStruct.setB_finish(false);
 							timeStruct.setS_titile(mEditText.getText().toString());
 							timeStruct.setI_status(0);
 							timeStruct.setS_start_time(date);
-							TSDatabaseMgrMul tsDatabaseMgrMul = new TSDatabaseMgrMul(getApplicationContext()); // Memory leak??
+							TSDatabaseMgrMul tsDatabaseMgrMul = new TSDatabaseMgrMul(getApplicationContext());
 							tsDatabaseMgrMul.newDataBase();
 							tsDatabaseMgrMul.setDataBox(timeStruct);
 							mAdapter.addItem(timeStruct);

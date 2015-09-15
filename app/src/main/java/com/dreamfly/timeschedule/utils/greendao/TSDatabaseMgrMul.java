@@ -43,7 +43,6 @@ public class TSDatabaseMgrMul {
     }
 
     public void setDataBox(TimeStruct timeStruct) {
-        mTSBox.setId(timeStruct.getId());
         mTSBox.setB_finish(timeStruct.getB_finish());
         mTSBox.setS_title(timeStruct.getS_titile());
         mTSBox.setI_status(timeStruct.getI_status());
@@ -56,7 +55,7 @@ public class TSDatabaseMgrMul {
         List<TSBox> tsBoxList = TSRepository.getAllBoxes(mContext);
         List<TimeStruct> timeStructList = new ArrayList<TimeStruct>();
         for(int i=0; i<tsBoxList.size(); i++) {
-            LogPrint.Debug("===>>>i = " + i + "; tsBox = " + tsBoxList.get(i)
+            LogPrint.Debug("===>>>i = " + i
                 + "; b_f = " + tsBoxList.get(i).getB_finish()
                 + "; s_title = " + tsBoxList.get(i).getS_title()
                 + "; i_status = " + tsBoxList.get(i).getI_status()
