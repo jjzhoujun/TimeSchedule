@@ -10,9 +10,7 @@
 
 *Verions:*
 
-**V1.0.0**  初始化对应的控件，ViewPager控制前面翻页效果. 2014-01-29 
-
-**V2.0.0**  将Android Eclipse编辑方式换成AndroidStudio. 2015-09-13
-
-**V2.1.0**  利用开源数据库GreenDao,ORM来管理Sqlite数据库. 2015-09-15
-**V2.1.1**  修改listview底部再往下拉的时候不能出现对应数据的问题. 2015-09-15
+**V1.0.0**  初始化对应的控件，ViewPager控制前面翻页效果. 2014-01-29  
+**V2.0.0**  将Android Eclipse编辑方式换成AndroidStudio. 2015-09-13  
+**V2.1.0**  利用开源数据库GreenDao,ORM来管理Sqlite数据库. 2015-09-15  
+**V2.1.1**  修改listview底部再往下拉的时候不能出现对应数据的问题. 2015-09-15  
