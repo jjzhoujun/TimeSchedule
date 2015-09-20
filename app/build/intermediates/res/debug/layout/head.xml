@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- ListView的头部 -->
+
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content"
+  android:background="#ffffff"
+ >
+  
+  <!-- 内容 -->
+  <RelativeLayout
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content"
+  android:id="@+id/head_contentLayout"
+  android:paddingLeft="30dp"
+  >
+  
+  <!-- 箭头图像、进度条 -->
+  <FrameLayout
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:layout_alignParentLeft="true"
+  android:layout_centerVertical="true"
+  >
+  
+  <!-- 箭头 -->
+  <ImageView
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:layout_gravity="center"
+  android:src="@drawable/arrow_down"
+  android:id="@+id/head_arrowImageView"
+  />
+  
+  </FrameLayout>
+  
+   <!-- 提示 -->
+  <TextView
+  	android:layout_width="wrap_content"
+  	android:layout_height="wrap_content"
+  	android:layout_centerInParent="true"
+  	android:text="下拉创建新任务"
+  	android:textSize="20dp"
+  	android:id="@+id/head_tipsTextView"
+  />
+  
+  </RelativeLayout>
+  
+  
+</LinearLayout>
+<!-- From: file:/mnt/GT/Code_Pro/github/TimeSchedule/app/src/main/res/layout/head.xml -->

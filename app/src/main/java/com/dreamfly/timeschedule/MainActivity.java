@@ -56,7 +56,7 @@ public class MainActivity extends Activity implements OnClickListener, OnPageCha
 		for(int i = 0; i < mPics.length; i++){
 			ImageView imgView = new ImageView(this);
 			imgView.setLayoutParams(params);
-//			imgView.setScaleType(ScaleType.FIT_XY);
+			imgView.setScaleType(ScaleType.FIT_XY);
 			imgView.setImageResource(mPics[i]);
 			mViews.add(imgView);
 //			Bitmap bitmap = readBitMap(this, mPics[i]);
