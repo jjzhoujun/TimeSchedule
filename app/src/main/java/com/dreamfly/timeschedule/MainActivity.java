@@ -1,26 +1,25 @@
 package com.dreamfly.timeschedule;
 
-import java.io.InputStream;
-import java.util.ArrayList;
-
-import com.dreamfly.timeschedule.maininterface.MainInterface;
-
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
-import android.widget.Toast;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
+
+import com.dreamfly.debuginfo.LogPrint;
+import com.dreamfly.timeschedule.view.UIMainInterface;
+
+import java.io.InputStream;
+import java.util.ArrayList;
 
 public class MainActivity extends Activity implements OnClickListener, OnPageChangeListener{
 	private static final String TAG = "ViewPagerTest";
@@ -109,10 +108,10 @@ public class MainActivity extends Activity implements OnClickListener, OnPageCha
 	@Override
 	public void onPageScrollStateChanged(int arg0) {
 		// TODO Auto-generated method stub
-		Log.d(TAG, "===onPageScrollStateChanged====arg0 = " + arg0 + "; mCount = " + mCount);
+		LogPrint.Debug("===onPageScrollStateChanged====arg0 = " + arg0 + "; mCount = " + mCount);
 		if(arg0 == 0 && mCount > 3){
 			Intent intent = new Intent();
-			intent.setClass(MainActivity.this, MainInterface.class);
+			intent.setClass(MainActivity.this, UIMainInterface.class);
 			startActivity(intent);
 			overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 			finish();
@@ -127,14 +126,14 @@ public class MainActivity extends Activity implements OnClickListener, OnPageCha
 		if(arg0 == mPics.length - 1){
 			mCount++;
 		}
-		Log.d(TAG, "====onPageScrolled===arg0 = " + arg0 + "; arg1 = " + arg1 
+		LogPrint.Debug("====onPageScrolled===arg0 = " + arg0 + "; arg1 = " + arg1
 				+ "; arg2 = " + arg2 + "; mPics.length = " + mPics.length + "; mCount = " + mCount);
 	}
 
 	@Override
 	public void onPageSelected(int arg0) {
 		// TODO Auto-generated method stub
-		Log.d(TAG, "====onPageSelected==== arg0 = " + arg0);
+		LogPrint.Debug("====onPageSelected==== arg0 = " + arg0);
 		setCurDot(arg0);
 	}
 
@@ -142,7 +141,7 @@ public class MainActivity extends Activity implements OnClickListener, OnPageCha
 	public void onClick(View arg0) {
 		// TODO Auto-generated method stub
 		int position = (Integer)arg0.getTag();
-		Log.d(TAG, "====onClick ==== position = " + position);
+		LogPrint.Debug("====onClick ==== position = " + position);
 		setCurView(position);
 		setCurDot(position);
 	}
@@ -151,7 +150,7 @@ public class MainActivity extends Activity implements OnClickListener, OnPageCha
 		if(position < 0 || position >= mPics.length){
 			return ;
 		}
-		Log.d(TAG, "====setCurView====");
+		LogPrint.Debug("====setCurView====");
 		mViewPager.setCurrentItem(position);
 	}
 	
@@ -159,7 +158,7 @@ public class MainActivity extends Activity implements OnClickListener, OnPageCha
 		if(position < 0 || position >= mPics.length || position == mCurrIndex){
 			return ;
 		}
-		Log.d(TAG, "======setCurDot======");
+		LogPrint.Debug("======setCurDot======");
 		mPoints[position].setEnabled(false);
 		mPoints[mCurrIndex].setEnabled(true);
 		mCurrIndex = position;

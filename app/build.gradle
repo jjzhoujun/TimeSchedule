@@ -6,8 +6,8 @@ android {
 
     defaultConfig {
         applicationId "com.dreamfly.timeschedule"
-        minSdkVersion 8
-        targetSdkVersion 18
+        minSdkVersion 17
+        targetSdkVersion 20
     }
 
     buildTypes {

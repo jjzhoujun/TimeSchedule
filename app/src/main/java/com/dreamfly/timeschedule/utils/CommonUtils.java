@@ -1,8 +1,13 @@
 package com.dreamfly.timeschedule.utils;
 
 import android.content.Context;
+import android.content.Intent;
 
 import com.dreamfly.timeschedule.R;
+import com.dreamfly.timeschedule.model.TimeStruct;
+import com.dreamfly.timeschedule.utils.greendao.TSDatabaseMgrMul;
+
+import java.text.SimpleDateFormat;
 
 /**
  * Created by jayden on 15-9-14.
@@ -21,7 +26,7 @@ public class CommonUtils {
     }
 
     private CommonUtils(Context context) {
-        mContext = context.getApplicationContext();
+        mContext = context;
     }
 
     public String getTaskStatus(final int value) {
@@ -38,5 +43,30 @@ public class CommonUtils {
                 break;
         }
         return mContext.getString(R.string.str_import_urgent);
+    }
+
+    public void startActivity(String pkgName, String clzName) {
+        try {
+            Intent intent = new Intent();
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setClassName(pkgName, clzName);
+            mContext.startActivity(intent);
+        } catch(Exception e){
+
+        }
+    }
+
+    public TimeStruct saveTimeStuct(String title) {
+        SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd  hh:mm:ss");
+        String date = sDateFormat.format(new java.util.Date());
+        TimeStruct timeStruct = new TimeStruct();
+        timeStruct.setB_finish(false);
+        timeStruct.setS_titile(title);
+        timeStruct.setI_status(0);
+        timeStruct.setS_start_time(date);
+        TSDatabaseMgrMul tsDatabaseMgrMul = new TSDatabaseMgrMul(mContext);
+        tsDatabaseMgrMul.newDataBase();
+        tsDatabaseMgrMul.setDataBox(timeStruct);
+        return timeStruct;
     }
 }

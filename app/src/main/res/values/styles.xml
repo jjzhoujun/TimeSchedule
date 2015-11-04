@@ -17,4 +17,13 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
+    <style name="CustomCheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/selector_checkbox</item>
+    </style>
+
+
+    <style name="CustomCheckBoxLitle" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/selector_checkbox_litle</item>
+    </style>
+
 </resources>

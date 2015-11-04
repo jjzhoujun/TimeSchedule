@@ -5,8 +5,8 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
-        android:targetSdkVersion="18" />
+        android:minSdkVersion="17"
+        android:targetSdkVersion="20" />
 
     <application
         android:allowBackup="true"
@@ -25,11 +25,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.dreamfly.timeschedule.maininterface.MainInterface"
+            android:name=".view.UIMainInterface"
             android:theme="@android:style/Theme.Light.NoTitleBar"
             android:windowSoftInputMode="stateHidden"/>
          <activity
-             android:name="com.dreamfly.timeschedule.maininterface.AddTask"
+             android:name=".view.UIAddTask"
              android:theme="@android:style/Theme.Light.NoTitleBar"/>
     </application>
 
