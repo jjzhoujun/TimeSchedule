@@ -8,6 +8,9 @@
 
 *Author*: Jayden
 
+效果如下：
+![demo](http://heiheimonkey.com/wp-content/uploads/2015/10/Chap0_begin.gif)
+
 *Verions:*
 
 **V1.0.0**  初始化对应的控件，ViewPager控制前面翻页效果. 2014-01-29  
