@@ -3,8 +3,6 @@ package com.dreamfly.timeschedule;
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.dreamfly.timeschedule.utils.greendao.TSDatabaseMgr;
-
 import greendao.DaoMaster;
 import greendao.DaoSession;
 

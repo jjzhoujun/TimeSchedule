@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_checked="true" android:drawable="@drawable/ic_action_24_checked"/>
-    <item android:state_checked="false" android:drawable="@drawable/ic_action_24_unchecked"/>
-    <item android:drawable="@drawable/ic_action_24_unchecked"/>
-</selector><!-- From: file:/mnt/GT/Code_Pro/github/TimeSchedule/app/src/main/res/drawable/selector_checkbox_litle.xml -->

@@ -31,7 +31,7 @@
     </LinearLayout>
     
 <!-- 自定义List，添加下拉添加功能 -->
-	<com.dreamfly.timeschedule.view.MyListView
+	<com.dreamfly.timeschedule.view.widget.ListViewPullToRef
         android:id="@+id/main_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.dreamfly.timeschedule.R;
-import com.dreamfly.timeschedule.model.TimeStruct;
+import com.dreamfly.timeschedule.model.TimeItemEntity;
 import com.dreamfly.timeschedule.utils.greendao.TSDatabaseMgrMul;
 
 import java.text.SimpleDateFormat;
@@ -56,10 +56,10 @@ public class CommonUtils {
         }
     }
 
-    public TimeStruct saveTimeStuct(String title) {
+    public TimeItemEntity saveTimeStuct(String title) {
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd  hh:mm:ss");
         String date = sDateFormat.format(new java.util.Date());
-        TimeStruct timeStruct = new TimeStruct();
+        TimeItemEntity timeStruct = new TimeItemEntity();
         timeStruct.setB_finish(false);
         timeStruct.setS_titile(title);
         timeStruct.setI_status(0);

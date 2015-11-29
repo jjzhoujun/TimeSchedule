@@ -3,7 +3,7 @@ package com.dreamfly.timeschedule.utils.greendao;
 import android.content.Context;
 
 import com.dreamfly.debuginfo.LogPrint;
-import com.dreamfly.timeschedule.model.TimeStruct;
+import com.dreamfly.timeschedule.model.TimeItemEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +42,7 @@ public class TSDatabaseMgrMul {
         TSRepository.insertOrUpdate(mContext, mTSBox);
     }
 
-    public void setDataBox(TimeStruct timeStruct) {
+    public void setDataBox(TimeItemEntity timeStruct) {
         mTSBox.setB_finish(timeStruct.getB_finish());
         mTSBox.setS_title(timeStruct.getS_titile());
         mTSBox.setI_status(timeStruct.getI_status());
@@ -50,17 +50,17 @@ public class TSDatabaseMgrMul {
         TSRepository.insertOrUpdate(mContext, mTSBox);
     }
 
-    public List<TimeStruct> getAllBoxesData() {
+    public List<TimeItemEntity> getAllBoxesData() {
         LogPrint.Debug("==>>>> get the all Boxes??? memory..");
         List<TSBox> tsBoxList = TSRepository.getAllBoxes(mContext);
-        List<TimeStruct> timeStructList = new ArrayList<TimeStruct>();
+        List<TimeItemEntity> timeStructList = new ArrayList<TimeItemEntity>();
         for(int i=0; i<tsBoxList.size(); i++) {
             LogPrint.Debug("===>>>i = " + i
                 + "; b_f = " + tsBoxList.get(i).getB_finish()
                 + "; s_title = " + tsBoxList.get(i).getS_title()
                 + "; i_status = " + tsBoxList.get(i).getI_status()
                 + "; s_time = " + tsBoxList.get(i).getS_start_time());
-            TimeStruct timeStruct = new TimeStruct();
+            TimeItemEntity timeStruct = new TimeItemEntity();
             timeStruct.setId(tsBoxList.get(i).getId());
             timeStruct.setB_finish(tsBoxList.get(i).getB_finish());
             timeStruct.setS_titile(tsBoxList.get(i).getS_title());
