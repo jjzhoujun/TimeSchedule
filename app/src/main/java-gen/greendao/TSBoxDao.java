@@ -27,7 +27,10 @@ public class TSBoxDao extends AbstractDao<TSBox, Long> {
         public final static Property B_finish = new Property(1, Boolean.class, "b_finish", false, "B_FINISH");
         public final static Property S_title = new Property(2, String.class, "s_title", false, "S_TITLE");
         public final static Property I_status = new Property(3, Integer.class, "i_status", false, "I_STATUS");
-        public final static Property S_start_time = new Property(4, String.class, "s_start_time", false, "S_START_TIME");
+        public final static Property S_notice = new Property(4, String.class, "s_notice", false, "S_NOTICE");
+        public final static Property S_start_time = new Property(5, String.class, "s_start_time", false, "S_START_TIME");
+        public final static Property S_end_time = new Property(6, String.class, "s_end_time", false, "S_END_TIME");
+        public final static Property B_alarm = new Property(7, Boolean.class, "b_alarm", false, "B_ALARM");
     };
 
 
@@ -47,7 +50,10 @@ public class TSBoxDao extends AbstractDao<TSBox, Long> {
                 "'B_FINISH' INTEGER," + // 1: b_finish
                 "'S_TITLE' TEXT," + // 2: s_title
                 "'I_STATUS' INTEGER," + // 3: i_status
-                "'S_START_TIME' TEXT);"); // 4: s_start_time
+                "'S_NOTICE' TEXT," + // 4: s_notice
+                "'S_START_TIME' TEXT," + // 5: s_start_time
+                "'S_END_TIME' TEXT," + // 6: s_end_time
+                "'B_ALARM' INTEGER);"); // 7: b_alarm
         // Add Indexes
         db.execSQL("CREATE INDEX " + constraint + "IDX__tl_time_schedule_ID ON _tl_time_schedule" +
                 " (ID);");
@@ -84,9 +90,24 @@ public class TSBoxDao extends AbstractDao<TSBox, Long> {
             stmt.bindLong(4, i_status);
         }
  
+        String s_notice = entity.getS_notice();
+        if (s_notice != null) {
+            stmt.bindString(5, s_notice);
+        }
+ 
         String s_start_time = entity.getS_start_time();
         if (s_start_time != null) {
-            stmt.bindString(5, s_start_time);
+            stmt.bindString(6, s_start_time);
+        }
+ 
+        String s_end_time = entity.getS_end_time();
+        if (s_end_time != null) {
+            stmt.bindString(7, s_end_time);
+        }
+ 
+        Boolean b_alarm = entity.getB_alarm();
+        if (b_alarm != null) {
+            stmt.bindLong(8, b_alarm ? 1l: 0l);
         }
     }
 
@@ -104,7 +125,10 @@ public class TSBoxDao extends AbstractDao<TSBox, Long> {
             cursor.isNull(offset + 1) ? null : cursor.getShort(offset + 1) != 0, // b_finish
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // s_title
             cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3), // i_status
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4) // s_start_time
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // s_notice
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // s_start_time
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // s_end_time
+            cursor.isNull(offset + 7) ? null : cursor.getShort(offset + 7) != 0 // b_alarm
         );
         return entity;
     }
@@ -116,7 +140,10 @@ public class TSBoxDao extends AbstractDao<TSBox, Long> {
         entity.setB_finish(cursor.isNull(offset + 1) ? null : cursor.getShort(offset + 1) != 0);
         entity.setS_title(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setI_status(cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3));
-        entity.setS_start_time(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setS_notice(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setS_start_time(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setS_end_time(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setB_alarm(cursor.isNull(offset + 7) ? null : cursor.getShort(offset + 7) != 0);
      }
     
     /** @inheritdoc */

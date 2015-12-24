@@ -10,7 +10,10 @@ public class TSBox {
     private Boolean b_finish;
     private String s_title;
     private Integer i_status;
+    private String s_notice;
     private String s_start_time;
+    private String s_end_time;
+    private Boolean b_alarm;
 
     public TSBox() {
     }
@@ -19,12 +22,15 @@ public class TSBox {
         this.id = id;
     }
 
-    public TSBox(Long id, Boolean b_finish, String s_title, Integer i_status, String s_start_time) {
+    public TSBox(Long id, Boolean b_finish, String s_title, Integer i_status, String s_notice, String s_start_time, String s_end_time, Boolean b_alarm) {
         this.id = id;
         this.b_finish = b_finish;
         this.s_title = s_title;
         this.i_status = i_status;
+        this.s_notice = s_notice;
         this.s_start_time = s_start_time;
+        this.s_end_time = s_end_time;
+        this.b_alarm = b_alarm;
     }
 
     public Long getId() {
@@ -59,12 +65,36 @@ public class TSBox {
         this.i_status = i_status;
     }
 
+    public String getS_notice() {
+        return s_notice;
+    }
+
+    public void setS_notice(String s_notice) {
+        this.s_notice = s_notice;
+    }
+
     public String getS_start_time() {
         return s_start_time;
     }
 
     public void setS_start_time(String s_start_time) {
         this.s_start_time = s_start_time;
+    }
+
+    public String getS_end_time() {
+        return s_end_time;
+    }
+
+    public void setS_end_time(String s_end_time) {
+        this.s_end_time = s_end_time;
+    }
+
+    public Boolean getB_alarm() {
+        return b_alarm;
+    }
+
+    public void setB_alarm(Boolean b_alarm) {
+        this.b_alarm = b_alarm;
     }
 
 }

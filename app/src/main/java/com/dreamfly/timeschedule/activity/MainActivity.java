@@ -40,8 +40,13 @@ public class MainActivity extends Activity implements OnClickListener, OnPageCha
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		initView();
-		initData();
+		if(true) {
+			startMainListActivity();
+			finish();
+		} else {
+			initView();
+			initData();
+		}
 	}
 	
 	public void initView(){
@@ -89,7 +94,7 @@ public class MainActivity extends Activity implements OnClickListener, OnPageCha
      * @param resId
      * @return
      */  
-	public static Bitmap readBitMap(Context context, int resId){  
+	public static Bitmap readBitMap(Context context, int resId) {
 		BitmapFactory.Options opt = new BitmapFactory.Options();  
 		opt.inPreferredConfig = Bitmap.Config.RGB_565;   
 		opt.inPurgeable = true;  
@@ -111,14 +116,18 @@ public class MainActivity extends Activity implements OnClickListener, OnPageCha
 		// TODO Auto-generated method stub
 		LogPrint.Debug("===onPageScrollStateChanged====arg0 = " + arg0 + "; mCount = " + mCount);
 		if(arg0 == 0 && mCount > 3){
-			Intent intent = new Intent();
-			intent.setClass(MainActivity.this, UIMainListActivity.class);
-			startActivity(intent);
+			startMainListActivity();
 			overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 			finish();
 		} 
 		mCount = 0;
 		
+	}
+
+	private void startMainListActivity() {
+		Intent intent = new Intent();
+		intent.setClass(MainActivity.this, UIMainListActivity.class);
+		startActivity(intent);
 	}
 
 	@Override

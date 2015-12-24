@@ -5,10 +5,13 @@ package com.dreamfly.timeschedule.model;
  */
 public class TimeItemEntity {
     private long _id;
-    private boolean b_finish;
-    private String s_titile;
-    private int i_status;
-    private String s_start_time;
+    private boolean b_finish;   // 是否完成,并删除
+    private String s_titile;    // 标题
+    private int i_status;       // 优先级
+    private String s_notice;    // 备注信息
+    private String s_start_time;// 起始时间.
+    private String s_end_time;  // 结束时间.
+    private boolean b_alarm;    // 是否需要闹铃提醒.
 
     public TimeItemEntity() {
 
@@ -46,6 +49,14 @@ public class TimeItemEntity {
         return this.i_status;
     }
 
+    public void setS_notice(String str) {
+        this.s_notice = str;
+    }
+
+    public String getS_notice() {
+        return this.s_notice;
+    }
+
     public void setS_start_time(String str) {
         this.s_start_time = str;
     }
@@ -53,4 +64,23 @@ public class TimeItemEntity {
     public String getS_start_time() {
         return this.s_start_time;
     }
+
+    public void setS_end_time(String str) {
+        this.s_end_time = str;
+    }
+
+    public String getS_end_time() {
+        return this.s_end_time;
+    }
+
+    public void setB_alarm(boolean bOn) {
+        this.b_alarm = bOn;
+    }
+
+    public boolean getB_alarm() {
+        return this.b_alarm;
+    }
+
+
+
 }

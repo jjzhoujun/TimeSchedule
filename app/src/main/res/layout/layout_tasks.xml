@@ -6,15 +6,17 @@
     <LinearLayout
         android:id="@+id/ly_addtask"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:padding="10dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/normal_horizontal_margin"
+        android:layout_marginEnd="@dimen/normal_horizontal_margin"
+        android:layout_marginTop="@dimen/normal_vertical_margin"
+        android:layout_marginBottom="@dimen/normal_vertical_margin"
         android:orientation="horizontal">
         <com.dreamfly.timeschedule.view.widget.EditTextWithDel
             android:id="@+id/main_edit_task"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="@dimen/textedit_height"
             android:layout_weight="6"
-            android:layout_marginStart="10dp"
             android:background="@drawable/main_edit_task"
             android:layout_gravity="center_vertical"
             android:singleLine="true"
@@ -23,8 +25,7 @@
             android:id="@+id/main_add"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="4dp"
+            android:layout_marginStart="@dimen/normal_inner_space"
             android:background="@drawable/addimg"
             android:clickable="true"
             android:layout_gravity="center_vertical"/>
@@ -34,7 +35,7 @@
 	<com.dreamfly.timeschedule.view.widget.ListViewPullToRef
         android:id="@+id/main_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@id/ly_addtask"/>
     
 

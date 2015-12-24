@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="color_item_line_blue">#046d9e</color>
+    <color name="color_item_line_blue">#FF046d9e</color>
+    <color name="color_back_bg_normal">#FF32BEFF</color>
+    <color name="color_back_bg_pressed">#5532BEFF</color>
+    <color name="color_save_bg_normal">#FF21e14e</color>
+    <color name="color_save_bg_pressed">#5521e14e</color>
+    <color name="color_del_bg_normal">#FF97a49a</color>
+    <color name="color_del_bg_pressed">#5597a49a</color>
 </resources>

@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import com.dreamfly.debuginfo.LogPrint;
 import com.dreamfly.timeschedule.R;
 import com.dreamfly.timeschedule.adapter.MainBaseAdapter;
+import com.dreamfly.timeschedule.model.ConstantVar;
 import com.dreamfly.timeschedule.utils.CommonUtils;
 import com.dreamfly.timeschedule.view.widget.ListViewPullToRef;
 import com.dreamfly.timeschedule.view.widget.ListViewPullToRef.OnRefreshListener;
@@ -20,6 +21,7 @@ import com.dreamfly.timeschedule.model.TimeItemEntity;
 import com.dreamfly.timeschedule.utils.greendao.TSDatabaseMgrMul;
 import com.dreamfly.timeschedule.view.widget.EditTextWithDel;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class UIMainListActivity extends Activity{
@@ -151,9 +153,17 @@ public class UIMainListActivity extends Activity{
             intent.setClass(UIMainListActivity.this, UIAddTaskActivity.class);
             startActivity(intent);
         } else {
-            TimeItemEntity timeStruct = CommonUtils.getInstance(mContext)
-                    .saveTimeStuct(mEditText.getText().toString());
-            mAdapter.addItem(timeStruct);
+            TimeItemEntity timeItemEntity = new TimeItemEntity();
+            timeItemEntity.setB_finish(false);
+            timeItemEntity.setS_titile(mEditText.getText().toString());
+            timeItemEntity.setI_status(ConstantVar.STATUS_FIRST_LEVEL);
+
+            SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd  hh:mm:ss");
+            String date = sDateFormat.format(new java.util.Date());
+            timeItemEntity.setS_start_time(date);
+            CommonUtils.getInstance(mContext).saveTimeStruct(timeItemEntity);
+
+            mAdapter.addItem(timeItemEntity);
             mEditText.setText("");
         }
     }

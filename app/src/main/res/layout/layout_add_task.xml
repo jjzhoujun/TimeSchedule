@@ -1,223 +1,239 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <com.dreamfly.timeschedule.view.widget.EditTextWithDel
+        android:id="@+id/main_edit_task"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="8dp">
-
-        <CheckBox
-            android:id="@+id/icon_task_choose"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/CustomCheckBox"
-            android:layout_marginStart="6dp"
-            />
-
-        <com.dreamfly.timeschedule.view.widget.EditTextWithDel
-            android:id="@+id/main_edit_task"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:background="@drawable/main_edit_task"
-            android:layout_gravity="center_vertical"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            android:singleLine="true"
-            />
-    </LinearLayout>
+        android:layout_height="@dimen/textedit_height"
+        android:layout_marginStart="@dimen/normal_horizontal_margin"
+        android:layout_marginEnd="@dimen/normal_horizontal_margin"
+        android:layout_marginTop="@dimen/normal_vertical_margin"
+        android:layout_marginBottom="@dimen/normal_vertical_margin"
+        android:background="@drawable/main_edit_task"
+        android:layout_gravity="center_vertical"
+        android:paddingStart="@dimen/textedit_cursor_margin"
+        android:paddingEnd="@dimen/textedit_cursor_margin"
+        android:singleLine="true"
+        />
 
     <ImageView
+        android:id="@+id/line_one"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_margin="8dp"
+        android:layout_margin="@dimen/normal_inner_space"
+        android:layout_below="@id/main_edit_task"
         android:background="@drawable/shape_rectangle_divider"/>
 
     <TableLayout
+        android:id="@+id/table_list_task"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_below="@id/line_one"
+        android:layout_margin="@dimen/normal_inner_space"
         >
         <TableRow>
             <LinearLayout
+                android:id="@+id/ll_first_level"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                >
                 <CheckBox
+                    android:id="@+id/cb_first_level"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/CustomCheckBoxLitle"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="@dimen/normal_inner_space"
+                    android:layout_marginEnd="@dimen/normal_inner_space"
+                    android:clickable="false"
                     android:layout_gravity="center_vertical"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
+                    android:layout_marginEnd="@dimen/normal_inner_space"
                     android:layout_gravity="center"
                     android:text="@string/str_import_urgent"/>
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ly_import_not_urgent"
+                android:id="@+id/ll_second_level"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="horizontal">
                 <CheckBox
+                    android:id="@+id/cb_second_level"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/CustomCheckBoxLitle"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="@dimen/normal_inner_space"
+                    android:layout_marginEnd="@dimen/normal_inner_space"
+                    android:clickable="false"
                     android:layout_gravity="center_vertical"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
+                    android:layout_marginEnd="@dimen/normal_inner_space"
                     android:layout_gravity="center"
                     android:text="@string/str_import_not_urgent"/>
             </LinearLayout>
         </TableRow>
-        <TableRow>
+        <TableRow
+            android:layout_marginTop="@dimen/normal_inner_space">
             <LinearLayout
+                android:id="@+id/ll_third_level"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="horizontal">
                 <CheckBox
+                    android:id="@+id/cb_third_level"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/CustomCheckBoxLitle"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="@dimen/normal_inner_space"
+                    android:layout_marginEnd="@dimen/normal_inner_space"
+                    android:clickable="false"
                     android:layout_gravity="center_vertical"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
+                    android:layout_marginEnd="@dimen/normal_inner_space"
                     android:layout_gravity="center"
-                    android:text="@string/str_import_urgent"/>
+                    android:text="@string/str_not_import_urgent"/>
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_fourth_level"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="horizontal">
                 <CheckBox
+                    android:id="@+id/cb_fourth_level"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/CustomCheckBoxLitle"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="@dimen/normal_inner_space"
+                    android:layout_marginEnd="@dimen/normal_inner_space"
+                    android:clickable="false"
                     android:layout_gravity="center_vertical"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
+                    android:layout_marginEnd="@dimen/normal_inner_space"
                     android:layout_gravity="center"
-                    android:text="@string/str_import_not_urgent"/>
+                    android:text="@string/str_not_import_not_urgent"/>
             </LinearLayout>
         </TableRow>
     </TableLayout>
 
     <ImageView
+        android:id="@+id/line_two"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_margin="8dp"
+        android:layout_below="@id/table_list_task"
+        android:layout_margin="@dimen/normal_inner_space"
         android:background="@drawable/shape_rectangle_divider"/>
 
     <LinearLayout
+        android:id="@+id/alarm_notice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_below="@id/line_two"
+        android:layout_margin="@dimen/normal_inner_space"
         android:orientation="horizontal">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_alarm_black_36dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"/>
+            android:layout_marginStart="@dimen/normal_inner_space"
+            android:layout_marginEnd="@dimen/normal_inner_space"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
+            android:layout_marginStart="@dimen/normal_inner_space"
+            android:layout_marginEnd="@dimen/normal_inner_space"
             android:layout_gravity="center_vertical"
             android:text="2015-09-26 01:32"/>
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
+            android:layout_marginStart="@dimen/normal_inner_space"
+            android:layout_marginEnd="@dimen/normal_inner_space"
             android:layout_gravity="center_vertical"
             android:src="@drawable/ic_trending_flat_black_36dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
+            android:layout_marginStart="@dimen/normal_inner_space"
+            android:layout_marginEnd="@dimen/normal_inner_space"
             android:layout_gravity="center_vertical"
             android:text="2015-09-26 01:32"/>
     </LinearLayout>
 
-    <com.dreamfly.timeschedule.view.widget.EditTextWithDel
+    <RelativeLayout
+        android:id="@+id/ly_function_btn"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="@dimen/button_layout_height"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/normal_horizontal_margin"
+        android:layout_marginEnd="@dimen/normal_horizontal_margin"
+        android:layout_marginTop="@dimen/normal_inner_space"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        >
+        <ImageButton
+            android:id="@+id/icon_back"
+            android:layout_width="@dimen/button_little_width"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_arrow_back_black_36dp"
+            android:background="@drawable/selector_back_btn"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"/>
+        <ImageButton
+            android:id="@+id/icon_delete"
+            android:layout_width="@dimen/button_little_width"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_delete_black_36dp"
+            android:background="@drawable/selector_del_btn"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"/>
+        <Button
+            android:id="@+id/icon_save"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toEndOf="@id/icon_back"
+            android:layout_toStartOf="@id/icon_delete"
+            android:layout_centerVertical="true"
+            android:background="@drawable/selector_save_btn"
+            android:text="@string/str_save"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/line_three"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@id/ly_function_btn"
+        android:layout_margin="@dimen/normal_inner_space"
+        android:background="@drawable/shape_rectangle_divider"/>
+
+    <com.dreamfly.timeschedule.view.widget.EditTextWithDel
+        android:id="@+id/edit_notice"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/alarm_notice"
+        android:layout_above="@id/line_three"
         android:background="@drawable/main_edit_task"
         android:gravity="start|top"
-        android:layout_margin="8dp"
-        android:padding="8dp"
+        android:layout_margin="@dimen/normal_inner_space"
+        android:padding="@dimen/textedit_cursor_margin"
         android:hint="@string/str_note"
         />
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_margin="8dp"
-        android:background="@drawable/shape_rectangle_divider"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        >
-        <ImageView
-            android:id="@+id/icon_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_arrow_back_black_36dp"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"/>
-        <ImageView
-            android:id="@+id/icon_delete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_delete_black_36dp"
-            android:layout_alignParentEnd="true"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:layout_centerVertical="true"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/icon_back"
-            android:layout_toLeftOf="@id/icon_delete"
-            android:layout_centerVertical="true"
-            android:text="Save"/>
-    </RelativeLayout>
-
-</LinearLayout>
+</RelativeLayout>
