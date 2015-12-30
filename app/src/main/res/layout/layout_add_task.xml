@@ -40,22 +40,24 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="horizontal"
+                android:layout_marginEnd="@dimen/normal_inner_space"
+                android:background="@drawable/shape_first_level_bg"
                 >
                 <CheckBox
                     android:id="@+id/cb_first_level"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/CustomCheckBoxLitle"
-                    android:layout_marginStart="@dimen/normal_inner_space"
-                    android:layout_marginEnd="@dimen/normal_inner_space"
+                    android:layout_margin="@dimen/normal_inner_space"
                     android:clickable="false"
                     android:layout_gravity="center_vertical"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/normal_inner_space"
-                    android:layout_gravity="center"
-                    android:text="@string/str_import_urgent"/>
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/str_import_urgent"
+                    android:textColor="@color/color_first_level"/>
             </LinearLayout>
 
             <LinearLayout
@@ -63,22 +65,23 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:background="@drawable/shape_second_level_bg">
                 <CheckBox
                     android:id="@+id/cb_second_level"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/CustomCheckBoxLitle"
-                    android:layout_marginStart="@dimen/normal_inner_space"
-                    android:layout_marginEnd="@dimen/normal_inner_space"
+                    android:layout_margin="@dimen/normal_inner_space"
                     android:clickable="false"
                     android:layout_gravity="center_vertical"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/normal_inner_space"
-                    android:layout_gravity="center"
-                    android:text="@string/str_import_not_urgent"/>
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/str_import_not_urgent"
+                    android:textColor="@color/color_second_level"/>
             </LinearLayout>
         </TableRow>
         <TableRow
@@ -88,21 +91,23 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginEnd="@dimen/normal_inner_space"
+                android:background="@drawable/shape_third_level_bg">
                 <CheckBox
                     android:id="@+id/cb_third_level"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/CustomCheckBoxLitle"
-                    android:layout_marginStart="@dimen/normal_inner_space"
-                    android:layout_marginEnd="@dimen/normal_inner_space"
+                    android:layout_margin="@dimen/normal_inner_space"
                     android:clickable="false"
                     android:layout_gravity="center_vertical"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/normal_inner_space"
-                    android:layout_gravity="center"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/color_third_level"
                     android:text="@string/str_not_import_urgent"/>
             </LinearLayout>
 
@@ -111,21 +116,22 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:background="@drawable/shape_fourth_level_bg">
                 <CheckBox
                     android:id="@+id/cb_fourth_level"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/CustomCheckBoxLitle"
-                    android:layout_marginStart="@dimen/normal_inner_space"
-                    android:layout_marginEnd="@dimen/normal_inner_space"
+                    android:layout_margin="@dimen/normal_inner_space"
                     android:clickable="false"
                     android:layout_gravity="center_vertical"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/normal_inner_space"
-                    android:layout_gravity="center"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/color_fourth_level"
                     android:text="@string/str_not_import_not_urgent"/>
             </LinearLayout>
         </TableRow>

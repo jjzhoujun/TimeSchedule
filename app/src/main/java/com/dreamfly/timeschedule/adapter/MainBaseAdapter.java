@@ -17,6 +17,7 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class MainBaseAdapter extends BaseAdapter{
@@ -28,8 +29,6 @@ public class MainBaseAdapter extends BaseAdapter{
 	public MainBaseAdapter(Context context){
 		mContext = context;
 		mData = new ArrayList<TimeItemEntity>();
-		mInflater = (LayoutInflater)mContext.getSystemService(
-				Context.LAYOUT_INFLATER_SERVICE);
 	}
 
 	public void addItem(final TimeItemEntity item){
@@ -57,30 +56,53 @@ public class MainBaseAdapter extends BaseAdapter{
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
-		
-		LogPrint.Debug("====getView; position = " + position + "; convertView = " + convertView);
+//		LogPrint.Debug("====getView; position = " + position);
 		ViewHolder holder = null;
 		// Optimize the speed
 		if(convertView == null){
-			convertView = mInflater.inflate(R.layout.item, null);
+			convertView = View.inflate(mContext, R.layout.item, null);
 			holder = new ViewHolder();
+            holder.rlayout = (RelativeLayout) convertView.findViewById(R.id.ly_main_item);
 			holder.checkBox = (CheckBox) convertView.findViewById(R.id.checked);
-			holder.TxtHeading = (TextView) convertView.findViewById(R.id.heading);
-			holder.TxtStateinfo = (TextView) convertView.findViewById(R.id.stateinfo);
-			holder.TxtTime = (TextView) convertView.findViewById(R.id.time);
+			holder.title = (TextView) convertView.findViewById(R.id.title);
+            holder.titleCenter = (TextView) convertView.findViewById(R.id.title_center);
+			holder.comment = (TextView) convertView.findViewById(R.id.comment);
+			holder.startTime = (TextView) convertView.findViewById(R.id.start_time);
+			holder.endTime = (TextView) convertView.findViewById(R.id.end_time);
+            holder.centerTime = (TextView) convertView.findViewById(R.id.time_center);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder)convertView.getTag();
 		}
 		String title = mData.get(position).getS_titile();
-		String status = CommonUtils.getInstance(mContext).getTaskStatus(mData.get(position).getI_status());
-		String s_time = mData.get(position).getS_start_time();
+		String comment = mData.get(position).getS_notice();
+		int status = mData.get(position).getI_status();
+		String startTime = mData.get(position).getS_start_time();
+		String endTime = mData.get(position).getS_end_time();
+		boolean bAlarm = mData.get(position).getB_alarm();
 
-		LogPrint.Debug("===>>>>S_title => " + title + "; status = " + status + "; s_time = " + s_time);
+		LogPrint.Debug("title = " + title + "; comment = " + comment + "; status = " + status + "; s_time = " + startTime + "; endTime = " + endTime + "; alarm = " + bAlarm);
 
-		holder.TxtHeading.setText(title);
-		holder.TxtStateinfo.setText(status);
-		holder.TxtTime.setText(s_time);
+        if(comment == null || "".equals(comment)) {
+            holder.titleCenter.setText(title);
+            holder.titleCenter.setVisibility(View.VISIBLE);
+            holder.title.setVisibility(View.GONE);
+            holder.comment.setVisibility(View.GONE);
+        } else {
+            holder.title.setText(title);
+            holder.comment.setText(comment);
+        }
+
+        if(endTime == null || "".equals(endTime)) {
+            holder.centerTime.setText(startTime);
+            holder.centerTime.setVisibility(View.VISIBLE);
+            holder.startTime.setVisibility(View.GONE);
+            holder.endTime.setVisibility(View.GONE);
+        } else {
+            holder.startTime.setText(startTime);
+            holder.endTime.setText(endTime);
+        }
+        holder.rlayout.setBackgroundResource(CommonUtils.getInstance(mContext).getTaskStatus(status));
 		holder.checkBox.setChecked(false);
 		holder.checkBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			
@@ -102,10 +124,14 @@ public class MainBaseAdapter extends BaseAdapter{
 	}
 	
 	public static class ViewHolder{
+        public RelativeLayout rlayout;
 		public CheckBox checkBox;
-		public TextView TxtHeading;
-		public TextView TxtStateinfo;
-		public TextView TxtTime;
+		public TextView title;
+        public TextView titleCenter;
+		public TextView comment;
+		public TextView startTime;
+		public TextView endTime;
+        public TextView centerTime;
 	}
 	
 }

@@ -6,6 +6,7 @@
 
     <dimen name="normal_horizontal_margin">12dp</dimen>
     <dimen name="normal_vertical_margin">10dp</dimen>
+    <dimen name="normal_vertical_little_margin">2dp</dimen>
     <dimen name="normal_inner_space">6dp</dimen>
 
     <dimen name="textedit_height">40dp</dimen>
@@ -15,5 +16,16 @@
 
     <dimen name="button_layout_height">40dp</dimen>
     <dimen name="button_little_width">60dp</dimen>
+
+    <dimen name="task_head_size">25sp</dimen>
+
+    <dimen name="main_list_item_height">60dp</dimen>
+    <dimen name="main_list_vertical_margin">8dp</dimen>
+    <dimen name="main_checkbox_size">40dp</dimen>
+    <dimen name="main_list_title_size">18sp</dimen>
+    <dimen name="main_list_center_title_size">24sp</dimen>
+    <dimen name="main_list_comment_size">14sp</dimen>
+    <dimen name="main_list_time">80dp</dimen>
+    <dimen name="main_list_time_size">14sp</dimen>
 
 </resources>

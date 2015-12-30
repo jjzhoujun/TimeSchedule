@@ -3,16 +3,13 @@ package com.dreamfly.timeschedule.view.widget;
 import android.content.Context;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.opengl.Visibility;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
-import android.view.View;
 import android.widget.EditText;
 
-import com.dreamfly.debuginfo.LogPrint;
 import com.dreamfly.timeschedule.R;
 
 /**
@@ -93,7 +90,6 @@ public class EditTextWithDel extends EditText {
     // Something error...
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        LogPrint.Debug("===>>>> EditTextWithDel==>> keyCode === " + keyCode);
         return super.onKeyDown(keyCode, event);
     }
 

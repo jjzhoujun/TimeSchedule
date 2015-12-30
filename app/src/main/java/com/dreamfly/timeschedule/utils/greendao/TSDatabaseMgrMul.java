@@ -27,7 +27,6 @@ public class TSDatabaseMgrMul {
         mTSBox = new TSBox();
 //            mTSBox.setId(mCurrentId);     // Set What ?
         if (mTSBox.getB_finish() == null) {
-            LogPrint.Debug("This is NULL...=getB_finish==>>>>> ... ");
             mTSBox.setB_finish(false);
         }
         if (mTSBox.getS_title() == null) {
@@ -36,8 +35,17 @@ public class TSDatabaseMgrMul {
         if (mTSBox.getI_status() == null) {
             mTSBox.setI_status(0);      //0 means Import & Urgent
         }
+        if (mTSBox.getS_notice() == null) {
+            mTSBox.setS_notice("");
+        }
         if (mTSBox.getS_start_time() == null) {
             mTSBox.setS_start_time("");
+        }
+        if (mTSBox.getS_end_time() == null) {
+            mTSBox.setS_end_time("");
+        }
+        if (mTSBox.getB_alarm() == null) {
+            mTSBox.setB_alarm(false);
         }
         TSRepository.insertOrUpdate(mContext, mTSBox);
     }
@@ -46,7 +54,10 @@ public class TSDatabaseMgrMul {
         mTSBox.setB_finish(timeStruct.getB_finish());
         mTSBox.setS_title(timeStruct.getS_titile());
         mTSBox.setI_status(timeStruct.getI_status());
+        mTSBox.setS_notice(timeStruct.getS_notice());
         mTSBox.setS_start_time(timeStruct.getS_start_time());
+        mTSBox.setS_end_time(timeStruct.getS_end_time());
+        mTSBox.setB_alarm(timeStruct.getB_alarm());
         TSRepository.insertOrUpdate(mContext, mTSBox);
     }
 
@@ -56,16 +67,22 @@ public class TSDatabaseMgrMul {
         List<TimeItemEntity> timeStructList = new ArrayList<TimeItemEntity>();
         for(int i=0; i<tsBoxList.size(); i++) {
             LogPrint.Debug("===>>>i = " + i
-                + "; b_f = " + tsBoxList.get(i).getB_finish()
-                + "; s_title = " + tsBoxList.get(i).getS_title()
-                + "; i_status = " + tsBoxList.get(i).getI_status()
-                + "; s_time = " + tsBoxList.get(i).getS_start_time());
+                    + "; b_f = " + tsBoxList.get(i).getB_finish()
+                    + "; s_title = " + tsBoxList.get(i).getS_title()
+                    + "; i_status = " + tsBoxList.get(i).getI_status()
+                    + "; s_notice = " + tsBoxList.get(i).getS_notice()
+                    + "; s_start_time = " + tsBoxList.get(i).getS_start_time()
+                    + "; s_end_time = " + tsBoxList.get(i).getS_end_time()
+                    + "; b_alarm = " + tsBoxList.get(i).getB_alarm());
             TimeItemEntity timeStruct = new TimeItemEntity();
             timeStruct.setId(tsBoxList.get(i).getId());
             timeStruct.setB_finish(tsBoxList.get(i).getB_finish());
             timeStruct.setS_titile(tsBoxList.get(i).getS_title());
             timeStruct.setI_status(tsBoxList.get(i).getI_status());
+            timeStruct.setS_notice(tsBoxList.get(i).getS_notice());
             timeStruct.setS_start_time(tsBoxList.get(i).getS_start_time());
+            timeStruct.setS_end_time(tsBoxList.get(i).getS_end_time());
+            timeStruct.setB_alarm(tsBoxList.get(i).getB_alarm());
             timeStructList.add(timeStruct);
         }
         return timeStructList;
@@ -121,6 +138,5 @@ public class TSDatabaseMgrMul {
     public String getTSStartTime() {
         return mTSBox.getS_start_time();
     }
-
 
 }

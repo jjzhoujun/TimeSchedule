@@ -3,7 +3,7 @@ package com.dreamfly.debuginfo;
 import android.util.Log;
 
 public class LogPrint {
-	private static boolean debug = false;
+	private static boolean debug = true;
 	private static boolean warning = true;
 	private static boolean fatal = true;
 
@@ -11,7 +11,7 @@ public class LogPrint {
 		if( debug ) {
 			StackTraceElement line = new Throwable().getStackTrace()[1];
 			if( line != null ) {
-				Log.d("DEBUG_TIMESCHEDULE","["+line.getFileName() + ":" + line.getLineNumber() +"]: " + msg);
+				Log.d("Debug_TS","["+line.getFileName() + ":" + line.getLineNumber() +"]: " + msg);
 			}
 		}
 	}
@@ -19,7 +19,7 @@ public class LogPrint {
 		if( warning ) {
 			StackTraceElement line = new Throwable().getStackTrace()[1];
 			if( line != null ) {
-				Log.w("WARNING_TIMESCHEDULE","["+line.getFileName() + ":" + line.getLineNumber() +"]: " + msg);
+				Log.w("Warning_TS","["+line.getFileName() + ":" + line.getLineNumber() +"]: " + msg);
 			}
 		}
 	}
@@ -27,7 +27,7 @@ public class LogPrint {
 		if( fatal ) {
 			StackTraceElement line = new Throwable().getStackTrace()[1];
 			if( line != null ) {
-				Log.e("FATAL_TIMESCHEDULE","["+line.getFileName() + ":" + line.getLineNumber() +"]: " + msg);
+				Log.e("Fatal_TS","["+line.getFileName() + ":" + line.getLineNumber() +"]: " + msg);
 			}
 		}
 	}

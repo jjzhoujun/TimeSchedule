@@ -5,10 +5,11 @@
     android:orientation="vertical" >
     
     <TextView
+        android:id="@+id/task_head"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Today Task"
-        android:textSize="35sp"/>
+        android:text="@string/str_today"
+        android:textSize="@dimen/task_head_size"/>
 
 </LinearLayout>

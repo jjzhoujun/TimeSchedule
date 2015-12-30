@@ -8,4 +8,5 @@
     <string name="str_not_import_not_urgent">Not Import, Not Urgent</string>
     <string name="str_note">Note</string>
     <string name="str_save">Save</string>
+    <string name="str_today">Today Task</string>
 </resources>

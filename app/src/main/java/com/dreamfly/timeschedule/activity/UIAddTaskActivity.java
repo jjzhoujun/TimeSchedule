@@ -7,10 +7,14 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 
+import com.dreamfly.debuginfo.LogPrint;
 import com.dreamfly.timeschedule.R;
 import com.dreamfly.timeschedule.model.ConstantVar;
+import com.dreamfly.timeschedule.model.TimeItemEntity;
 import com.dreamfly.timeschedule.utils.CommonUtils;
 import com.dreamfly.timeschedule.view.widget.EditTextWithDel;
+
+import de.greenrobot.event.EventBus;
 
 public class UIAddTaskActivity extends Activity{
 
@@ -28,7 +32,7 @@ public class UIAddTaskActivity extends Activity{
 	private ImageButton mDelBtn;
 	private EditTextWithDel mEditTitle;
 	private EditTextWithDel mEditNotice;
-	private int mStatus = ConstantVar.STATUS_FIRST_LEVEL;
+	private int mLevel = ConstantVar.STATUS_FIRST_LEVEL;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
@@ -60,28 +64,28 @@ public class UIAddTaskActivity extends Activity{
 		mVFirstLevel.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				mStatus = ConstantVar.STATUS_FIRST_LEVEL;
+				mLevel = ConstantVar.STATUS_FIRST_LEVEL;
 				setStatusView(ConstantVar.STATUS_FIRST_LEVEL);
 			}
 		});
 		mVSecondLevel.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				mStatus = ConstantVar.STATUS_SECOND_LEVEL;
+				mLevel = ConstantVar.STATUS_SECOND_LEVEL;
 				setStatusView(ConstantVar.STATUS_SECOND_LEVEL);
 			}
 		});
 		mVThirdLevel.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				mStatus = ConstantVar.STATUS_THIRD_LEVEL;
+				mLevel = ConstantVar.STATUS_THIRD_LEVEL;
 			    setStatusView(ConstantVar.STATUS_THIRD_LEVEL);
 			}
 		});
 		mVFourthLevel.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				mStatus = ConstantVar.STATUS_FOURTH_LEVEL;
+				mLevel = ConstantVar.STATUS_FOURTH_LEVEL;
 				setStatusView(ConstantVar.STATUS_FOURTH_LEVEL);
 			}
 		});
@@ -95,8 +99,16 @@ public class UIAddTaskActivity extends Activity{
 		mSaveBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				String strTitle = mEditTitle.getText().toString();
-//				CommonUtils.getInstance(UIAddTaskActivity.this).saveTimeStuct(strTitle);
+                LogPrint.Debug("start to save the item to database...");
+                String strTitle = mEditTitle.getText().toString();
+				String strNotice = mEditNotice.getText().toString();
+				TimeItemEntity timeItemEntity = new TimeItemEntity();
+				timeItemEntity.setS_titile(strTitle);
+				timeItemEntity.setI_status(mLevel);
+				timeItemEntity.setS_notice(strNotice);
+				CommonUtils.getInstance(UIAddTaskActivity.this).saveTimeStruct(timeItemEntity);
+				EventBus.getDefault().post(timeItemEntity);
+                finish();
 			}
 		});
 		mDelBtn.setOnClickListener(new View.OnClickListener() {

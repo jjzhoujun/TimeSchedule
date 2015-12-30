@@ -82,5 +82,16 @@ public class TimeItemEntity {
     }
 
 
+    @Override
+    public String toString() {
+        return "isFinish = " + b_finish
+                + "; title = " + s_titile
+                + "; status = " + i_status
+                + "; notice = " + s_notice
+                + "; s_time = " + s_start_time
+                + "; end_time = " + s_end_time
+                + "; bAlarm = " + b_alarm;
+    }
+
 
 }

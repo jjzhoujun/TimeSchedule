@@ -8,4 +8,5 @@
     <string name="str_not_import_not_urgent">不重要，不紧急</string>
     <string name="str_note">备注</string>
     <string name="str_save">保存</string>
+    <string name="str_today">今日安排</string>
 </resources>

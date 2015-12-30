@@ -1,57 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ly_main_item"
     android:layout_width="match_parent"
-    android:layout_height="75dp" 
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
-    android:background="@drawable/itembg">
-    
+    android:layout_height="match_parent"
+    android:paddingStart="@dimen/normal_inner_space"
+    android:paddingEnd="@dimen/normal_inner_space"
+    >
+
     <CheckBox
     	android:id="@+id/checked"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
+        android:layout_width="@dimen/main_checkbox_size"
+        android:layout_height="@dimen/main_checkbox_size"
+        android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
         android:checked="false"
         android:focusable="false"
         style="@style/CustomCheckBox"/>
     
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_toRightOf="@id/checked"
+        android:layout_height="@dimen/main_list_item_height"
+        android:layout_toEndOf="@id/checked"
         android:layout_centerVertical="true"
-        android:padding="5dp"
-        android:paddingLeft="10dp"
-        android:orientation="vertical"
-        >
+        android:paddingTop="@dimen/main_list_vertical_margin"
+        android:paddingBottom="@dimen/main_list_vertical_margin">
         
         <TextView
-            android:id="@+id/heading"
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:textSize="@dimen/main_list_title_size"
             />
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/comment"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_alignStart="@id/title"
+            android:layout_alignParentBottom="true"
+            android:textSize="@dimen/main_list_comment_size"
+            />
 
-            <TextView
-                android:id="@+id/stateinfo"
-                android:layout_width="90dp"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                />
-            <TextView
-                android:id="@+id/time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:paddingLeft="20dp"
-                />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/title_center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:textSize="@dimen/main_list_center_title_size"
+            android:visibility="gone"
+            />
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/start_time"
+            android:layout_width="@dimen/main_list_time"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/normal_inner_space"
+            android:layout_alignParentTop="true"
+            android:singleLine="true"
+            android:textSize="@dimen/main_list_time_size"
+            android:textColor="@color/color_main_time"
+            />
+
+        <TextView
+            android:id="@+id/end_time"
+            android:layout_width="@dimen/main_list_time"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/normal_inner_space"
+            android:layout_alignParentBottom="true"
+            android:singleLine="true"
+            android:textSize="@dimen/main_list_time_size"
+            android:textColor="@color/color_main_time"
+            />
+        <TextView
+            android:id="@+id/time_center"
+            android:layout_width="@dimen/main_list_time"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/normal_inner_space"
+            android:singleLine="true"
+            android:textSize="@dimen/main_list_time_size"
+            android:textColor="@color/color_main_time"
+            android:visibility="gone"
+            />
+    </RelativeLayout>
 
 </RelativeLayout>

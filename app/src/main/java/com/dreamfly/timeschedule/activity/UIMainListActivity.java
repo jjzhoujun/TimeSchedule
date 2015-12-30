@@ -22,7 +22,10 @@ import com.dreamfly.timeschedule.utils.greendao.TSDatabaseMgrMul;
 import com.dreamfly.timeschedule.view.widget.EditTextWithDel;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
+import de.greenrobot.event.EventBus;
 
 public class UIMainListActivity extends Activity{
 	
@@ -39,6 +42,7 @@ public class UIMainListActivity extends Activity{
 		initUI();
 		initData();
 		setClickListener();
+        EventBus.getDefault().register(this);
 		// create adapt
 		mAdapter = new MainBaseAdapter(this);
 		// For test
@@ -109,8 +113,9 @@ public class UIMainListActivity extends Activity{
 		mEditText = (EditTextWithDel)findViewById(R.id.main_edit_task);
 		mImgAdd = (ImageView)findViewById(R.id.main_add);
 		mListView = (ListViewPullToRef)findViewById(R.id.main_list);
-		View headerView = getLayoutInflater().inflate(R.layout.showlisthead, mListView, false);
-		mListView.addHeaderView(headerView);
+        // Not use the header view.
+//		View headerView = getLayoutInflater().inflate(R.layout.showlisthead, mListView, false);
+//		mListView.addHeaderView(headerView);
 	}
 	
 	private void initData(){
@@ -129,7 +134,6 @@ public class UIMainListActivity extends Activity{
 	private void setClickListener(){
 		View.OnClickListener onClickListener = new View.OnClickListener() {
 			
-			@SuppressLint("SimpleDateFormat")
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -158,15 +162,26 @@ public class UIMainListActivity extends Activity{
             timeItemEntity.setS_titile(mEditText.getText().toString());
             timeItemEntity.setI_status(ConstantVar.STATUS_FIRST_LEVEL);
 
-            SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd  hh:mm:ss");
-            String date = sDateFormat.format(new java.util.Date());
+            long curTimeMills = System.currentTimeMillis();
+            SimpleDateFormat sDateFormat = new SimpleDateFormat("MM-dd hh:mm");
+            String date = sDateFormat.format(new Date(curTimeMills));
             timeItemEntity.setS_start_time(date);
             CommonUtils.getInstance(mContext).saveTimeStruct(timeItemEntity);
-
             mAdapter.addItem(timeItemEntity);
             mEditText.setText("");
         }
     }
-	
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    public void onEventMainThread(TimeItemEntity timeItemEntity) {
+        LogPrint.Debug("==>> onEventMainThread...timeItemEntity = " + timeItemEntity.toString());
+        mAdapter.addItem(timeItemEntity);
+
+    }
 	
 }

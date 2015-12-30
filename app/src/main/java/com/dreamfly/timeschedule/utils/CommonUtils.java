@@ -8,8 +8,6 @@ import com.dreamfly.timeschedule.model.ConstantVar;
 import com.dreamfly.timeschedule.model.TimeItemEntity;
 import com.dreamfly.timeschedule.utils.greendao.TSDatabaseMgrMul;
 
-import java.text.SimpleDateFormat;
-
 /**
  * Created by jayden on 15-9-14.
  */
@@ -30,20 +28,20 @@ public class CommonUtils {
         mContext = context;
     }
 
-    public String getTaskStatus(final int value) {
+    public int getTaskStatus(final int value) {
         switch(value){
-            case 0:
-                return mContext.getString(R.string.str_import_urgent);
-            case 1:
-                return mContext.getString(R.string.str_import_not_urgent);
-            case 2:
-                return mContext.getString(R.string.str_not_import_urgent);
-            case 3:
-                return mContext.getString(R.string.str_not_import_not_urgent);
+            case ConstantVar.STATUS_FIRST_LEVEL:
+                return R.color.color_first_level;
+            case ConstantVar.STATUS_SECOND_LEVEL:
+                return R.color.color_second_level;
+            case ConstantVar.STATUS_THIRD_LEVEL:
+                return R.color.color_third_level;
+            case ConstantVar.STATUS_FOURTH_LEVEL:
+                return R.color.color_fourth_level;
             default:
                 break;
         }
-        return mContext.getString(R.string.str_import_urgent);
+        return R.color.color_first_level;
     }
 
     public void startActivity(String pkgName, String clzName) {
@@ -55,21 +53,6 @@ public class CommonUtils {
         } catch(Exception e){
 
         }
-    }
-
-
-    public TimeItemEntity saveTimeStruct(String title, int status, String strNotice) {
-        SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd  hh:mm:ss");
-        String date = sDateFormat.format(new java.util.Date());
-        TimeItemEntity timeStruct = new TimeItemEntity();
-        timeStruct.setB_finish(false);
-        timeStruct.setS_titile(title);
-        timeStruct.setI_status(status);
-        timeStruct.setS_start_time(date);
-        TSDatabaseMgrMul tsDatabaseMgrMul = new TSDatabaseMgrMul(mContext);
-        tsDatabaseMgrMul.newDataBase();
-        tsDatabaseMgrMul.setDataBox(timeStruct);
-        return timeStruct;
     }
 
     public void saveTimeStruct(TimeItemEntity timeItemEntity) {
