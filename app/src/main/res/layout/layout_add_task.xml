@@ -209,7 +209,8 @@
             android:src="@drawable/ic_delete_black_36dp"
             android:background="@drawable/selector_del_btn"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true"
+            android:visibility="gone"/>
         <Button
             android:id="@+id/icon_save"
             android:layout_width="match_parent"

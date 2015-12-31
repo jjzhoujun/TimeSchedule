@@ -1,9 +1,9 @@
-package com.dreamfly.timeschedule.model;
+package com.dreamfly.timeschedule.bo;
 
 /**
  * Created by jayden on 15-9-15.
  */
-public class TimeItemEntity {
+public class TimeItemEntity extends Entity{
     private long _id;
     private boolean b_finish;   // 是否完成,并删除
     private String s_titile;    // 标题
@@ -92,6 +92,4 @@ public class TimeItemEntity {
                 + "; end_time = " + s_end_time
                 + "; bAlarm = " + b_alarm;
     }
-
-
 }

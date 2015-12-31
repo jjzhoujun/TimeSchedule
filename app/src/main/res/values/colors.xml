@@ -10,7 +10,11 @@
     <color name="color_del_bg_pressed">#5597a49a</color>
     <color name="color_main_time">#000000</color>
     <color name="color_first_level">#af4343</color>
+    <color name="color_first_level_pressed">#55af4343</color>
     <color name="color_second_level">#3a973e</color>
+    <color name="color_second_level_pressed">#553a973e</color>
     <color name="color_third_level">#a14585</color>
+    <color name="color_third_level_pressed">#55a14585</color>
     <color name="color_fourth_level">#8f9392</color>
+    <color name="color_fourth_level_pressed">#558f9392</color>
 </resources>

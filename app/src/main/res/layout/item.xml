@@ -31,6 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
+            android:singleLine="true"
             android:textSize="@dimen/main_list_title_size"
             />
         <TextView
@@ -39,6 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@id/title"
             android:layout_alignParentBottom="true"
+            android:singleLine="true"
             android:textSize="@dimen/main_list_comment_size"
             />
 
@@ -50,6 +52,7 @@
             android:layout_alignParentStart="true"
             android:textSize="@dimen/main_list_center_title_size"
             android:visibility="gone"
+            android:singleLine="true"
             />
 
         <TextView

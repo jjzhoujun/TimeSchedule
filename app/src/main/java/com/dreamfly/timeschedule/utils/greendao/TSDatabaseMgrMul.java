@@ -3,7 +3,8 @@ package com.dreamfly.timeschedule.utils.greendao;
 import android.content.Context;
 
 import com.dreamfly.debuginfo.LogPrint;
-import com.dreamfly.timeschedule.model.TimeItemEntity;
+import com.dreamfly.timeschedule.bo.Entity;
+import com.dreamfly.timeschedule.bo.TimeItemEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +24,9 @@ public class TSDatabaseMgrMul {
         mContext = context;
     }
 
-    public void newDataBase() {
+    public void newDataBase(TimeItemEntity timeStruct) {
         mTSBox = new TSBox();
-//            mTSBox.setId(mCurrentId);     // Set What ?
+//            mTSBox.setId(mCurrentId);     // Set What ? id 可以自增长
         if (mTSBox.getB_finish() == null) {
             mTSBox.setB_finish(false);
         }
@@ -47,10 +48,7 @@ public class TSDatabaseMgrMul {
         if (mTSBox.getB_alarm() == null) {
             mTSBox.setB_alarm(false);
         }
-        TSRepository.insertOrUpdate(mContext, mTSBox);
-    }
 
-    public void setDataBox(TimeItemEntity timeStruct) {
         mTSBox.setB_finish(timeStruct.getB_finish());
         mTSBox.setS_title(timeStruct.getS_titile());
         mTSBox.setI_status(timeStruct.getI_status());
@@ -66,23 +64,24 @@ public class TSDatabaseMgrMul {
         List<TSBox> tsBoxList = TSRepository.getAllBoxes(mContext);
         List<TimeItemEntity> timeStructList = new ArrayList<TimeItemEntity>();
         for(int i=0; i<tsBoxList.size(); i++) {
+            TSBox tsBox = tsBoxList.get(i);
             LogPrint.Debug("===>>>i = " + i
-                    + "; b_f = " + tsBoxList.get(i).getB_finish()
-                    + "; s_title = " + tsBoxList.get(i).getS_title()
-                    + "; i_status = " + tsBoxList.get(i).getI_status()
-                    + "; s_notice = " + tsBoxList.get(i).getS_notice()
-                    + "; s_start_time = " + tsBoxList.get(i).getS_start_time()
-                    + "; s_end_time = " + tsBoxList.get(i).getS_end_time()
-                    + "; b_alarm = " + tsBoxList.get(i).getB_alarm());
+                    + "; b_f = " + tsBox.getB_finish()
+                    + "; s_title = " + tsBox.getS_title()
+                    + "; i_status = " + tsBox.getI_status()
+                    + "; s_notice = " + tsBox.getS_notice()
+                    + "; s_start_time = " + tsBox.getS_start_time()
+                    + "; s_end_time = " + tsBox.getS_end_time()
+                    + "; b_alarm = " + tsBox.getB_alarm());
             TimeItemEntity timeStruct = new TimeItemEntity();
-            timeStruct.setId(tsBoxList.get(i).getId());
-            timeStruct.setB_finish(tsBoxList.get(i).getB_finish());
-            timeStruct.setS_titile(tsBoxList.get(i).getS_title());
-            timeStruct.setI_status(tsBoxList.get(i).getI_status());
-            timeStruct.setS_notice(tsBoxList.get(i).getS_notice());
-            timeStruct.setS_start_time(tsBoxList.get(i).getS_start_time());
-            timeStruct.setS_end_time(tsBoxList.get(i).getS_end_time());
-            timeStruct.setB_alarm(tsBoxList.get(i).getB_alarm());
+            timeStruct.setId(tsBox.getId());
+            timeStruct.setB_finish(tsBox.getB_finish());
+            timeStruct.setS_titile(tsBox.getS_title());
+            timeStruct.setI_status(tsBox.getI_status());
+            timeStruct.setS_notice(tsBox.getS_notice());
+            timeStruct.setS_start_time(tsBox.getS_start_time());
+            timeStruct.setS_end_time(tsBox.getS_end_time());
+            timeStruct.setB_alarm(tsBox.getB_alarm());
             timeStructList.add(timeStruct);
         }
         return timeStructList;
@@ -93,7 +92,6 @@ public class TSDatabaseMgrMul {
         LogPrint.Debug(";;-=>>> the max ==>>> is  " + tsBoxList.size());
         return tsBoxList.size();
     }
-
 
 
     public void setTSFinish(boolean value) {

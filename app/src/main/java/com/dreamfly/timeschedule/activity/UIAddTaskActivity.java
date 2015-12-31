@@ -1,16 +1,18 @@
 package com.dreamfly.timeschedule.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.dreamfly.debuginfo.LogPrint;
 import com.dreamfly.timeschedule.R;
-import com.dreamfly.timeschedule.model.ConstantVar;
-import com.dreamfly.timeschedule.model.TimeItemEntity;
+import com.dreamfly.timeschedule.bo.ConstantVar;
+import com.dreamfly.timeschedule.bo.TimeItemEntity;
 import com.dreamfly.timeschedule.utils.CommonUtils;
 import com.dreamfly.timeschedule.view.widget.EditTextWithDel;
 
@@ -32,14 +34,51 @@ public class UIAddTaskActivity extends Activity{
 	private ImageButton mDelBtn;
 	private EditTextWithDel mEditTitle;
 	private EditTextWithDel mEditNotice;
+	private TimeItemEntity mTimeItemEntity;
+	private boolean mFinish;
+	private String mTitle;
+	private String mComment;
 	private int mLevel = ConstantVar.STATUS_FIRST_LEVEL;
+	private String mStartTime;
+	private String mEndTime;
+	private boolean mAlarm;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
+		Intent intent = getIntent();
+		if(savedInstanceState != null) {
+//			LogPrint.Warning("saveInstanceState != null... resotre");
+			restoreInstance(savedInstanceState);
+		} else {
+			if(intent != null) {
+				mTimeItemEntity = (TimeItemEntity)intent.getSerializableExtra(ConstantVar.ADD_TASK);
+			}
+		}
+		if(mTimeItemEntity != null) {
+//			LogPrint.Debug("timeEntity = " + mTimeItemEntity.toString());
+			mFinish = mTimeItemEntity.getB_finish();
+			mTitle = mTimeItemEntity.getS_titile();
+			mComment = mTimeItemEntity.getS_notice();
+			mLevel = mTimeItemEntity.getI_status();
+			mStartTime = mTimeItemEntity.getS_start_time();
+			mEndTime = mTimeItemEntity.getS_end_time();
+		}
 		setContentView(R.layout.layout_add_task);
 		initView();
 		initListener();
+	}
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+//		LogPrint.Warning("=>>start to onSavedInstanceState");
+		outState.putSerializable(ConstantVar.TASK_DATA, mTimeItemEntity);
+		super.onSaveInstanceState(outState);
+	}
+
+	private void restoreInstance(Bundle savedInstanceState) {
+		mTimeItemEntity = (TimeItemEntity)savedInstanceState.getSerializable(ConstantVar.TASK_DATA);
 	}
 
 
@@ -57,7 +96,10 @@ public class UIAddTaskActivity extends Activity{
 		mDelBtn = (ImageButton) findViewById(R.id.icon_delete);
 		mEditTitle = (EditTextWithDel) findViewById(R.id.main_edit_task);
 		mEditNotice = (EditTextWithDel) findViewById(R.id.edit_notice);
-		setStatusView(ConstantVar.STATUS_FIRST_LEVEL);
+
+		mEditTitle.setText(mTitle);
+		mEditNotice.setText(mComment);
+		setStatusView(mLevel);
 	}
 
 	private void initListener() {
@@ -101,6 +143,10 @@ public class UIAddTaskActivity extends Activity{
 			public void onClick(View view) {
                 LogPrint.Debug("start to save the item to database...");
                 String strTitle = mEditTitle.getText().toString();
+				if("".equals(strTitle)) {
+					Toast.makeText(UIAddTaskActivity.this, R.string.str_plz_title, Toast.LENGTH_SHORT).show();
+					return ;
+				}
 				String strNotice = mEditNotice.getText().toString();
 				TimeItemEntity timeItemEntity = new TimeItemEntity();
 				timeItemEntity.setS_titile(strTitle);
@@ -111,12 +157,11 @@ public class UIAddTaskActivity extends Activity{
                 finish();
 			}
 		});
-		mDelBtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-
-			}
-		});
+//		mDelBtn.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View view) {
+//			}
+//		});
 	}
 
 	private void setStatusView(final int level) {
@@ -146,6 +191,10 @@ public class UIAddTaskActivity extends Activity{
 				mCBFourthLevel.setChecked(true);
 				break;
 			default:
+				mCBFirstLevel.setChecked(true);
+				mCBSecondLevel.setChecked(false);
+				mCBThirdLevel.setChecked(false);
+				mCBFourthLevel.setChecked(false);
 				break;
 		}
 	}

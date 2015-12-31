@@ -6,7 +6,8 @@ import java.util.List;
 
 import com.dreamfly.debuginfo.LogPrint;
 import com.dreamfly.timeschedule.R;
-import com.dreamfly.timeschedule.model.TimeItemEntity;
+import com.dreamfly.timeschedule.bo.Entity;
+import com.dreamfly.timeschedule.bo.TimeItemEntity;
 import com.dreamfly.timeschedule.utils.CommonUtils;
 
 import android.content.Context;
@@ -22,16 +23,16 @@ import android.widget.TextView;
 
 public class MainBaseAdapter extends BaseAdapter{
 	private Context mContext;
-	private List<TimeItemEntity> mData;
+	private List<Entity> mData;
 	
 	private LayoutInflater mInflater;
 	
 	public MainBaseAdapter(Context context){
 		mContext = context;
-		mData = new ArrayList<TimeItemEntity>();
+		mData = new ArrayList<Entity>();
 	}
 
-	public void addItem(final TimeItemEntity item){
+	public void addItem(final Entity item){
 		mData.add(item);
 		notifyDataSetChanged();
 	}
@@ -56,7 +57,6 @@ public class MainBaseAdapter extends BaseAdapter{
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
-//		LogPrint.Debug("====getView; position = " + position);
 		ViewHolder holder = null;
 		// Optimize the speed
 		if(convertView == null){
@@ -74,14 +74,17 @@ public class MainBaseAdapter extends BaseAdapter{
 		} else {
 			holder = (ViewHolder)convertView.getTag();
 		}
-		String title = mData.get(position).getS_titile();
-		String comment = mData.get(position).getS_notice();
-		int status = mData.get(position).getI_status();
-		String startTime = mData.get(position).getS_start_time();
-		String endTime = mData.get(position).getS_end_time();
-		boolean bAlarm = mData.get(position).getB_alarm();
 
-		LogPrint.Debug("title = " + title + "; comment = " + comment + "; status = " + status + "; s_time = " + startTime + "; endTime = " + endTime + "; alarm = " + bAlarm);
+		Entity entity = (Entity)this.getItem(position);
+		TimeItemEntity bo = (TimeItemEntity) entity;
+		String title = bo.getS_titile();
+		String comment = bo.getS_notice();
+		int status = bo.getI_status();
+		String startTime = bo.getS_start_time();
+		String endTime = bo.getS_end_time();
+		boolean bAlarm = bo.getB_alarm();
+
+		LogPrint.Debug("position = " + position + ";title = " + title + "; comment = " + comment + "; status = " + status + "; s_time = " + startTime + "; endTime = " + endTime + "; alarm = " + bAlarm);
 
         if(comment == null || "".equals(comment)) {
             holder.titleCenter.setText(title);
@@ -91,6 +94,9 @@ public class MainBaseAdapter extends BaseAdapter{
         } else {
             holder.title.setText(title);
             holder.comment.setText(comment);
+			holder.title.setVisibility(View.VISIBLE);
+			holder.comment.setVisibility(View.VISIBLE);
+			holder.titleCenter.setVisibility(View.GONE);
         }
 
         if(endTime == null || "".equals(endTime)) {
@@ -101,6 +107,9 @@ public class MainBaseAdapter extends BaseAdapter{
         } else {
             holder.startTime.setText(startTime);
             holder.endTime.setText(endTime);
+			holder.startTime.setVisibility(View.VISIBLE);
+			holder.endTime.setVisibility(View.VISIBLE);
+			holder.centerTime.setVisibility(View.GONE);
         }
         holder.rlayout.setBackgroundResource(CommonUtils.getInstance(mContext).getTaskStatus(status));
 		holder.checkBox.setChecked(false);
@@ -114,6 +123,9 @@ public class MainBaseAdapter extends BaseAdapter{
 					if(position < 0 || position >= mData.size()){
 						LogPrint.Debug("===== out of position = " + position);
 					} else {
+						TimeItemEntity itemEntity = (TimeItemEntity)getItem(position);
+						LogPrint.Debug("checked, del, id = " + itemEntity.getId() + "; title = " + itemEntity.getS_titile());
+						CommonUtils.getInstance(mContext).delTimeStruct(itemEntity.getId());
 						mData.remove(position);
 						notifyDataSetChanged();
 					}
