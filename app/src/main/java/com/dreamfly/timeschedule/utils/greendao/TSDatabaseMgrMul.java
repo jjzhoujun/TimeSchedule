@@ -3,7 +3,6 @@ package com.dreamfly.timeschedule.utils.greendao;
 import android.content.Context;
 
 import com.dreamfly.debuginfo.LogPrint;
-import com.dreamfly.timeschedule.bo.Entity;
 import com.dreamfly.timeschedule.bo.TimeItemEntity;
 
 import java.util.ArrayList;
@@ -24,31 +23,10 @@ public class TSDatabaseMgrMul {
         mContext = context;
     }
 
-    public void newDataBase(TimeItemEntity timeStruct) {
+    public void insertOrUpdate(TimeItemEntity timeStruct) {
         mTSBox = new TSBox();
-//            mTSBox.setId(mCurrentId);     // Set What ? id 可以自增长
-        if (mTSBox.getB_finish() == null) {
-            mTSBox.setB_finish(false);
-        }
-        if (mTSBox.getS_title() == null) {
-            mTSBox.setS_title("");
-        }
-        if (mTSBox.getI_status() == null) {
-            mTSBox.setI_status(0);      //0 means Import & Urgent
-        }
-        if (mTSBox.getS_notice() == null) {
-            mTSBox.setS_notice("");
-        }
-        if (mTSBox.getS_start_time() == null) {
-            mTSBox.setS_start_time("");
-        }
-        if (mTSBox.getS_end_time() == null) {
-            mTSBox.setS_end_time("");
-        }
-        if (mTSBox.getB_alarm() == null) {
-            mTSBox.setB_alarm(false);
-        }
-
+        LogPrint.Debug("==>> timeStruct id = " + timeStruct.getId());
+        mTSBox.setId(timeStruct.getId());
         mTSBox.setB_finish(timeStruct.getB_finish());
         mTSBox.setS_title(timeStruct.getS_titile());
         mTSBox.setI_status(timeStruct.getI_status());
@@ -60,12 +38,11 @@ public class TSDatabaseMgrMul {
     }
 
     public List<TimeItemEntity> getAllBoxesData() {
-        LogPrint.Debug("==>>>> get the all Boxes??? memory..");
         List<TSBox> tsBoxList = TSRepository.getAllBoxes(mContext);
         List<TimeItemEntity> timeStructList = new ArrayList<TimeItemEntity>();
         for(int i=0; i<tsBoxList.size(); i++) {
             TSBox tsBox = tsBoxList.get(i);
-            LogPrint.Debug("===>>>i = " + i
+            LogPrint.Debug("===>>>i = " + i + "; tsBox.id = " + tsBox.getId()
                     + "; b_f = " + tsBox.getB_finish()
                     + "; s_title = " + tsBox.getS_title()
                     + "; i_status = " + tsBox.getI_status()

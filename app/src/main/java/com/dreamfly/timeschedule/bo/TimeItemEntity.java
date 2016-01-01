@@ -12,6 +12,7 @@ public class TimeItemEntity extends Entity{
     private String s_start_time;// 起始时间.
     private String s_end_time;  // 结束时间.
     private boolean b_alarm;    // 是否需要闹铃提醒.
+    private boolean b_add;      // Other flag to detect update or add.
 
     public TimeItemEntity() {
 
@@ -81,6 +82,14 @@ public class TimeItemEntity extends Entity{
         return this.b_alarm;
     }
 
+    public void setAddFlag(boolean bAdd) {
+        this.b_add = bAdd;
+    }
+
+    public boolean getAddFlag() {
+        return this.b_add;
+    }
+
 
     @Override
     public String toString() {
@@ -90,6 +99,7 @@ public class TimeItemEntity extends Entity{
                 + "; notice = " + s_notice
                 + "; s_time = " + s_start_time
                 + "; end_time = " + s_end_time
-                + "; bAlarm = " + b_alarm;
+                + "; bAlarm = " + b_alarm
+                + "; bAdd = " + b_add;
     }
 }

@@ -36,6 +36,13 @@ public class MainBaseAdapter extends BaseAdapter{
 		mData.add(item);
 		notifyDataSetChanged();
 	}
+
+	public void updateItem(int position, Entity entity) {
+		LogPrint.Debug("==>>updateItem position = " + position + "; entity = " + entity);
+		mData.set(position, entity);
+		notifyDataSetChanged();
+	}
+
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
@@ -85,7 +92,6 @@ public class MainBaseAdapter extends BaseAdapter{
 		boolean bAlarm = bo.getB_alarm();
 
 		LogPrint.Debug("position = " + position + ";title = " + title + "; comment = " + comment + "; status = " + status + "; s_time = " + startTime + "; endTime = " + endTime + "; alarm = " + bAlarm);
-
         if(comment == null || "".equals(comment)) {
             holder.titleCenter.setText(title);
             holder.titleCenter.setVisibility(View.VISIBLE);

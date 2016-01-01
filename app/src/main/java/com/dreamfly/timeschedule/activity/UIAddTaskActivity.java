@@ -142,18 +142,31 @@ public class UIAddTaskActivity extends Activity{
 			@Override
 			public void onClick(View view) {
                 LogPrint.Debug("start to save the item to database...");
-                String strTitle = mEditTitle.getText().toString();
-				if("".equals(strTitle)) {
+                mTitle = mEditTitle.getText().toString();
+				if("".equals(mTitle)) {
 					Toast.makeText(UIAddTaskActivity.this, R.string.str_plz_title, Toast.LENGTH_SHORT).show();
 					return ;
 				}
-				String strNotice = mEditNotice.getText().toString();
-				TimeItemEntity timeItemEntity = new TimeItemEntity();
-				timeItemEntity.setS_titile(strTitle);
-				timeItemEntity.setI_status(mLevel);
-				timeItemEntity.setS_notice(strNotice);
-				CommonUtils.getInstance(UIAddTaskActivity.this).saveTimeStruct(timeItemEntity);
-				EventBus.getDefault().post(timeItemEntity);
+				mComment = mEditNotice.getText().toString();
+				long id = 0;
+				if(mTimeItemEntity == null) {
+					mTimeItemEntity = new TimeItemEntity();
+					id = CommonUtils.getInstance(UIAddTaskActivity.this).getId();
+					mTimeItemEntity.setId(id);
+					id++;
+					LogPrint.Debug("==>>jayden, lastId id = " + id);
+					CommonUtils.getInstance(UIAddTaskActivity.this).setId(id);
+					mTimeItemEntity.setAddFlag(true);
+				} else {
+					id = mTimeItemEntity.getId();
+					mTimeItemEntity.setAddFlag(false);
+				}
+				LogPrint.Debug("==>>Add Task id = " + id);
+				mTimeItemEntity.setS_titile(mTitle);
+				mTimeItemEntity.setI_status(mLevel);
+				mTimeItemEntity.setS_notice(mComment);
+				CommonUtils.getInstance(UIAddTaskActivity.this).saveTimeStruct(mTimeItemEntity);
+				EventBus.getDefault().post(mTimeItemEntity);
                 finish();
 			}
 		});

@@ -23,6 +23,7 @@ import com.dreamfly.timeschedule.view.widget.EditTextWithDel;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import de.greenrobot.event.EventBus;
 
@@ -33,6 +34,7 @@ public class UIMainListActivity extends Activity{
 	private ListViewPullToRef mListView;
 	private MainBaseAdapter mAdapter;
     private Context mContext;
+    private int mClickItem;     // Record the mData position to refresh the list.
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,7 @@ public class UIMainListActivity extends Activity{
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 // 此处position从1开始. id从0开始.
                 LogPrint.Debug("position = " + position + "; id = " + id);
+                mClickItem = (int)id;
                 TimeItemEntity timeItemEntity = (TimeItemEntity) adapterView.getItemAtPosition(position);
                 CommonUtils.getInstance(mContext).startAddTaskActivity(UIMainListActivity.this, timeItemEntity);
             }
@@ -104,9 +107,18 @@ public class UIMainListActivity extends Activity{
     private void showDatabaseView() {
 		TSDatabaseMgrMul tsDatabaseMgrMul = new TSDatabaseMgrMul(this);
 		List<TimeItemEntity> timeStructList = tsDatabaseMgrMul.getAllBoxesData();
-		for(int i=0; i<timeStructList.size(); i++) {
+        int size = timeStructList.size();
+		for(int i=0; i<size; i++) {
 			mAdapter.addItem(timeStructList.get(i));
 		}
+        long lastId;
+        if(size > 0) {
+            lastId = timeStructList.get(size-1).getId() + 1;
+        } else {
+            lastId = 0;
+        }
+        LogPrint.Debug("jayden, lastId == " + lastId);
+        CommonUtils.getInstance(mContext).setId(lastId);
     }
 	
 	private void setClickListener(){
@@ -137,17 +149,22 @@ public class UIMainListActivity extends Activity{
             startActivity(intent);
         } else {
             TimeItemEntity timeItemEntity = new TimeItemEntity();
+            long id = CommonUtils.getInstance(mContext).getId();
+            timeItemEntity.setId(id);
             timeItemEntity.setB_finish(false);
             timeItemEntity.setS_titile(title);
             timeItemEntity.setI_status(ConstantVar.STATUS_FIRST_LEVEL);
 
             long curTimeMills = System.currentTimeMillis();
-            SimpleDateFormat sDateFormat = new SimpleDateFormat("MM-dd hh:mm");
+            SimpleDateFormat sDateFormat = new SimpleDateFormat("MM-dd HH:mm", Locale.getDefault());
             String date = sDateFormat.format(new Date(curTimeMills));
             timeItemEntity.setS_start_time(date);
             CommonUtils.getInstance(mContext).saveTimeStruct(timeItemEntity);
             mAdapter.addItem(timeItemEntity);
             mEditText.setText("");
+            id++;
+            LogPrint.Debug("jayden, add new, lastId ==>> id = " + id);
+            CommonUtils.getInstance(mContext).setId(id);
         }
     }
 
@@ -158,8 +175,13 @@ public class UIMainListActivity extends Activity{
     }
 
     public void onEventMainThread(TimeItemEntity timeItemEntity) {
-        LogPrint.Debug("==>> onEventMainThread...timeItemEntity = " + timeItemEntity.toString());
-        mAdapter.addItem(timeItemEntity);
+        boolean isAdd = timeItemEntity.getAddFlag();
+        LogPrint.Debug("onEventMainThread...timeItemEntity = " + timeItemEntity.toString() + "; isAdd = " + isAdd);
+        if(isAdd){
+            mAdapter.addItem(timeItemEntity);
+        } else {
+            mAdapter.updateItem(mClickItem, timeItemEntity);
+        }
 
     }
 	

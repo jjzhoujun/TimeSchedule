@@ -150,36 +150,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/line_two"
-        android:layout_margin="@dimen/normal_inner_space"
+        android:layout_marginStart="@dimen/normal_inner_space"
+        android:layout_marginEnd="@dimen/normal_inner_space"
         android:orientation="horizontal">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_alarm_black_36dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="@dimen/normal_inner_space"
-            android:layout_marginEnd="@dimen/normal_inner_space"/>
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/normal_inner_space"
-            android:layout_marginEnd="@dimen/normal_inner_space"
+            android:layout_weight="2"
+            android:gravity="end"
             android:layout_gravity="center_vertical"
             android:text="2015-09-26 01:32"/>
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/normal_inner_space"
-            android:layout_marginEnd="@dimen/normal_inner_space"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_trending_flat_black_36dp"/>
+            android:layout_weight="1"
+            android:src="@drawable/ic_alarm_black_36dp"
+            android:gravity="center"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/normal_inner_space"
-            android:layout_marginEnd="@dimen/normal_inner_space"
+            android:layout_weight="2"
+            android:gravity="start"
             android:layout_gravity="center_vertical"
             android:text="2015-09-26 01:32"/>
     </LinearLayout>

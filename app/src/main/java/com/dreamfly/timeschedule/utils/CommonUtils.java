@@ -21,6 +21,8 @@ public class CommonUtils {
     private static final String TAG = "CommonUtils";
     private static CommonUtils sInstance;
     private Context mContext;
+    private long mId;
+
 
     public static synchronized CommonUtils getInstance(Context context) {
         if(sInstance == null) {
@@ -73,11 +75,19 @@ public class CommonUtils {
 
     public void saveTimeStruct(TimeItemEntity timeItemEntity) {
         TSDatabaseMgrMul tsDatabaseMgrMul = new TSDatabaseMgrMul(mContext);
-        tsDatabaseMgrMul.newDataBase(timeItemEntity);
+        tsDatabaseMgrMul.insertOrUpdate(timeItemEntity);
     }
 
     public void delTimeStruct(long id) {
         LogPrint.Warning("start to delTimeStruct by id = " + id);
         TSRepository.deleteBoxWithId(mContext, id);
+    }
+
+    public void setId(long id) {
+        mId = id;
+    }
+
+    public long getId() {
+        return mId;
     }
 }

@@ -97,4 +97,16 @@ public class TSBox {
         this.b_alarm = b_alarm;
     }
 
+    @Override
+    public String toString() {
+        return "TSBox, id = " + id
+                + "; title = " + s_title
+                + "; comment = " + s_notice
+                + "; level = " + i_status
+                + "; finish = " + b_finish
+                + "; s_start_time = " + s_start_time
+                + "; end_time = " + s_end_time
+                + "; b_alarm = " + b_alarm;
+    }
+
 }
