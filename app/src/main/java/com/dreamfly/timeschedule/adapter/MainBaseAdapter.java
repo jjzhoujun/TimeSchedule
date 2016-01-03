@@ -74,9 +74,8 @@ public class MainBaseAdapter extends BaseAdapter{
 			holder.title = (TextView) convertView.findViewById(R.id.title);
             holder.titleCenter = (TextView) convertView.findViewById(R.id.title_center);
 			holder.comment = (TextView) convertView.findViewById(R.id.comment);
-			holder.startTime = (TextView) convertView.findViewById(R.id.start_time);
-			holder.endTime = (TextView) convertView.findViewById(R.id.end_time);
-            holder.centerTime = (TextView) convertView.findViewById(R.id.time_center);
+			holder.monthDay = (TextView) convertView.findViewById(R.id.month_day);
+			holder.hourMin = (TextView) convertView.findViewById(R.id.hour_min);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder)convertView.getTag();
@@ -105,18 +104,15 @@ public class MainBaseAdapter extends BaseAdapter{
 			holder.titleCenter.setVisibility(View.GONE);
         }
 
-        if(endTime == null || "".equals(endTime)) {
-            holder.centerTime.setText(startTime);
-            holder.centerTime.setVisibility(View.VISIBLE);
-            holder.startTime.setVisibility(View.GONE);
-            holder.endTime.setVisibility(View.GONE);
-        } else {
-            holder.startTime.setText(startTime);
-            holder.endTime.setText(endTime);
-			holder.startTime.setVisibility(View.VISIBLE);
-			holder.endTime.setVisibility(View.VISIBLE);
-			holder.centerTime.setVisibility(View.GONE);
-        }
+		if(startTime != null){
+			String[] strArray = startTime.split(" ");
+			if(strArray.length > 1) {
+				String monthDay = strArray[0];
+				String hourMin = strArray[1];
+				holder.monthDay.setText(monthDay);
+				holder.hourMin.setText(hourMin);
+			}
+		}
         holder.rlayout.setBackgroundResource(CommonUtils.getInstance(mContext).getTaskStatus(status));
 		holder.checkBox.setChecked(false);
 		holder.checkBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -147,9 +143,8 @@ public class MainBaseAdapter extends BaseAdapter{
 		public TextView title;
         public TextView titleCenter;
 		public TextView comment;
-		public TextView startTime;
-		public TextView endTime;
-        public TextView centerTime;
+		public TextView monthDay;
+		public TextView hourMin;
 	}
 	
 }

@@ -24,13 +24,39 @@
         android:layout_centerVertical="true"
         android:paddingTop="@dimen/main_list_vertical_margin"
         android:paddingBottom="@dimen/main_list_vertical_margin">
-        
+
+        <TextView
+            android:id="@+id/month_day"
+            android:layout_width="@dimen/main_list_time"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/normal_inner_space"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/normal_vertical_little_margin"
+            android:singleLine="true"
+            android:textSize="@dimen/main_list_time_size"
+            android:textColor="@color/color_main_time"
+            />
+
+        <TextView
+            android:id="@+id/hour_min"
+            android:layout_width="@dimen/main_list_time"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@id/month_day"
+            android:layout_marginBottom="@dimen/normal_vertical_little_margin"
+            android:singleLine="true"
+            android:textSize="@dimen/main_list_time_size"
+            android:textColor="@color/color_main_time"
+            />
+
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
+            android:layout_toStartOf="@id/month_day"
             android:singleLine="true"
             android:textSize="@dimen/main_list_title_size"
             />
@@ -40,6 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@id/title"
             android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@id/month_day"
             android:singleLine="true"
             android:textSize="@dimen/main_list_comment_size"
             />
@@ -50,45 +77,10 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_alignParentStart="true"
+            android:layout_toStartOf="@id/month_day"
             android:textSize="@dimen/main_list_center_title_size"
             android:visibility="gone"
             android:singleLine="true"
-            />
-
-        <TextView
-            android:id="@+id/start_time"
-            android:layout_width="@dimen/main_list_time"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="@dimen/normal_inner_space"
-            android:layout_alignParentTop="true"
-            android:singleLine="true"
-            android:textSize="@dimen/main_list_time_size"
-            android:textColor="@color/color_main_time"
-            />
-
-        <TextView
-            android:id="@+id/end_time"
-            android:layout_width="@dimen/main_list_time"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="@dimen/normal_inner_space"
-            android:layout_alignParentBottom="true"
-            android:singleLine="true"
-            android:textSize="@dimen/main_list_time_size"
-            android:textColor="@color/color_main_time"
-            />
-        <TextView
-            android:id="@+id/time_center"
-            android:layout_width="@dimen/main_list_time"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="@dimen/normal_inner_space"
-            android:singleLine="true"
-            android:textSize="@dimen/main_list_time_size"
-            android:textColor="@color/color_main_time"
-            android:visibility="gone"
             />
     </RelativeLayout>
 

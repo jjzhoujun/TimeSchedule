@@ -1,24 +1,27 @@
 package com.dreamfly.timeschedule.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dreamfly.debuginfo.LogPrint;
 import com.dreamfly.timeschedule.R;
 import com.dreamfly.timeschedule.bo.ConstantVar;
+import com.dreamfly.timeschedule.bo.TimeEntity;
 import com.dreamfly.timeschedule.bo.TimeItemEntity;
 import com.dreamfly.timeschedule.utils.CommonUtils;
+import com.dreamfly.timeschedule.utils.TSFragmentMgr;
+import com.dreamfly.timeschedule.utils.Tools;
 import com.dreamfly.timeschedule.view.widget.EditTextWithDel;
 
 import de.greenrobot.event.EventBus;
 
-public class UIAddTaskActivity extends Activity{
+public class UIAddTaskActivity extends BaseActivity{
 
 	private static final String TAG = "UIAddTaskActivity";
 	private View mVFirstLevel;
@@ -31,9 +34,11 @@ public class UIAddTaskActivity extends Activity{
 	private CheckBox mCBFourthLevel;
 	private ImageButton mBackBtn;
 	private Button mSaveBtn;
-	private ImageButton mDelBtn;
 	private EditTextWithDel mEditTitle;
 	private EditTextWithDel mEditNotice;
+	private View mLyAlarm;
+	private TextView mTextSTime;
+	private TextView mTextETime;
 	private TimeItemEntity mTimeItemEntity;
 	private boolean mFinish;
 	private String mTitle;
@@ -42,6 +47,7 @@ public class UIAddTaskActivity extends Activity{
 	private String mStartTime;
 	private String mEndTime;
 	private boolean mAlarm;
+	private String[] mTimeArray = {"", ""};
 
 
 	@Override
@@ -68,6 +74,14 @@ public class UIAddTaskActivity extends Activity{
 		setContentView(R.layout.layout_add_task);
 		initView();
 		initListener();
+		EventBus.getDefault().register(this);
+		configData();
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		EventBus.getDefault().unregister(this);
 	}
 
 	@Override
@@ -81,7 +95,6 @@ public class UIAddTaskActivity extends Activity{
 		mTimeItemEntity = (TimeItemEntity)savedInstanceState.getSerializable(ConstantVar.TASK_DATA);
 	}
 
-
 	private void initView() {
 		mVFirstLevel = findViewById(R.id.ll_first_level);
 		mVSecondLevel = findViewById(R.id.ll_second_level);
@@ -93,9 +106,11 @@ public class UIAddTaskActivity extends Activity{
 		mCBFourthLevel = (CheckBox) findViewById(R.id.cb_fourth_level);
 		mBackBtn = (ImageButton) findViewById(R.id.icon_back);
 		mSaveBtn = (Button) findViewById(R.id.icon_save);
-		mDelBtn = (ImageButton) findViewById(R.id.icon_delete);
 		mEditTitle = (EditTextWithDel) findViewById(R.id.main_edit_task);
 		mEditNotice = (EditTextWithDel) findViewById(R.id.edit_notice);
+		mLyAlarm = findViewById(R.id.alarm_notice);
+		mTextSTime = (TextView) findViewById(R.id.start_time);
+		mTextETime = (TextView) findViewById(R.id.end_time);
 
 		mEditTitle.setText(mTitle);
 		mEditNotice.setText(mComment);
@@ -132,6 +147,15 @@ public class UIAddTaskActivity extends Activity{
 			}
 		});
 
+		mLyAlarm.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				LogPrint.Debug("==>> Click Alarm Layout, show.. = " + mTimeArray);
+				CommonUtils.getInstance(UIAddTaskActivity.this).startTimePickerActivity(
+						UIAddTaskActivity.this, mTimeArray);
+			}
+		});
+
 		mBackBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -141,15 +165,15 @@ public class UIAddTaskActivity extends Activity{
 		mSaveBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-                LogPrint.Debug("start to save the item to database...");
-                mTitle = mEditTitle.getText().toString();
-				if("".equals(mTitle)) {
+				LogPrint.Debug("start to save the item to database...");
+				mTitle = mEditTitle.getText().toString();
+				if ("".equals(mTitle)) {
 					Toast.makeText(UIAddTaskActivity.this, R.string.str_plz_title, Toast.LENGTH_SHORT).show();
-					return ;
+					return;
 				}
 				mComment = mEditNotice.getText().toString();
 				long id = 0;
-				if(mTimeItemEntity == null) {
+				if (mTimeItemEntity == null) {
 					mTimeItemEntity = new TimeItemEntity();
 					id = CommonUtils.getInstance(UIAddTaskActivity.this).getId();
 					mTimeItemEntity.setId(id);
@@ -165,16 +189,13 @@ public class UIAddTaskActivity extends Activity{
 				mTimeItemEntity.setS_titile(mTitle);
 				mTimeItemEntity.setI_status(mLevel);
 				mTimeItemEntity.setS_notice(mComment);
+				mTimeItemEntity.setS_start_time(mStartTime);
+				mTimeItemEntity.setS_end_time(mEndTime);
 				CommonUtils.getInstance(UIAddTaskActivity.this).saveTimeStruct(mTimeItemEntity);
 				EventBus.getDefault().post(mTimeItemEntity);
-                finish();
+				finish();
 			}
 		});
-//		mDelBtn.setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View view) {
-//			}
-//		});
 	}
 
 	private void setStatusView(final int level) {
@@ -210,5 +231,43 @@ public class UIAddTaskActivity extends Activity{
 				mCBFourthLevel.setChecked(false);
 				break;
 		}
+	}
+
+	private void configData() {
+		if(mStartTime == null || "".equals(mStartTime)) {
+			String sTime = Tools.getCurTimeStr();
+			mTextSTime.setText(sTime);
+			mStartTime = sTime;
+		} else {
+			mTextSTime.setText(mStartTime);
+		}
+
+		if(mEndTime == null || "".equals(mEndTime)) {
+			String endTime;
+			if(mStartTime != null) {
+				endTime = mStartTime;
+			} else {
+				endTime = Tools.getCurTimeStr();
+			}
+			mTextETime.setText(endTime);
+			mEndTime = endTime;
+		} else {
+			mTextETime.setText(mEndTime);
+		}
+
+		mTimeArray[0] = mStartTime;
+		mTimeArray[1] = mEndTime;
+	}
+
+	/**
+	 * 接收从TimePickerActivity发生过来的事件。
+	 * */
+	public void onEventMainThread(String[] timeArray) {
+		LogPrint.Debug("==>> receive.. timeArray 0 = " + timeArray[0]
+			+ "; 1 = " + timeArray[1]);
+		mStartTime = timeArray[0];
+		mEndTime = timeArray[1];
+		mTextSTime.setText(mStartTime);
+		mTextETime.setText(mEndTime);
 	}
 }

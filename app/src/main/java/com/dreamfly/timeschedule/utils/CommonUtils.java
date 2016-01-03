@@ -6,12 +6,17 @@ import android.content.Intent;
 
 import com.dreamfly.debuginfo.LogPrint;
 import com.dreamfly.timeschedule.R;
+import com.dreamfly.timeschedule.activity.TimePickerActivity;
 import com.dreamfly.timeschedule.activity.UIAddTaskActivity;
 import com.dreamfly.timeschedule.bo.ConstantVar;
 import com.dreamfly.timeschedule.bo.Entity;
 import com.dreamfly.timeschedule.bo.TimeItemEntity;
 import com.dreamfly.timeschedule.utils.greendao.TSDatabaseMgrMul;
 import com.dreamfly.timeschedule.utils.greendao.TSRepository;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by jayden on 15-9-14.
@@ -25,7 +30,7 @@ public class CommonUtils {
 
 
     public static synchronized CommonUtils getInstance(Context context) {
-        if(sInstance == null) {
+        if (sInstance == null) {
             sInstance = new CommonUtils(context);
         }
         return sInstance;
@@ -36,7 +41,7 @@ public class CommonUtils {
     }
 
     public int getTaskStatus(final int value) {
-        switch(value){
+        switch (value) {
             // 备注: 这里面的pressed的颜色效果, 跟我设置的不一样,默认都变成系统的press颜色了. why ?
             case ConstantVar.STATUS_FIRST_LEVEL:
                 return R.drawable.selector_first_level;
@@ -57,7 +62,7 @@ public class CommonUtils {
             Intent intent = new Intent();
             intent.setClassName(pkgName, clzName);
             mContext.startActivity(intent);
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -68,7 +73,18 @@ public class CommonUtils {
             intent.setClass(activity, UIAddTaskActivity.class);
             intent.putExtra(ConstantVar.ADD_TASK, entity);
             mContext.startActivity(intent);
-        } catch(Exception e){
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void startTimePickerActivity(Activity activity, String[] entity) {
+        try {
+            Intent intent = new Intent();
+            intent.setClass(activity, TimePickerActivity.class);
+            intent.putExtra(ConstantVar.TASK_TIME, entity);
+            mContext.startActivity(intent);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -91,3 +107,4 @@ public class CommonUtils {
         return mId;
     }
 }
+

@@ -10,4 +10,11 @@
     <string name="str_save">Save</string>
     <string name="str_today">Today Task</string>
     <string name="str_plz_title">Please input title</string>
+    <string name="str_year">Year</string>
+    <string name="str_month">Month</string>
+    <string name="str_day">Day</string>
+    <string name="str_hour">Hour</string>
+    <string name="str_min">Min</string>
+    <string name="str_start_time">Start Time:</string>
+    <string name="str_end_time">End Time:</string>
 </resources>

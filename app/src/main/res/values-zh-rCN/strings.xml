@@ -10,4 +10,11 @@
     <string name="str_save">保存</string>
     <string name="str_today">今日安排</string>
     <string name="str_plz_title">请输入标题</string>
+    <string name="str_year">年</string>
+    <string name="str_month">月</string>
+    <string name="str_day">日</string>
+    <string name="str_hour">时</string>
+    <string name="str_min">分</string>
+    <string name="str_start_time">开始时间：</string>
+    <string name="str_end_time">结束时间：</string>
 </resources>

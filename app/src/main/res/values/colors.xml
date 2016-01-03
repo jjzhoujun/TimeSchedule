@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="transparent">#00000000</color>
+    <color name="white">#ffffff</color>
     <color name="color_item_line_blue">#FF046d9e</color>
     <color name="color_back_bg_normal">#FF32BEFF</color>
     <color name="color_back_bg_pressed">#5532BEFF</color>
@@ -15,6 +16,10 @@
     <color name="color_second_level_pressed">#553a973e</color>
     <color name="color_third_level">#a14585</color>
     <color name="color_third_level_pressed">#55a14585</color>
-    <color name="color_fourth_level">#8f9392</color>
+    <color name="color_fourth_level">#9ea7a5</color>
     <color name="color_fourth_level_pressed">#558f9392</color>
+    <color name="gray_normal">#ccc7c7</color>
+    <color name="color_time_line">#ff5789DC</color>
+    <color name="color_time_sel">#2e2a70</color>
+    <color name="color_time_unsel">#ccc7c7</color>
 </resources>

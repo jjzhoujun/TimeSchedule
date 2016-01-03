@@ -13,7 +13,9 @@ import com.dreamfly.debuginfo.LogPrint;
 import com.dreamfly.timeschedule.R;
 import com.dreamfly.timeschedule.adapter.MainBaseAdapter;
 import com.dreamfly.timeschedule.bo.ConstantVar;
+import com.dreamfly.timeschedule.bo.TimeEntity;
 import com.dreamfly.timeschedule.utils.CommonUtils;
+import com.dreamfly.timeschedule.utils.Tools;
 import com.dreamfly.timeschedule.view.widget.ListViewPullToRef;
 import com.dreamfly.timeschedule.view.widget.ListViewPullToRef.OnRefreshListener;
 import com.dreamfly.timeschedule.bo.TimeItemEntity;
@@ -27,7 +29,8 @@ import java.util.Locale;
 
 import de.greenrobot.event.EventBus;
 
-public class UIMainListActivity extends Activity{
+
+public class UIMainListActivity extends BaseActivity{
 	
 	private ImageView mImgAdd = null;
 	private EditTextWithDel mEditText = null;
@@ -42,8 +45,8 @@ public class UIMainListActivity extends Activity{
 		setContentView(R.layout.layout_tasks);
 		initUI();
 		initData();
-		setClickListener();
         EventBus.getDefault().register(this);
+		setClickListener();
 		// create adapt
 		mAdapter = new MainBaseAdapter(this);
 		// For test
@@ -89,6 +92,12 @@ public class UIMainListActivity extends Activity{
         showDatabaseView();
 		
 	}
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 	
 	private void initUI(){
 		mEditText = (EditTextWithDel)findViewById(R.id.main_edit_task);
@@ -154,10 +163,8 @@ public class UIMainListActivity extends Activity{
             timeItemEntity.setB_finish(false);
             timeItemEntity.setS_titile(title);
             timeItemEntity.setI_status(ConstantVar.STATUS_FIRST_LEVEL);
-
-            long curTimeMills = System.currentTimeMillis();
-            SimpleDateFormat sDateFormat = new SimpleDateFormat("MM-dd HH:mm", Locale.getDefault());
-            String date = sDateFormat.format(new Date(curTimeMills));
+            String date = Tools.getCurTimeStr();
+            LogPrint.Debug("==>>date = " + date);
             timeItemEntity.setS_start_time(date);
             CommonUtils.getInstance(mContext).saveTimeStruct(timeItemEntity);
             mAdapter.addItem(timeItemEntity);
@@ -168,12 +175,9 @@ public class UIMainListActivity extends Activity{
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
-    }
-
+    /**
+     * 1. 接收从UIAddTaskActivity传过来的EventBus。
+     * */
     public void onEventMainThread(TimeItemEntity timeItemEntity) {
         boolean isAdd = timeItemEntity.getAddFlag();
         LogPrint.Debug("onEventMainThread...timeItemEntity = " + timeItemEntity.toString() + "; isAdd = " + isAdd);
@@ -182,7 +186,6 @@ public class UIMainListActivity extends Activity{
         } else {
             mAdapter.updateItem(mClickItem, timeItemEntity);
         }
-
     }
-	
+
 }

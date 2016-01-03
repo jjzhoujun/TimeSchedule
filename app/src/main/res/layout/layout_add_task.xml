@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -137,31 +139,26 @@
         </TableRow>
     </TableLayout>
 
-    <ImageView
-        android:id="@+id/line_two"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@id/table_list_task"
-        android:layout_margin="@dimen/normal_inner_space"
-        android:background="@drawable/shape_rectangle_divider"/>
-
     <LinearLayout
         android:id="@+id/alarm_notice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/line_two"
+        android:layout_below="@id/table_list_task"
         android:layout_marginStart="@dimen/normal_inner_space"
         android:layout_marginEnd="@dimen/normal_inner_space"
+        android:background="@drawable/shape_fourth_level_bg"
         android:orientation="horizontal">
         <TextView
+            android:id="@+id/start_time"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:gravity="end"
             android:layout_gravity="center_vertical"
-            android:text="2015-09-26 01:32"/>
+            />
 
         <ImageView
+            android:id="@+id/alarm_icon"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -169,57 +166,43 @@
             android:gravity="center"/>
 
         <TextView
+            android:id="@+id/end_time"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:gravity="start"
             android:layout_gravity="center_vertical"
-            android:text="2015-09-26 01:32"/>
+            />
     </LinearLayout>
 
-    <RelativeLayout
-        android:id="@+id/ly_function_btn"
-        android:layout_width="match_parent"
+    <ImageButton
+        android:id="@+id/icon_back"
+        android:layout_width="@dimen/button_little_width"
         android:layout_height="@dimen/button_layout_height"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
         android:layout_marginStart="@dimen/normal_horizontal_margin"
-        android:layout_marginEnd="@dimen/normal_horizontal_margin"
         android:layout_marginTop="@dimen/normal_inner_space"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
-        >
-        <ImageButton
-            android:id="@+id/icon_back"
-            android:layout_width="@dimen/button_little_width"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_arrow_back_black_36dp"
-            android:background="@drawable/selector_back_btn"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"/>
-        <ImageButton
-            android:id="@+id/icon_delete"
-            android:layout_width="@dimen/button_little_width"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_delete_black_36dp"
-            android:background="@drawable/selector_del_btn"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:visibility="gone"/>
-        <Button
-            android:id="@+id/icon_save"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_toEndOf="@id/icon_back"
-            android:layout_toStartOf="@id/icon_delete"
-            android:layout_centerVertical="true"
-            android:background="@drawable/selector_save_btn"
-            android:text="@string/str_save"/>
-    </RelativeLayout>
+        android:src="@drawable/ic_arrow_back_black_36dp"
+        android:background="@drawable/selector_back_btn"
+        android:layout_centerVertical="true"/>
+    <Button
+        android:id="@+id/icon_save"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_layout_height"
+        android:layout_toEndOf="@id/icon_back"
+        android:layout_alignBottom="@id/icon_back"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/normal_horizontal_margin"
+        android:background="@drawable/selector_save_btn"
+        android:text="@string/str_save"/>
 
     <ImageView
         android:id="@+id/line_three"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_above="@id/ly_function_btn"
+        android:layout_above="@id/icon_back"
         android:layout_margin="@dimen/normal_inner_space"
         android:background="@drawable/shape_rectangle_divider"/>
 
