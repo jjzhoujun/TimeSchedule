@@ -3,25 +3,15 @@
     android:id="@+id/ly_main_item"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingStart="@dimen/normal_inner_space"
-    android:paddingEnd="@dimen/normal_inner_space"
+    android:paddingLeft="@dimen/normal_inner_space"
+    android:paddingRight="@dimen/normal_inner_space"
     >
 
-    <CheckBox
-    	android:id="@+id/checked"
-        android:layout_width="@dimen/main_checkbox_size"
-        android:layout_height="@dimen/main_checkbox_size"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:checked="false"
-        android:focusable="false"
-        style="@style/CustomCheckBox"/>
-    
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/main_list_item_height"
-        android:layout_toEndOf="@id/checked"
         android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
         android:paddingTop="@dimen/main_list_vertical_margin"
         android:paddingBottom="@dimen/main_list_vertical_margin">
 
@@ -29,8 +19,8 @@
             android:id="@+id/month_day"
             android:layout_width="@dimen/main_list_time"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="@dimen/normal_inner_space"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/normal_inner_space"
             android:layout_alignParentTop="true"
             android:layout_marginTop="@dimen/normal_vertical_little_margin"
             android:singleLine="true"
@@ -43,7 +33,7 @@
             android:layout_width="@dimen/main_list_time"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_alignStart="@id/month_day"
+            android:layout_alignLeft="@id/month_day"
             android:layout_marginBottom="@dimen/normal_vertical_little_margin"
             android:singleLine="true"
             android:textSize="@dimen/main_list_time_size"
@@ -55,20 +45,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:layout_toStartOf="@id/month_day"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@id/month_day"
             android:singleLine="true"
             android:textSize="@dimen/main_list_title_size"
+            android:textColor="@color/color_main_title"
             />
         <TextView
             android:id="@+id/comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@id/title"
+            android:layout_alignLeft="@id/title"
             android:layout_alignParentBottom="true"
-            android:layout_toStartOf="@id/month_day"
+            android:layout_toLeftOf="@id/month_day"
             android:singleLine="true"
             android:textSize="@dimen/main_list_comment_size"
+            android:textColor="@color/color_main_title"
             />
 
         <TextView
@@ -76,11 +68,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_alignParentStart="true"
-            android:layout_toStartOf="@id/month_day"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@id/month_day"
             android:textSize="@dimen/main_list_center_title_size"
             android:visibility="gone"
             android:singleLine="true"
+            android:textColor="@color/color_main_title"
             />
     </RelativeLayout>
 

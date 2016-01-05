@@ -23,7 +23,7 @@
     <dimen name="main_list_vertical_margin">8dp</dimen>
     <dimen name="main_checkbox_size">40dp</dimen>
     <dimen name="main_list_title_size">18sp</dimen>
-    <dimen name="main_list_center_title_size">24sp</dimen>
+    <dimen name="main_list_center_title_size">22sp</dimen>
     <dimen name="main_list_comment_size">14sp</dimen>
     <dimen name="main_list_time">50dp</dimen>
     <dimen name="main_list_time_size">12sp</dimen>

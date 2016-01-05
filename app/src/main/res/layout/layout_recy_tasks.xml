@@ -30,9 +30,9 @@
             android:clickable="true"
             android:layout_gravity="center_vertical"/>
     </LinearLayout>
-    
+    dc
 <!-- 自定义List，添加下拉添加功能 -->
-	<com.dreamfly.timeschedule.view.widget.ListViewPullToRef
+	<android.support.v7.widget.RecyclerView
         android:id="@+id/main_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

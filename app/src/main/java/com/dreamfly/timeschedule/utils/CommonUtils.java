@@ -40,23 +40,6 @@ public class CommonUtils {
         mContext = context;
     }
 
-    public int getTaskStatus(final int value) {
-        switch (value) {
-            // 备注: 这里面的pressed的颜色效果, 跟我设置的不一样,默认都变成系统的press颜色了. why ?
-            case ConstantVar.STATUS_FIRST_LEVEL:
-                return R.drawable.selector_first_level;
-            case ConstantVar.STATUS_SECOND_LEVEL:
-                return R.drawable.selector_second_level;
-            case ConstantVar.STATUS_THIRD_LEVEL:
-                return R.drawable.selector_third_level;
-            case ConstantVar.STATUS_FOURTH_LEVEL:
-                return R.drawable.selector_fourth_level;
-            default:
-                break;
-        }
-        return R.drawable.selector_first_level;
-    }
-
     public void startActivity(String pkgName, String clzName) {
         try {
             Intent intent = new Intent();

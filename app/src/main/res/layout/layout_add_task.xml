@@ -9,14 +9,14 @@
         android:id="@+id/main_edit_task"
         android:layout_width="match_parent"
         android:layout_height="@dimen/textedit_height"
-        android:layout_marginStart="@dimen/normal_horizontal_margin"
-        android:layout_marginEnd="@dimen/normal_horizontal_margin"
+        android:layout_marginLeft="@dimen/normal_horizontal_margin"
+        android:layout_marginRight="@dimen/normal_horizontal_margin"
         android:layout_marginTop="@dimen/normal_vertical_margin"
         android:layout_marginBottom="@dimen/normal_vertical_margin"
         android:background="@drawable/main_edit_task"
         android:layout_gravity="center_vertical"
-        android:paddingStart="@dimen/textedit_cursor_margin"
-        android:paddingEnd="@dimen/textedit_cursor_margin"
+        android:paddingLeft="@dimen/textedit_cursor_margin"
+        android:paddingRight="@dimen/textedit_cursor_margin"
         android:singleLine="true"
         />
 
@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="horizontal"
-                android:layout_marginEnd="@dimen/normal_inner_space"
+                android:layout_marginRight="@dimen/normal_inner_space"
                 android:background="@drawable/shape_first_level_bg"
                 >
                 <CheckBox
@@ -56,7 +56,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/normal_inner_space"
+                    android:layout_marginRight="@dimen/normal_inner_space"
                     android:layout_gravity="center_vertical"
                     android:text="@string/str_import_urgent"
                     android:textColor="@color/color_first_level"/>
@@ -80,7 +80,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/normal_inner_space"
+                    android:layout_marginRight="@dimen/normal_inner_space"
                     android:layout_gravity="center_vertical"
                     android:text="@string/str_import_not_urgent"
                     android:textColor="@color/color_second_level"/>
@@ -94,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="horizontal"
-                android:layout_marginEnd="@dimen/normal_inner_space"
+                android:layout_marginRight="@dimen/normal_inner_space"
                 android:background="@drawable/shape_third_level_bg">
                 <CheckBox
                     android:id="@+id/cb_third_level"
@@ -107,7 +107,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/normal_inner_space"
+                    android:layout_marginRight="@dimen/normal_inner_space"
                     android:layout_gravity="center_vertical"
                     android:textColor="@color/color_third_level"
                     android:text="@string/str_not_import_urgent"/>
@@ -131,7 +131,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/normal_inner_space"
+                    android:layout_marginRight="@dimen/normal_inner_space"
                     android:layout_gravity="center_vertical"
                     android:textColor="@color/color_fourth_level"
                     android:text="@string/str_not_import_not_urgent"/>
@@ -144,8 +144,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/table_list_task"
-        android:layout_marginStart="@dimen/normal_inner_space"
-        android:layout_marginEnd="@dimen/normal_inner_space"
+        android:layout_marginLeft="@dimen/normal_inner_space"
+        android:layout_marginRight="@dimen/normal_inner_space"
         android:background="@drawable/shape_fourth_level_bg"
         android:orientation="horizontal">
         <TextView
@@ -153,7 +153,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:gravity="end"
+            android:gravity="right"
             android:layout_gravity="center_vertical"
             />
 
@@ -170,7 +170,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:gravity="start"
+            android:gravity="left"
             android:layout_gravity="center_vertical"
             />
     </LinearLayout>
@@ -180,8 +180,8 @@
         android:layout_width="@dimen/button_little_width"
         android:layout_height="@dimen/button_layout_height"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="@dimen/normal_horizontal_margin"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/normal_horizontal_margin"
         android:layout_marginTop="@dimen/normal_inner_space"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:src="@drawable/ic_arrow_back_black_36dp"
@@ -191,10 +191,10 @@
         android:id="@+id/icon_save"
         android:layout_width="match_parent"
         android:layout_height="@dimen/button_layout_height"
-        android:layout_toEndOf="@id/icon_back"
+        android:layout_toRightOf="@id/icon_back"
         android:layout_alignBottom="@id/icon_back"
         android:layout_centerVertical="true"
-        android:layout_marginEnd="@dimen/normal_horizontal_margin"
+        android:layout_marginRight="@dimen/normal_horizontal_margin"
         android:background="@drawable/selector_save_btn"
         android:text="@string/str_save"/>
 
@@ -213,7 +213,7 @@
         android:layout_below="@id/alarm_notice"
         android:layout_above="@id/line_three"
         android:background="@drawable/main_edit_task"
-        android:gravity="start|top"
+        android:gravity="left|top"
         android:layout_margin="@dimen/normal_inner_space"
         android:padding="@dimen/textedit_cursor_margin"
         android:hint="@string/str_note"

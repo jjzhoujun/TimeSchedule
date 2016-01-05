@@ -126,7 +126,8 @@ public class MainActivity extends Activity implements OnClickListener, OnPageCha
 
 	private void startMainListActivity() {
 		Intent intent = new Intent();
-		intent.setClass(MainActivity.this, UIMainListActivity.class);
+		//intent.setClass(MainActivity.this, UIMainListActivity.class);
+		intent.setClass(MainActivity.this, UIMainRecyActivity.class);
 		startActivity(intent);
 	}
 

@@ -17,4 +17,5 @@
 **V2.0.0**  将Android Eclipse编辑方式换成AndroidStudio. 2015-09-13  
 **V2.1.0**  利用开源数据库GreenDao,ORM来管理Sqlite数据库. 2015-09-15  
 **V2.1.2**  更换图片成google material design 开源icon. 2015-09-21  
-**V2.2.0**  完成80%的功能以及界面UI，数据存储和更新都已经OK. 2016-01-03 
+**V2.2.0**  完成80%的功能以及界面UI，数据存储和更新都已经OK. 2016-01-03  
+**V2.3.0**  主list替换成Material-CardView的样式风格. 2016-01-05   

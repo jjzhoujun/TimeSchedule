@@ -9,6 +9,7 @@ import com.dreamfly.timeschedule.R;
 import com.dreamfly.timeschedule.bo.Entity;
 import com.dreamfly.timeschedule.bo.TimeItemEntity;
 import com.dreamfly.timeschedule.utils.CommonUtils;
+import com.dreamfly.timeschedule.utils.Tools;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -70,7 +71,6 @@ public class MainBaseAdapter extends BaseAdapter{
 			convertView = View.inflate(mContext, R.layout.item, null);
 			holder = new ViewHolder();
             holder.rlayout = (RelativeLayout) convertView.findViewById(R.id.ly_main_item);
-			holder.checkBox = (CheckBox) convertView.findViewById(R.id.checked);
 			holder.title = (TextView) convertView.findViewById(R.id.title);
             holder.titleCenter = (TextView) convertView.findViewById(R.id.title_center);
 			holder.comment = (TextView) convertView.findViewById(R.id.comment);
@@ -113,33 +113,12 @@ public class MainBaseAdapter extends BaseAdapter{
 				holder.hourMin.setText(hourMin);
 			}
 		}
-        holder.rlayout.setBackgroundResource(CommonUtils.getInstance(mContext).getTaskStatus(status));
-		holder.checkBox.setChecked(false);
-		holder.checkBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-			
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				// TODO Auto-generated method stub
-				if(isChecked){
-					LogPrint.Debug("===== delete the item task = position = " + position);
-					if(position < 0 || position >= mData.size()){
-						LogPrint.Debug("===== out of position = " + position);
-					} else {
-						TimeItemEntity itemEntity = (TimeItemEntity)getItem(position);
-						LogPrint.Debug("checked, del, id = " + itemEntity.getId() + "; title = " + itemEntity.getS_titile());
-						CommonUtils.getInstance(mContext).delTimeStruct(itemEntity.getId());
-						mData.remove(position);
-						notifyDataSetChanged();
-					}
-				}
-			}
-		});
+        holder.rlayout.setBackgroundResource(Tools.getTaskStatus(status));
 		return convertView;
 	}
 	
 	public static class ViewHolder{
         public RelativeLayout rlayout;
-		public CheckBox checkBox;
 		public TextView title;
         public TextView titleCenter;
 		public TextView comment;
