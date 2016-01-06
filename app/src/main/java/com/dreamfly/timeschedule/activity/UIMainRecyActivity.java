@@ -16,7 +16,9 @@ import com.dreamfly.debuginfo.LogPrint;
 import com.dreamfly.timeschedule.R;
 import com.dreamfly.timeschedule.adapter.RecyclerViewAdapter;
 import com.dreamfly.timeschedule.bo.ConstantVar;
+import com.dreamfly.timeschedule.bo.Entity;
 import com.dreamfly.timeschedule.bo.TimeItemEntity;
+import com.dreamfly.timeschedule.listener.RecItemClickListener;
 import com.dreamfly.timeschedule.utils.CommonUtils;
 import com.dreamfly.timeschedule.utils.Tools;
 import com.dreamfly.timeschedule.utils.greendao.TSDatabaseMgrMul;
@@ -37,7 +39,7 @@ public class UIMainRecyActivity extends BaseActivity{
 	private RecyclerViewAdapter mAdapter;
     private Context mContext;
     private int mClickItem;     // Record the mData position to refresh the list.
-	private List<TimeItemEntity> datas;
+	private List<Entity> datas;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,17 +48,12 @@ public class UIMainRecyActivity extends BaseActivity{
         initData();
 		initUI();
         EventBus.getDefault().register(this);
-		setClickListener();
 		// create adapt
 		showDatabaseView();
 
-//		datas = new ArrayList<>();
-//		for (int i = 0; i <= 100; i++) {
-//			datas.add("Number:" + i);
-//		}
-
 		mAdapter =  new RecyclerViewAdapter(datas);
 		mRecyclerView.setAdapter(mAdapter);
+		setClickListener();
 
 		//0则不执行拖动或者滑动
 		ItemTouchHelper.Callback mCallback = new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP|ItemTouchHelper.DOWN,ItemTouchHelper.LEFT) {
@@ -70,6 +67,7 @@ public class UIMainRecyActivity extends BaseActivity{
 			public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
 				int fromPosition = viewHolder.getAdapterPosition();//得到拖动ViewHolder的position
 				int toPosition = target.getAdapterPosition();//得到目标ViewHolder的position
+				LogPrint.Debug("==>> fromPosition = " + fromPosition + "; toPos = " + toPosition);
 				if (fromPosition < toPosition) {
 					//分别把中间所有的item的位置重新交换
 					for (int i = fromPosition; i < toPosition; i++) {
@@ -88,6 +86,8 @@ public class UIMainRecyActivity extends BaseActivity{
 			@Override
 			public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
 				int position = viewHolder.getAdapterPosition();
+				TimeItemEntity itemEntity = (TimeItemEntity) datas.get(position);
+				CommonUtils.getInstance(mContext).delTimeStruct(itemEntity.getId());
 				datas.remove(position);
 				mAdapter.notifyItemRemoved(position);
 			}
@@ -149,7 +149,6 @@ public class UIMainRecyActivity extends BaseActivity{
         int size = timeStructList.size();
 		datas = new ArrayList<>();
 		for(int i=0; i<size; i++) {
-//			mAdapter.addItem(timeStructList.get(i));
 			datas.add(timeStructList.get(i));
 		}
         long lastId;
@@ -180,6 +179,16 @@ public class UIMainRecyActivity extends BaseActivity{
 		};
 		mImgAdd.setOnClickListener(onClickListener);
 
+		mAdapter.setOnItemClickListener(new RecItemClickListener() {
+			@Override
+			public void onItemClick(View view, int position) {
+				LogPrint.Debug("==>> recyclerview onclick.. position = " + position);
+				mClickItem = position;
+				TimeItemEntity timeItemEntity = (TimeItemEntity) datas.get(position);
+				CommonUtils.getInstance(mContext).startAddTaskActivity(UIMainRecyActivity.this, timeItemEntity);
+			}
+		});
+
 	}
 
     private void addTimeTask() {
@@ -199,7 +208,8 @@ public class UIMainRecyActivity extends BaseActivity{
             LogPrint.Debug("==>>date = " + date);
             timeItemEntity.setS_start_time(date);
             CommonUtils.getInstance(mContext).saveTimeStruct(timeItemEntity);
-//            mAdapter.addItem(timeItemEntity);
+			datas.add(timeItemEntity);
+			mAdapter.notifyDataSetChanged();
             mEditText.setText("");
             id++;
             LogPrint.Debug("jayden, add new, lastId ==>> id = " + id);
@@ -214,9 +224,11 @@ public class UIMainRecyActivity extends BaseActivity{
         boolean isAdd = timeItemEntity.getAddFlag();
         LogPrint.Debug("onEventMainThread...timeItemEntity = " + timeItemEntity.toString() + "; isAdd = " + isAdd);
         if(isAdd){
-//            mAdapter.addItem(timeItemEntity);
+			datas.add(timeItemEntity);
+			mAdapter.notifyDataSetChanged();
         } else {
-//            mAdapter.updateItem(mClickItem, timeItemEntity);
+			datas.set(mClickItem, timeItemEntity);
+			mAdapter.notifyDataSetChanged();
         }
     }
 

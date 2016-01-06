@@ -9,12 +9,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/card_view3"
-        android:layout_marginTop="@dimen/normal_vertical_little_margin"
+        android:layout_marginTop="@dimen/normal_vertical_card_margin"
         android:layout_marginRight="@dimen/normal_inner_space"
         android:layout_marginLeft="@dimen/normal_inner_space"
         app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="@dimen/cardview_default_radius"
-        app:cardElevation="@dimen/cardview_default_elevation">
+        app:cardCornerRadius="@dimen/card_radius"
+        app:cardElevation="@dimen/card_elevation">
         <include layout="@layout/item"/>
     </android.support.v7.widget.CardView>
 

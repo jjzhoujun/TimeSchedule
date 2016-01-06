@@ -176,7 +176,7 @@ public class UIMainListActivity extends BaseActivity{
     }
 
     /**
-     * 1. 接收从UIAddTaskActivity传过来的EventBus。
+     * 1. 接收从UIAddTaskActivity传过来的EventBus添加或者更新item.
      * */
     public void onEventMainThread(TimeItemEntity timeItemEntity) {
         boolean isAdd = timeItemEntity.getAddFlag();

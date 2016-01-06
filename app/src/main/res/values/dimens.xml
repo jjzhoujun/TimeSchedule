@@ -8,6 +8,9 @@
     <dimen name="normal_vertical_margin">10dp</dimen>
     <dimen name="normal_vertical_little_margin">2dp</dimen>
     <dimen name="normal_inner_space">6dp</dimen>
+    <dimen name="normal_vertical_card_margin">1dp</dimen>
+    <dimen name="card_radius">2dp</dimen>
+    <dimen name="card_elevation">2dp</dimen>
 
     <dimen name="textedit_height">40dp</dimen>
     <dimen name="textedit_large_note_height">200dp</dimen>

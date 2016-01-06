@@ -36,7 +36,8 @@
         android:id="@+id/main_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/ly_addtask"/>
+        android:layout_below="@id/ly_addtask"
+        android:scrollbars="vertical"/>
     
 
 </RelativeLayout>

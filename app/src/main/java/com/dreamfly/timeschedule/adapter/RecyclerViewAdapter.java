@@ -7,7 +7,9 @@ import android.view.ViewGroup;
 
 import com.dreamfly.debuginfo.LogPrint;
 import com.dreamfly.timeschedule.R;
+import com.dreamfly.timeschedule.bo.Entity;
 import com.dreamfly.timeschedule.bo.TimeItemEntity;
+import com.dreamfly.timeschedule.listener.RecItemClickListener;
 import com.dreamfly.timeschedule.utils.CommonUtils;
 import com.dreamfly.timeschedule.utils.Tools;
 
@@ -17,14 +19,18 @@ import java.util.List;
  * Created by Jayden on 2016-01-03
  */
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
-    private List<TimeItemEntity> datas;
-    public RecyclerViewAdapter(List<TimeItemEntity> datas){
+
+    private List<Entity> datas;
+    private RecItemClickListener mItemClickListener;
+
+    public RecyclerViewAdapter(List<Entity> datas){
         this.datas = datas;
     }
+
     @Override
     public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_item,parent,false);
-        RecyclerViewHolder holder = new RecyclerViewHolder(view);
+        RecyclerViewHolder holder = new RecyclerViewHolder(view, mItemClickListener);
         return holder;
     }
 
@@ -66,6 +72,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     @Override
     public int getItemCount() {
         return datas.size();
+    }
+
+    public void setOnItemClickListener(RecItemClickListener listener) {
+        this.mItemClickListener = listener;
     }
 
 }
