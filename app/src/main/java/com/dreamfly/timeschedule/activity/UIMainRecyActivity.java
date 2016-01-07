@@ -228,7 +228,7 @@ public class UIMainRecyActivity extends BaseActivity{
 			mAdapter.notifyDataSetChanged();
         } else {
 			datas.set(mClickItem, timeItemEntity);
-			mAdapter.notifyDataSetChanged();
+			mAdapter.notifyItemChanged(mClickItem);
         }
     }
 
