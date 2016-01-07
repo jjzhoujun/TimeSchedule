@@ -71,11 +71,11 @@ public class UIMainRecyActivity extends BaseActivity{
 				if (fromPosition < toPosition) {
 					//分别把中间所有的item的位置重新交换
 					for (int i = fromPosition; i < toPosition; i++) {
-						Collections.swap(datas, i, i + 1);
+						swapItemData(datas, i, i + 1);
 					}
 				} else {
 					for (int i = fromPosition; i > toPosition; i--) {
-						Collections.swap(datas, i, i - 1);
+						swapItemData(datas, i, i - 1);
 					}
 				}
 				mAdapter.notifyItemMoved(fromPosition, toPosition);
@@ -231,5 +231,25 @@ public class UIMainRecyActivity extends BaseActivity{
 			mAdapter.notifyDataSetChanged();
         }
     }
+
+	private void swapItemData(List<Entity> list, int src, int dest) {
+		Collections.swap(list, src, dest);
+		//Swap database and save.
+		TimeItemEntity srcEntity = (TimeItemEntity) list.get(src);
+		TimeItemEntity destEntity = (TimeItemEntity) list.get(dest);
+		TimeItemEntity tmpEntity = destEntity;
+//		LogPrint.Debug("before src = " + srcEntity.toString() + "; tmp = " + tmpEntity.toString() + ";dest = " + destEntity.toString());
+		long destId = destEntity.getId();
+		long srcId = srcEntity.getId();
+//		LogPrint.Debug("destId = " + destId);
+		destEntity = srcEntity;  // This will change srcEntity Id to destEntity Id, why ?
+		destEntity.setId(destId);
+//		LogPrint.Debug("srcId = " + srcId);
+		srcEntity = tmpEntity;
+		srcEntity.setId(srcId);
+//		LogPrint.Debug("after src = " + srcEntity.toString() + "; tmp = " + tmpEntity.toString() + ";dest = " + destEntity.toString());
+		CommonUtils.getInstance(mContext).saveTimeStruct(srcEntity);
+		CommonUtils.getInstance(mContext).saveTimeStruct(destEntity);
+	}
 
 }

@@ -93,7 +93,8 @@ public class TimeItemEntity extends Entity{
 
     @Override
     public String toString() {
-        return "isFinish = " + b_finish
+        return "id = " + _id
+                + "; isFinish = " + b_finish
                 + "; title = " + s_titile
                 + "; status = " + i_status
                 + "; notice = " + s_notice
