@@ -17,4 +17,7 @@
     <string name="str_min">分</string>
     <string name="str_start_time">开始时间：</string>
     <string name="str_end_time">结束时间：</string>
+    <string name="str_self_profile">个人中心</string>
+    <string name="str_tucao">吐槽:</string>
+    <string name="str_submit">提交</string>
 </resources>

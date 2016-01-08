@@ -19,3 +19,9 @@
 **V2.1.2**  更换图片成google material design 开源icon. 2015-09-21  
 **V2.2.0**  完成80%的功能以及界面UI，数据存储和更新都已经OK. 2016-01-03  
 **V2.3.0**  主list替换成Material-CardView的样式风格. 2016-01-05   
+
+
+Reference:
+1.http://www.cnblogs.com/tiantianbyconan/p/4116304.html
+2.http://blog.csdn.net/guxiao1201/article/details/40423361
+3.http://tieba.baidu.com/p/3125135645

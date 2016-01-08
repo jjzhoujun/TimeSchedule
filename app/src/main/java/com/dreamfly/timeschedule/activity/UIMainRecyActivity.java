@@ -4,11 +4,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.ViewDragHelper;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -24,6 +30,7 @@ import com.dreamfly.timeschedule.utils.Tools;
 import com.dreamfly.timeschedule.utils.greendao.TSDatabaseMgrMul;
 import com.dreamfly.timeschedule.view.widget.EditTextWithDel;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -32,7 +39,8 @@ import de.greenrobot.event.EventBus;
 
 
 public class UIMainRecyActivity extends BaseActivity{
-	
+
+	private DrawerLayout mDrawerLayout;
 	private ImageView mImgAdd = null;
 	private EditTextWithDel mEditText = null;
 	private RecyclerView mRecyclerView;
@@ -53,7 +61,7 @@ public class UIMainRecyActivity extends BaseActivity{
 
 		mAdapter =  new RecyclerViewAdapter(datas);
 		mRecyclerView.setAdapter(mAdapter);
-		setClickListener();
+		setListener();
 
 		//0则不执行拖动或者滑动
 		ItemTouchHelper.Callback mCallback = new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP|ItemTouchHelper.DOWN,ItemTouchHelper.LEFT) {
@@ -105,9 +113,9 @@ public class UIMainRecyActivity extends BaseActivity{
 
 			@Override
 			public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
-				super.onSelectedChanged(viewHolder, actionState);
 				//当选中Item时候会调用该方法，重写此方法可以实现选中时候的一些动画逻辑
 				LogPrint.Debug("onSelectedChanged, actionState = " + actionState);
+				super.onSelectedChanged(viewHolder, actionState);
 
 			}
 
@@ -130,6 +138,8 @@ public class UIMainRecyActivity extends BaseActivity{
     }
 	
 	private void initUI(){
+		mDrawerLayout = (DrawerLayout) findViewById(R.id.id_drawer_layout);
+//		mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN, Gravity.LEFT);
 		mEditText = (EditTextWithDel)findViewById(R.id.main_edit_task);
 		mImgAdd = (ImageView)findViewById(R.id.main_add);
 		mRecyclerView = (RecyclerView)findViewById(R.id.main_list);
@@ -161,7 +171,42 @@ public class UIMainRecyActivity extends BaseActivity{
         CommonUtils.getInstance(mContext).setId(lastId);
     }
 
-	private void setClickListener(){
+	private void setListener(){
+
+		mDrawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
+			@Override
+			public void onDrawerSlide(View drawerView, float slideOffset) {
+//				LogPrint.Debug("onDrawerSlide.. slideOffset = " + slideOffset);
+//				View content = mDrawerLayout.getChildAt(0);
+//				View menu = drawerView;
+//				float scale = 1 - slideOffset;
+//				if (drawerView.getTag().equals("LEFT")) {
+//					float leftScale = 1 - 0.3f * scale;
+//
+//				}
+			}
+
+			@Override
+			public void onDrawerOpened(View drawerView) {
+//				LogPrint.Debug("== onDrawerOpened.....");
+
+			}
+
+			@Override
+			public void onDrawerClosed(View drawerView) {
+//				LogPrint.Debug("== onDrawerClosed.....");
+
+			}
+
+			@Override
+			public void onDrawerStateChanged(int newState) {
+//				LogPrint.Debug("== onDrawerStateChanged...... newState = " + newState);
+
+			}
+		});
+		setDrawerLeftEdgeSize(mDrawerLayout, 0.3f);
+
+
 		View.OnClickListener onClickListener = new View.OnClickListener() {
 			
 			@Override
@@ -250,6 +295,31 @@ public class UIMainRecyActivity extends BaseActivity{
 //		LogPrint.Debug("after src = " + srcEntity.toString() + "; tmp = " + tmpEntity.toString() + ";dest = " + destEntity.toString());
 		CommonUtils.getInstance(mContext).saveTimeStruct(srcEntity);
 		CommonUtils.getInstance(mContext).saveTimeStruct(destEntity);
+	}
+
+	/**
+	 * 反射的方法让它在displayWidthPercent的情况下, 也可以左滑拉出来.
+	 * 由于此方法会导致长按也可以呼唤出来, 所以不能设置太大.
+	 * 参考http://tieba.baidu.com/p/3125135645
+	 * */
+	private void setDrawerLeftEdgeSize(DrawerLayout drawerLayout, float displayWidthPercent) {
+		if(mContext == null || drawerLayout == null) {
+			return;
+		}
+		try {
+			Field leftDraggerField = drawerLayout.getClass().getDeclaredField("mLeftDragger");
+			leftDraggerField.setAccessible(true);
+			ViewDragHelper leftDragger = (ViewDragHelper) leftDraggerField.get(drawerLayout);
+			Field edgeSizeField = leftDragger.getClass().getDeclaredField("mEdgeSize");
+			edgeSizeField.setAccessible(true);
+			int edgeSize = edgeSizeField.getInt(leftDragger);
+			DisplayMetrics dm = new DisplayMetrics();
+			getWindowManager().getDefaultDisplay().getMetrics(dm);
+			edgeSizeField.setInt(leftDragger, Math.max(edgeSize,
+					(int)(dm.widthPixels * displayWidthPercent)));
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
