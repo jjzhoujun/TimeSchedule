@@ -28,11 +28,20 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
     }
+
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build event when errors are found;
+//        abortOnError false
+    }
+
 }
 
 dependencies {
     compile 'com.android.support:support-v4:22.2.1'
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(dir: 'libs/umeng', include: ['*.jar'])
     compile 'de.greenrobot:eventbus:2.4.1'
     compile 'com.android.support:appcompat-v7:22.2.1'
     compile 'com.android.support:recyclerview-v7:22.2.1'

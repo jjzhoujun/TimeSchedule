@@ -17,6 +17,7 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.dreamfly.debuginfo.LogPrint;
 import com.dreamfly.timeschedule.R;
@@ -30,6 +31,12 @@ import com.dreamfly.timeschedule.utils.Tools;
 import com.dreamfly.timeschedule.utils.greendao.TSDatabaseMgrMul;
 import com.dreamfly.timeschedule.view.widget.EditTextWithDel;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.ShareContent;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.editorpage.ShareActivity;
+import com.umeng.socialize.media.UMImage;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -231,6 +238,7 @@ public class UIMainRecyActivity extends BaseActivity{
 					case R.id.main_add:
 						LogPrint.Debug("====mEditText.getText() = " + mEditText.getText().toString());
                         addTimeTask();
+//						addShare();
 						break;
 					default:
 						break;
@@ -252,7 +260,36 @@ public class UIMainRecyActivity extends BaseActivity{
 
 	}
 
-    private void addTimeTask() {
+	private void addShare() {
+		LogPrint.Debug("==>> addShare.... weixin...");
+		UMImage image = new UMImage(this, "http://www.umeng.com/images/pic/social/integrated_3.png");
+		new ShareAction(this).setDisplayList(SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.SINA, SHARE_MEDIA.QZONE,
+					SHARE_MEDIA.QQ, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.TENCENT,SHARE_MEDIA.RENREN)
+				.setContentList(new ShareContent(), new ShareContent())
+				.withMedia(image)
+				.setListenerList(umShareListener,umShareListener)
+				.open();
+	}
+
+	private UMShareListener umShareListener = new UMShareListener() {
+		@Override
+		public void onResult(SHARE_MEDIA platform) {
+			Toast.makeText(UIMainRecyActivity.this, platform + " 分享成功啦", Toast.LENGTH_SHORT).show();
+		}
+
+		@Override
+		public void onError(SHARE_MEDIA platform, Throwable t) {
+			Toast.makeText(UIMainRecyActivity.this,platform + " 分享失败啦", Toast.LENGTH_SHORT).show();
+		}
+
+		@Override
+		public void onCancel(SHARE_MEDIA platform) {
+			Toast.makeText(UIMainRecyActivity.this,platform + " 分享取消了", Toast.LENGTH_SHORT).show();
+		}
+	};
+
+
+	private void addTimeTask() {
         String title = mEditText.getText().toString();
         if("".equals(title)){
             Intent intent = new Intent();
