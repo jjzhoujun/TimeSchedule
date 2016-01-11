@@ -18,6 +18,7 @@ import com.dreamfly.timeschedule.utils.CommonUtils;
 import com.dreamfly.timeschedule.utils.TSFragmentMgr;
 import com.dreamfly.timeschedule.utils.Tools;
 import com.dreamfly.timeschedule.view.widget.EditTextWithDel;
+import com.umeng.analytics.MobclickAgent;
 
 import de.greenrobot.event.EventBus;
 
@@ -85,6 +86,18 @@ public class UIAddTaskActivity extends BaseActivity{
 	}
 
 	@Override
+	protected void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
+
+	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 //		LogPrint.Warning("=>>start to onSavedInstanceState");
 		outState.putSerializable(ConstantVar.TASK_DATA, mTimeItemEntity);
@@ -123,6 +136,7 @@ public class UIAddTaskActivity extends BaseActivity{
 			public void onClick(View view) {
 				mLevel = ConstantVar.STATUS_FIRST_LEVEL;
 				setStatusView(ConstantVar.STATUS_FIRST_LEVEL);
+				MobclickAgent.onEvent(UIAddTaskActivity.this, "StatusFirst");
 			}
 		});
 		mVSecondLevel.setOnClickListener(new View.OnClickListener() {
@@ -130,6 +144,7 @@ public class UIAddTaskActivity extends BaseActivity{
 			public void onClick(View view) {
 				mLevel = ConstantVar.STATUS_SECOND_LEVEL;
 				setStatusView(ConstantVar.STATUS_SECOND_LEVEL);
+				MobclickAgent.onEvent(UIAddTaskActivity.this, "StatusSecond");
 			}
 		});
 		mVThirdLevel.setOnClickListener(new View.OnClickListener() {
@@ -137,6 +152,7 @@ public class UIAddTaskActivity extends BaseActivity{
 			public void onClick(View view) {
 				mLevel = ConstantVar.STATUS_THIRD_LEVEL;
 			    setStatusView(ConstantVar.STATUS_THIRD_LEVEL);
+				MobclickAgent.onEvent(UIAddTaskActivity.this, "StatusThird");
 			}
 		});
 		mVFourthLevel.setOnClickListener(new View.OnClickListener() {
@@ -144,6 +160,7 @@ public class UIAddTaskActivity extends BaseActivity{
 			public void onClick(View view) {
 				mLevel = ConstantVar.STATUS_FOURTH_LEVEL;
 				setStatusView(ConstantVar.STATUS_FOURTH_LEVEL);
+				MobclickAgent.onEvent(UIAddTaskActivity.this, "StatusFourth");
 			}
 		});
 
@@ -153,12 +170,14 @@ public class UIAddTaskActivity extends BaseActivity{
 				LogPrint.Debug("==>> Click Alarm Layout, show.. = " + mTimeArray);
 				CommonUtils.getInstance(UIAddTaskActivity.this).startTimePickerActivity(
 						UIAddTaskActivity.this, mTimeArray);
+				MobclickAgent.onEvent(UIAddTaskActivity.this, "TimeChoose");
 			}
 		});
 
 		mBackBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				MobclickAgent.onEvent(UIAddTaskActivity.this, "BackInAddTask");
 				finish();
 			}
 		});
@@ -166,6 +185,7 @@ public class UIAddTaskActivity extends BaseActivity{
 			@Override
 			public void onClick(View view) {
 				LogPrint.Debug("start to save the item to database...");
+				MobclickAgent.onEvent(UIAddTaskActivity.this, "SaveInAddTask");
 				mTitle = mEditTitle.getText().toString();
 				if ("".equals(mTitle)) {
 					Toast.makeText(UIAddTaskActivity.this, R.string.str_plz_title, Toast.LENGTH_SHORT).show();

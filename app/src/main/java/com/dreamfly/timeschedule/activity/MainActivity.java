@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,6 +19,7 @@ import android.widget.LinearLayout;
 import com.dreamfly.debuginfo.LogPrint;
 import com.dreamfly.timeschedule.R;
 import com.dreamfly.timeschedule.adapter.ViewPagerAdapter;
+import com.umeng.analytics.MobclickAgent;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -37,9 +39,24 @@ public class MainActivity extends Activity implements OnClickListener, OnPageCha
 	private int mCurrIndex;
 
 	@Override
+	protected void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		// Start UMeng device notice.
+//		LogPrint.Debug("device = " + getDeviceInfo(this));
+		MobclickAgent.setDebugMode(true);
 		if(true) {
 			startMainListActivity();
 			finish();
@@ -48,7 +65,38 @@ public class MainActivity extends Activity implements OnClickListener, OnPageCha
 			initData();
 		}
 	}
-	
+
+	public static String getDeviceInfo(Context context) {
+		try{
+			org.json.JSONObject json = new org.json.JSONObject();
+			android.telephony.TelephonyManager tm = (android.telephony.TelephonyManager) context
+					.getSystemService(Context.TELEPHONY_SERVICE);
+
+			String device_id = tm.getDeviceId();
+
+			android.net.wifi.WifiManager wifi = (android.net.wifi.WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+
+			String mac = wifi.getConnectionInfo().getMacAddress();
+			json.put("mac", mac);
+
+			if( TextUtils.isEmpty(device_id) ){
+				device_id = mac;
+			}
+
+			if( TextUtils.isEmpty(device_id) ){
+				device_id = android.provider.Settings.Secure.getString(context.getContentResolver(),android.provider.Settings.Secure.ANDROID_ID);
+			}
+
+			json.put("device_id", device_id);
+
+			return json.toString();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+
 	public void initView(){
 		mViews = new ArrayList<View>();
 		mViewPager = (ViewPager)findViewById(R.id.viewpager);

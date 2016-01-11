@@ -12,6 +12,7 @@ import com.dreamfly.timeschedule.bo.ConstantVar;
 import com.dreamfly.timeschedule.bo.TimeItemEntity;
 import com.dreamfly.timeschedule.utils.Tools;
 import com.dreamfly.widget.TimePicker;
+import com.umeng.analytics.MobclickAgent;
 
 import de.greenrobot.event.EventBus;
 
@@ -25,6 +26,19 @@ public class TimePickerActivity extends BaseActivity {
 	private TimePicker mStartTimePicker;
 	private TimePicker mEndTimePicker;
 	private ImageButton mBtnBack;
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
+
 	private Button mBtnSave;
 
 	@Override
@@ -56,6 +70,7 @@ public class TimePickerActivity extends BaseActivity {
 		mBtnBack.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				MobclickAgent.onEvent(TimePickerActivity.this, "BackInTimePicker");
 				finish();
 			}
 		});
@@ -65,6 +80,7 @@ public class TimePickerActivity extends BaseActivity {
 			public void onClick(View v) {
 				LogPrint.Debug("00000 mTimeArray = " + mTimeArray[0]
 					+ "; 1 = " + mTimeArray[1]);
+				MobclickAgent.onEvent(TimePickerActivity.this, "SaveInTimePicker");
 				mTimeArray[0] = mStartTimePicker.getMonth() + "月"
 						+ mStartTimePicker.getDay() + "日 "      // 日后面要加空格。
 						+ mStartTimePicker.getHour() + ":"

@@ -29,6 +29,7 @@ import com.dreamfly.timeschedule.utils.CommonUtils;
 import com.dreamfly.timeschedule.utils.Tools;
 import com.dreamfly.timeschedule.utils.greendao.TSDatabaseMgrMul;
 import com.dreamfly.timeschedule.view.widget.EditTextWithDel;
+import com.umeng.analytics.MobclickAgent;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -136,7 +137,21 @@ public class UIMainRecyActivity extends BaseActivity{
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
-	
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		MobclickAgent.onPageStart("LeftFragment");
+		MobclickAgent.onResume(this);
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		MobclickAgent.onPageEnd("LeftFragment");
+		MobclickAgent.onPause(this);
+	}
+
 	private void initUI(){
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.id_drawer_layout);
 //		mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN, Gravity.LEFT);
@@ -228,6 +243,7 @@ public class UIMainRecyActivity extends BaseActivity{
 			@Override
 			public void onItemClick(View view, int position) {
 				LogPrint.Debug("==>> recyclerview onclick.. position = " + position);
+				MobclickAgent.onEvent(UIMainRecyActivity.this, "ItemClickIn");
 				mClickItem = position;
 				TimeItemEntity timeItemEntity = (TimeItemEntity) datas.get(position);
 				CommonUtils.getInstance(mContext).startAddTaskActivity(UIMainRecyActivity.this, timeItemEntity);
@@ -242,6 +258,7 @@ public class UIMainRecyActivity extends BaseActivity{
             Intent intent = new Intent();
             intent.setClass(UIMainRecyActivity.this, UIAddTaskActivity.class);
             startActivity(intent);
+			MobclickAgent.onEvent(this, "AddNew");
         } else {
             TimeItemEntity timeItemEntity = new TimeItemEntity();
             long id = CommonUtils.getInstance(mContext).getId();
@@ -259,6 +276,7 @@ public class UIMainRecyActivity extends BaseActivity{
             id++;
             LogPrint.Debug("jayden, add new, lastId ==>> id = " + id);
             CommonUtils.getInstance(mContext).setId(id);
+			MobclickAgent.onEvent(this, "AddOnce");
         }
     }
 
@@ -278,6 +296,7 @@ public class UIMainRecyActivity extends BaseActivity{
     }
 
 	private void swapItemData(List<Entity> list, int src, int dest) {
+		MobclickAgent.onEvent(this, "SwapItem");
 		Collections.swap(list, src, dest);
 		//Swap database and save.
 		TimeItemEntity srcEntity = (TimeItemEntity) list.get(src);

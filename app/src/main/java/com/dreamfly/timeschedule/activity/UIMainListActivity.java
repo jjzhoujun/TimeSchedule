@@ -21,6 +21,7 @@ import com.dreamfly.timeschedule.view.widget.ListViewPullToRef.OnRefreshListener
 import com.dreamfly.timeschedule.bo.TimeItemEntity;
 import com.dreamfly.timeschedule.utils.greendao.TSDatabaseMgrMul;
 import com.dreamfly.timeschedule.view.widget.EditTextWithDel;
+import com.umeng.analytics.MobclickAgent;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -98,8 +99,20 @@ public class UIMainListActivity extends BaseActivity{
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
-	
-	private void initUI(){
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
+
+    private void initUI(){
 		mEditText = (EditTextWithDel)findViewById(R.id.main_edit_task);
 		mImgAdd = (ImageView)findViewById(R.id.main_add);
 		mListView = (ListViewPullToRef)findViewById(R.id.main_list);
