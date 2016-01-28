@@ -22,8 +22,8 @@ public class TSApplication extends Application {
         //说明：需要使用第三方公司api的平台，新浪，腾讯等，是需要去申请appkey的。
         // 人人豆瓣只能在服务器端设置。其它需要配置appid的平台，如qq，微信，易信,twitter等都需要在本地设置。
         // 还有一部分平台需要在mainfest中配置，前面已经提到过。
-        //友盟微信平台,  appId  appSecret
-        PlatformConfig.setWeixin("wx967daebe835fbeac", "5bb696d9ccd75a38c8a0bfe0675559b3");
+        //友盟微信平台,需要去微信开放平台申请, 参数:appId,appSecret
+        PlatformConfig.setWeixin("wxb7ff70f8ed986b3f", "b5a58046118fb410b788d827ef9a6559");
     }
 
     private void initDataBase() {
