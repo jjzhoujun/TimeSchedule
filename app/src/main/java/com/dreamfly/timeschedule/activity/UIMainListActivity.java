@@ -1,6 +1,5 @@
 package com.dreamfly.timeschedule.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -13,20 +12,16 @@ import com.dreamfly.debuginfo.LogPrint;
 import com.dreamfly.timeschedule.R;
 import com.dreamfly.timeschedule.adapter.MainBaseAdapter;
 import com.dreamfly.timeschedule.bo.ConstantVar;
-import com.dreamfly.timeschedule.bo.TimeEntity;
+import com.dreamfly.timeschedule.bo.TimeItemEntity;
 import com.dreamfly.timeschedule.utils.CommonUtils;
 import com.dreamfly.timeschedule.utils.Tools;
+import com.dreamfly.timeschedule.utils.greendao.TSDatabaseMgrMul;
+import com.dreamfly.widget.EditTextWithDel;
 import com.dreamfly.timeschedule.view.widget.ListViewPullToRef;
 import com.dreamfly.timeschedule.view.widget.ListViewPullToRef.OnRefreshListener;
-import com.dreamfly.timeschedule.bo.TimeItemEntity;
-import com.dreamfly.timeschedule.utils.greendao.TSDatabaseMgrMul;
-import com.dreamfly.timeschedule.view.widget.EditTextWithDel;
 import com.umeng.analytics.MobclickAgent;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import de.greenrobot.event.EventBus;
 

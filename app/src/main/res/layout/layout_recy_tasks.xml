@@ -21,7 +21,7 @@
             android:layout_marginTop="@dimen/normal_vertical_margin"
             android:orientation="horizontal">
 
-            <com.dreamfly.timeschedule.view.widget.EditTextWithDel
+            <com.dreamfly.widget.EditTextWithDel
                 android:id="@+id/main_edit_task"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/textedit_height"

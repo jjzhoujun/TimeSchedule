@@ -1,4 +1,4 @@
-package com.dreamfly.timeschedule.view.widget;
+package com.dreamfly.widget;
 
 import android.content.Context;
 import android.graphics.Rect;

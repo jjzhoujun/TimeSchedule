@@ -6,6 +6,16 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:1.5.0'
     }
+
+    // 全局工程配置编译版本以及sdk等版本
+    project.ext {
+        compileSdkVersion = 22
+        buildToolsVersion = "22.0.1"
+        minSdkVersion = 12
+        targetSdkVersion = 19
+        versionCode = 1
+        versionName = "1.0.0"
+    }
 }
 
 allprojects {

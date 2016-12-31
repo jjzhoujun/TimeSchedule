@@ -12,12 +12,10 @@ import android.widget.Toast;
 import com.dreamfly.debuginfo.LogPrint;
 import com.dreamfly.timeschedule.R;
 import com.dreamfly.timeschedule.bo.ConstantVar;
-import com.dreamfly.timeschedule.bo.TimeEntity;
 import com.dreamfly.timeschedule.bo.TimeItemEntity;
 import com.dreamfly.timeschedule.utils.CommonUtils;
-import com.dreamfly.timeschedule.utils.TSFragmentMgr;
 import com.dreamfly.timeschedule.utils.Tools;
-import com.dreamfly.timeschedule.view.widget.EditTextWithDel;
+import com.dreamfly.widget.EditTextWithDel;
 import com.umeng.analytics.MobclickAgent;
 
 import de.greenrobot.event.EventBus;

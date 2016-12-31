@@ -15,7 +15,7 @@
         android:textSize="@dimen/main_list_center_title_size"
         android:textColor="@color/black"/>
 
-    <com.dreamfly.timeschedule.view.widget.EditTextWithDel
+    <com.dreamfly.widget.EditTextWithDel
         android:id="@+id/edit_notice"
         android:layout_width="match_parent"
         android:layout_height="@dimen/textedit_large_note_height"
