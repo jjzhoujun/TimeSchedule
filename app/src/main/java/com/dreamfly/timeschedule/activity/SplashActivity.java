@@ -8,7 +8,6 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.text.TextUtils;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,13 +18,16 @@ import android.widget.LinearLayout;
 import com.dreamfly.debuginfo.LogPrint;
 import com.dreamfly.timeschedule.R;
 import com.dreamfly.timeschedule.adapter.ViewPagerAdapter;
+import com.dreamfly.timeschedule.utils.ApplicationVersionUtils;
+import com.dreamfly.timeschedule.utils.ApplicationVersionUtils.ClientVersionInfo;
+import com.dreamfly.timeschedule.utils.ConfigUtils;
 import com.umeng.analytics.MobclickAgent;
 
 import java.io.InputStream;
 import java.util.ArrayList;
 
-public class MainActivity extends Activity implements OnClickListener, OnPageChangeListener{
-	private static final String TAG = "ViewPagerTest";
+public class SplashActivity extends Activity implements OnClickListener, OnPageChangeListener{
+	private static final String TAG = SplashActivity.class.getSimpleName();
 	private static final int[] mPics = {R.drawable.introduce_1,
 										R.drawable.introduce_2,
 										R.drawable.introduce_3,
@@ -53,49 +55,31 @@ public class MainActivity extends Activity implements OnClickListener, OnPageCha
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-		// Start UMeng device notice.
-//		LogPrint.Debug("device = " + getDeviceInfo(this));
-		MobclickAgent.setDebugMode(true);
-		if(true) {
-			startMainListActivity();
-			finish();
+		ClientVersionInfo clientVersionInfo = ApplicationVersionUtils
+				.getApplicationVersionInfo(this);
+		int versionCode = clientVersionInfo.getVersionCode();
+		ConfigUtils configUtils = new ConfigUtils(this);
+		int oldVersionCode = configUtils.getCurVersionCode();
+		if(configUtils.isAppFirstRun() || oldVersionCode != versionCode) {
+			doFirstEnter();
+			configUtils.setAppFirstRun(false);
+			configUtils.setCurVersionCode(versionCode);
 		} else {
-			initView();
-			initData();
+			doNotFirstEnter();
 		}
 	}
 
-	public static String getDeviceInfo(Context context) {
-		try{
-			org.json.JSONObject json = new org.json.JSONObject();
-			android.telephony.TelephonyManager tm = (android.telephony.TelephonyManager) context
-					.getSystemService(Context.TELEPHONY_SERVICE);
-
-			String device_id = tm.getDeviceId();
-
-			android.net.wifi.WifiManager wifi = (android.net.wifi.WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-
-			String mac = wifi.getConnectionInfo().getMacAddress();
-			json.put("mac", mac);
-
-			if( TextUtils.isEmpty(device_id) ){
-				device_id = mac;
-			}
-
-			if( TextUtils.isEmpty(device_id) ){
-				device_id = android.provider.Settings.Secure.getString(context.getContentResolver(),android.provider.Settings.Secure.ANDROID_ID);
-			}
-
-			json.put("device_id", device_id);
-
-			return json.toString();
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return null;
+	private void doFirstEnter() {
+		setContentView(R.layout.guide);
+		initView();
+		initData();
 	}
 
+	private void doNotFirstEnter() {
+		setContentView(R.layout.splash);
+		startMainListActivity();
+		finish();
+	}
 
 	public void initView(){
 		mViews = new ArrayList<View>();
@@ -174,8 +158,8 @@ public class MainActivity extends Activity implements OnClickListener, OnPageCha
 
 	private void startMainListActivity() {
 		Intent intent = new Intent();
-		//intent.setClass(MainActivity.this, UIMainListActivity.class);
-		intent.setClass(MainActivity.this, UIMainRecyActivity.class);
+		//intent.setClass(SplashActivity.this, UIMainListActivity.class);
+		intent.setClass(SplashActivity.this, UIMainRecyActivity.class);
 		startActivity(intent);
 	}
 
