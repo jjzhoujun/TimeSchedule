@@ -37,7 +37,8 @@
             android:windowSoftInputMode="stateHidden|adjustPan"
             />
         <activity
-            android:name=".activity.UIAddTaskActivity"/>
+            android:name=".activity.UIAddTaskActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity
             android:name=".activity.TimePickerActivity"/>
 

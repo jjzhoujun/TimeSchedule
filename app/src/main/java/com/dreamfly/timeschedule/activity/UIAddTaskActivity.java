@@ -1,8 +1,10 @@
 package com.dreamfly.timeschedule.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
@@ -176,7 +178,7 @@ public class UIAddTaskActivity extends BaseActivity{
 			@Override
 			public void onClick(View view) {
 				MobclickAgent.onEvent(UIAddTaskActivity.this, "BackInAddTask");
-				finish();
+				exitAndHideInput();
 			}
 		});
 		mSaveBtn.setOnClickListener(new View.OnClickListener() {
@@ -211,7 +213,7 @@ public class UIAddTaskActivity extends BaseActivity{
 				mTimeItemEntity.setS_end_time(mEndTime);
 				CommonUtils.getInstance(UIAddTaskActivity.this).saveTimeStruct(mTimeItemEntity);
 				EventBus.getDefault().post(mTimeItemEntity);
-				finish();
+				exitAndHideInput();
 			}
 		});
 	}
@@ -287,5 +289,15 @@ public class UIAddTaskActivity extends BaseActivity{
 		mEndTime = timeArray[1];
 		mTextSTime.setText(mStartTime);
 		mTextETime.setText(mEndTime);
+	}
+
+	private void exitAndHideInput() {
+		//收起输入法
+		if(this.getCurrentFocus() != null) {
+			((InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE))
+					.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(),
+							InputMethodManager.HIDE_NOT_ALWAYS);
+		}
+		finish();
 	}
 }

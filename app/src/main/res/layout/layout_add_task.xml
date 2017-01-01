@@ -209,7 +209,7 @@
     <com.dreamfly.widget.EditTextWithDel
         android:id="@+id/edit_notice"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/alarm_notice"
         android:layout_above="@id/line_three"
         android:background="@drawable/main_edit_task"
