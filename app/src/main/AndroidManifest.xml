@@ -34,7 +34,8 @@
             android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".activity.UIMainRecyActivity"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden|adjustPan"
+            />
         <activity
             android:name=".activity.UIAddTaskActivity"/>
         <activity

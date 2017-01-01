@@ -27,6 +27,8 @@ import com.dreamfly.timeschedule.utils.CommonUtils;
 import com.dreamfly.timeschedule.utils.Tools;
 import com.dreamfly.timeschedule.utils.greendao.TSDatabaseMgrMul;
 import com.dreamfly.widget.EditTextWithDel;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshRecyclerView;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.ShareContent;
@@ -47,7 +49,7 @@ public class UIMainRecyActivity extends BaseActivity{
 	private DrawerLayout mDrawerLayout;
 	private ImageView mImgAdd = null;
 	private EditTextWithDel mEditText = null;
-	private RecyclerView mRecyclerView;
+	private PullToRefreshRecyclerView mRecyclerView;
 	private RecyclerViewAdapter mAdapter;
     private Context mContext;
     private int mClickItem;     // Record the mData position to refresh the list.
@@ -64,7 +66,7 @@ public class UIMainRecyActivity extends BaseActivity{
 		showDatabaseView();
 
 		mAdapter =  new RecyclerViewAdapter(datas);
-		mRecyclerView.setAdapter(mAdapter);
+		mRecyclerView.getRefreshableView().setAdapter(mAdapter);
 		setListener();
 
 		//0则不执行拖动或者滑动
@@ -131,7 +133,7 @@ public class UIMainRecyActivity extends BaseActivity{
 			}
 		};
 		ItemTouchHelper itemTouchHelper = new ItemTouchHelper(mCallback);
-		itemTouchHelper.attachToRecyclerView(mRecyclerView);
+		itemTouchHelper.attachToRecyclerView(mRecyclerView.getRefreshableView());
 
 	}
 		
@@ -160,10 +162,10 @@ public class UIMainRecyActivity extends BaseActivity{
 //		mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN, Gravity.LEFT);
 		mEditText = (EditTextWithDel)findViewById(R.id.main_edit_task);
 		mImgAdd = (ImageView)findViewById(R.id.main_add);
-		mRecyclerView = (RecyclerView)findViewById(R.id.main_list);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+		mRecyclerView = (PullToRefreshRecyclerView) findViewById(R.id.main_list);
+        mRecyclerView.getRefreshableView().setItemAnimator(new DefaultItemAnimator());
+        mRecyclerView.getRefreshableView().setHasFixedSize(true);
+        mRecyclerView.getRefreshableView().setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 	}
 	
 	private void initData(){
@@ -254,6 +256,12 @@ public class UIMainRecyActivity extends BaseActivity{
 			}
 		});
 
+		mRecyclerView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<RecyclerView>() {
+			@Override
+			public void onRefresh(PullToRefreshBase<RecyclerView> refreshView) {
+				addTimeTask();
+			}
+		});
 	}
 
 	private void addShare() {
@@ -286,6 +294,9 @@ public class UIMainRecyActivity extends BaseActivity{
 
 
 	private void addTimeTask() {
+		if(mRecyclerView.isRefreshing()) {
+			mRecyclerView.onRefreshComplete();
+		}
         String title = mEditText.getText().toString();
         if("".equals(title)){
             Intent intent = new Intent();
