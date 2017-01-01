@@ -57,8 +57,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
             holder.comment.setVisibility(View.VISIBLE);
             holder.titleCenter.setVisibility(View.GONE);
         }
-        if(sTime != null){
-            String[] strArray = sTime.split(" ");
+        if(eTime != null){
+            String[] strArray = eTime.split(" ");
             if(strArray.length > 1) {
                 String monthDay = strArray[0];
                 String hourMin = strArray[1];
