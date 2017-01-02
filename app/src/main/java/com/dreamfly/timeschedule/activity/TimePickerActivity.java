@@ -91,7 +91,10 @@ public class TimePickerActivity extends BaseActivity {
 						+ mEndTimePicker.getMinute();
 				LogPrint.Debug("1111 mTimeArray = " + mTimeArray[0]
 					+ "; 1 = " + mTimeArray[1]);
-				EventBus.getDefault().post(mTimeArray);
+				TimePickerEntity timePickerEntity = new TimePickerEntity();
+				timePickerEntity.setStartTime(mTimeArray[0]);
+				timePickerEntity.setEndTime(mTimeArray[1]);
+				EventBus.getDefault().post(timePickerEntity);
 				finish();
 			}
 		});
@@ -138,6 +141,27 @@ public class TimePickerActivity extends BaseActivity {
 
 	private void restoreInstance(Bundle savedInstanceState) {
 		mTimeArray = savedInstanceState.getStringArray(ConstantVar.TASK_TIME);
+	}
+
+	public static class TimePickerEntity {
+		private String startTime;
+		private String endTime;
+
+		public String getStartTime() {
+			return startTime;
+		}
+
+		public void setStartTime(String startTime) {
+			this.startTime = startTime;
+		}
+
+		public String getEndTime() {
+			return endTime;
+		}
+
+		public void setEndTime(String endTime) {
+			this.endTime = endTime;
+		}
 	}
 
 }

@@ -282,11 +282,13 @@ public class UIAddTaskActivity extends BaseActivity{
 	/**
 	 * 接收从TimePickerActivity发生过来的事件。
 	 * */
-	public void onEventMainThread(String[] timeArray) {
-		LogPrint.Debug("==>> receive.. timeArray 0 = " + timeArray[0]
-			+ "; 1 = " + timeArray[1]);
-		mStartTime = timeArray[0];
-		mEndTime = timeArray[1];
+	public void onEventMainThread(TimePickerActivity.TimePickerEntity timePickerEntity) {
+		LogPrint.Debug("==>> receive.. timePickerEntity  = " + timePickerEntity);
+		if(timePickerEntity == null) {
+			return ;
+		}
+		mStartTime = timePickerEntity.getStartTime();
+		mEndTime = timePickerEntity.getEndTime();
 		mTextSTime.setText(mStartTime);
 		mTextETime.setText(mEndTime);
 	}

@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.Menu;
@@ -17,6 +19,7 @@ import android.widget.LinearLayout;
 
 import com.dreamfly.debuginfo.LogPrint;
 import com.dreamfly.timeschedule.R;
+import com.dreamfly.timeschedule.ad.AdManager;
 import com.dreamfly.timeschedule.adapter.ViewPagerAdapter;
 import com.dreamfly.timeschedule.utils.ApplicationVersionUtils;
 import com.dreamfly.timeschedule.utils.ApplicationVersionUtils.ClientVersionInfo;
@@ -28,17 +31,24 @@ import java.util.ArrayList;
 
 public class SplashActivity extends Activity implements OnClickListener, OnPageChangeListener{
 	private static final String TAG = SplashActivity.class.getSimpleName();
-	private static final int[] mPics = {R.drawable.introduce_1,
-										R.drawable.introduce_2,
-										R.drawable.introduce_3,
-										R.drawable.introduce_4};
+//	private static final int[] mPics = {R.drawable.introduce_1,
+//										R.drawable.introduce_2,
+//										R.drawable.introduce_3,
+//										R.drawable.introduce_4};
+	private static final int[] mPics = {R.drawable.sp_0001,
+										R.drawable.sp_0002,
+										R.drawable.sp_0003};
+	private static final int TIMEOUT_CHECK_AD = 3000;
+	private static final int TIMEOUT_SHOW_AD = 3000;
+	private static final int MSG_SHOW_SPLASH_AD = 0;
+	private static final int MSG_SHOW_MAIN = 1;
 	private ImageView[] mPoints;
 	private ViewPager mViewPager;
 	private ViewPagerAdapter mVpAdapter;
 	private ArrayList<View> mViews;
 	private int mCount = 0;
-	
 	private int mCurrIndex;
+	private AdManager mAdManager;
 
 	@Override
 	protected void onPause() {
@@ -60,12 +70,15 @@ public class SplashActivity extends Activity implements OnClickListener, OnPageC
 		int versionCode = clientVersionInfo.getVersionCode();
 		ConfigUtils configUtils = new ConfigUtils(this);
 		int oldVersionCode = configUtils.getCurVersionCode();
+		mAdManager = new AdManager(this);
 		if(configUtils.isAppFirstRun() || oldVersionCode != versionCode) {
 			doFirstEnter();
 			configUtils.setAppFirstRun(false);
 			configUtils.setCurVersionCode(versionCode);
 		} else {
 			doNotFirstEnter();
+			startMainListActivity();
+//			loadAd();
 		}
 	}
 
@@ -77,8 +90,6 @@ public class SplashActivity extends Activity implements OnClickListener, OnPageC
 
 	private void doNotFirstEnter() {
 		setContentView(R.layout.splash);
-		startMainListActivity();
-		finish();
 	}
 
 	public void initView(){
@@ -161,6 +172,7 @@ public class SplashActivity extends Activity implements OnClickListener, OnPageC
 		//intent.setClass(SplashActivity.this, UIMainListActivity.class);
 		intent.setClass(SplashActivity.this, UIMainRecyActivity.class);
 		startActivity(intent);
+		finish();
 	}
 
 	@Override
@@ -205,6 +217,32 @@ public class SplashActivity extends Activity implements OnClickListener, OnPageC
 		mPoints[position].setEnabled(false);
 		mPoints[mCurrIndex].setEnabled(true);
 		mCurrIndex = position;
+	}
+
+	private final Handler mHandler = new Handler() {
+
+		@Override
+		public void handleMessage(Message msg) {
+			int what = msg.what;
+			switch (what) {
+				case MSG_SHOW_SPLASH_AD:
+					showAd();
+					break;
+				case MSG_SHOW_MAIN:
+					startMainListActivity();
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	private void loadAd() {
+		mHandler.sendEmptyMessageDelayed(MSG_SHOW_MAIN, TIMEOUT_CHECK_AD);
+	}
+
+	private void showAd() {
+
 	}
 
 }

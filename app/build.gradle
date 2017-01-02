@@ -12,9 +12,31 @@ android {
         versionName rootProject.ext.versionName
     }
 
-    buildTypes {
+    signingConfigs {
+        debug {
+        }
+
         release {
+            storeFile file(RELEASE_STORE_FILE)
+            storePassword RELEASE_STORE_PWD
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_KEY_PWD
+        }
+    }
+
+    buildTypes {
+        debug {
             minifyEnabled false
+            zipAlignEnabled false
+            shrinkResources false
+            signingConfig signingConfigs.debug
+        }
+
+        release {
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
