@@ -87,3 +87,8 @@
     public void onEvent*(**);
     void onEvent*(**);
 }
+
+#百度联盟广告
+-keep class com.baidu.** {
+public protected *;
+}

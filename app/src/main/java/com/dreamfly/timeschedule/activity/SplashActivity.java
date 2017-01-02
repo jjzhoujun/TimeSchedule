@@ -10,13 +10,17 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
+import com.baidu.mobads.SplashAd;
+import com.baidu.mobads.SplashAdListener;
 import com.dreamfly.debuginfo.LogPrint;
 import com.dreamfly.timeschedule.R;
 import com.dreamfly.timeschedule.ad.AdManager;
@@ -24,7 +28,6 @@ import com.dreamfly.timeschedule.adapter.ViewPagerAdapter;
 import com.dreamfly.timeschedule.utils.ApplicationVersionUtils;
 import com.dreamfly.timeschedule.utils.ApplicationVersionUtils.ClientVersionInfo;
 import com.dreamfly.timeschedule.utils.ConfigUtils;
-import com.umeng.analytics.MobclickAgent;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -51,18 +54,6 @@ public class SplashActivity extends Activity implements OnClickListener, OnPageC
 	private AdManager mAdManager;
 
 	@Override
-	protected void onPause() {
-		super.onPause();
-		MobclickAgent.onPause(this);
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		MobclickAgent.onResume(this);
-	}
-
-	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		ClientVersionInfo clientVersionInfo = ApplicationVersionUtils
@@ -77,9 +68,24 @@ public class SplashActivity extends Activity implements OnClickListener, OnPageC
 			configUtils.setCurVersionCode(versionCode);
 		} else {
 			doNotFirstEnter();
-			startMainListActivity();
-//			loadAd();
+//			startMainListActivity();
+			loadAd();
 		}
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if (canJumpImmediately) {
+			jumpWhenCanClick();
+		}
+		canJumpImmediately = true;
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		canJumpImmediately = false;
 	}
 
 	private void doFirstEnter() {
@@ -238,11 +244,62 @@ public class SplashActivity extends Activity implements OnClickListener, OnPageC
 	};
 
 	private void loadAd() {
-		mHandler.sendEmptyMessageDelayed(MSG_SHOW_MAIN, TIMEOUT_CHECK_AD);
+//		mHandler.sendEmptyMessageDelayed(MSG_SHOW_MAIN, TIMEOUT_CHECK_AD);
+		RelativeLayout adsParent = (RelativeLayout) this.findViewById(R.id.adsRl);
+
+		// the observer of AD
+		SplashAdListener listener = new SplashAdListener() {
+			@Override
+			public void onAdDismissed() {
+				Log.i("RSplashActivity", "onAdDismissed");
+				jumpWhenCanClick(); // 跳转至您的应用主界面
+			}
+
+			@Override
+			public void onAdFailed(String arg0) {
+				Log.i("RSplashActivity", "onAdFailed");
+				jump();
+			}
+
+			@Override
+			public void onAdPresent() {
+				Log.i("RSplashActivity", "onAdPresent");
+			}
+
+			@Override
+			public void onAdClick() {
+				Log.i("RSplashActivity", "onAdClick");
+				// 设置开屏可接受点击时，该回调可用
+			}
+		};
+		String adPlaceId = "2058622"; // 重要：请填上您的广告位ID，代码位错误会导致无法请求到广告  -- demo
+//		String adPlaceId = "3273906"; // 重要：请填上您的广告位ID，代码位错误会导致无法请求到广告
+		new SplashAd(this, adsParent, listener, adPlaceId, true);
 	}
 
 	private void showAd() {
 
 	}
+
+	/**
+	 * 当设置开屏可点击时，需要等待跳转页面关闭后，再切换至您的主窗口。故此时需要增加canJumpImmediately判断。 另外，点击开屏还需要在onResume中调用jumpWhenCanClick接口。
+	 */
+	public boolean canJumpImmediately = false;
+
+	private void jumpWhenCanClick() {
+		Log.d("test", "this.hasWindowFocus():" + this.hasWindowFocus());
+		if (canJumpImmediately) {
+			startMainListActivity();
+		} else {
+			canJumpImmediately = true;
+		}
+	}
+
+	private void jump() {
+		startMainListActivity();
+	}
+
+
+
 
 }
