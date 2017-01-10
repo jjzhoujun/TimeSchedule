@@ -60,6 +60,12 @@ android {
 
 }
 
+repositories {
+    flatDir {
+        dirs 'libs/ali'
+    }
+}
+
 dependencies {
     compile 'com.android.support:support-v4:22.2.1'
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -70,4 +76,8 @@ dependencies {
     compile 'com.android.support:cardview-v7:22.2.1'
     compile 'com.umeng.analytics:analytics:latest.integration'
     compile project(':Pulltorefresh:library')
+    compile (name:'alisdk-feedback-2.5.0.1', ext:'aar')
+    compile (name:'securityguardaar3-5.1.81', ext:'aar')
+    compile files('app-monitor-sdk-2.5.1.1_for_bc_proguard.jar')
+    compile files('utdid4all-1.1.5.3_proguard.jar')
 }

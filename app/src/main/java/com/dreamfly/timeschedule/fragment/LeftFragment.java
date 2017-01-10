@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
 import com.dreamfly.debuginfo.LogPrint;
 import com.dreamfly.timeschedule.R;
 import com.umeng.socialize.ShareAction;
@@ -30,6 +31,7 @@ public class LeftFragment extends BaseFragment{
             @Override
             public void onClick(View v) {
                 LogPrint.Debug("==>>> Press Submit in Fragment....");
+                FeedbackAPI.openFeedbackActivity();
 
             }
         });
