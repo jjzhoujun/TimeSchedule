@@ -30,6 +30,7 @@ android {
             zipAlignEnabled false
             shrinkResources false
             signingConfig signingConfigs.debug
+//            signingConfig signingConfigs.release
         }
 
         release {
@@ -62,7 +63,7 @@ android {
 
 repositories {
     flatDir {
-        dirs 'libs/ali'
+        dirs 'libs'
     }
 }
 
