@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -7,42 +7,22 @@
     android:clickable="true">
 
     <TextView
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_centerInParent="true"
         android:text="@string/str_tucao"
         android:textSize="@dimen/main_list_center_title_size"
         android:textColor="@color/black"/>
-
-    <com.dreamfly.widget.EditTextWithDel
-        android:id="@+id/edit_notice"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/textedit_large_note_height"
-        android:layout_margin="@dimen/normal_inner_space"
-        android:layout_gravity="center_vertical"
-        android:background="@drawable/main_edit_task"
-        android:padding="@dimen/textedit_cursor_margin"
-        android:gravity="left|top"
-        />
 
     <Button
         android:id="@+id/icon_submit"
         android:layout_width="match_parent"
         android:layout_height="@dimen/button_layout_height"
         android:layout_margin="@dimen/normal_inner_space"
-        android:layout_gravity="center"
+        android:layout_below="@id/title"
         android:gravity="center"
         android:background="@drawable/selector_save_btn"
         android:text="@string/str_submit"/>
 
-    <ImageView
-        android:id="@+id/line_two"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_margin="@dimen/normal_inner_space"
-        android:background="@drawable/shape_rectangle_divider"/>
-
-    
-
-</LinearLayout>
+</RelativeLayout>

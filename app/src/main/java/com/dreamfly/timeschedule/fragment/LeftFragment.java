@@ -9,7 +9,6 @@ import android.widget.Button;
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
 import com.dreamfly.debuginfo.LogPrint;
 import com.dreamfly.timeschedule.R;
-import com.umeng.socialize.ShareAction;
 
 /**
  * Created by jayden on 1/8/16.
