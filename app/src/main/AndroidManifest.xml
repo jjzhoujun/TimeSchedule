@@ -11,7 +11,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
@@ -63,6 +62,11 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <!--友盟社会化分享 End-->
+
+        <!--AdView广告相关 Start-->
+        <activity android:name="com.dreamfly.timeschedule.AdviewWebView" />
+        <service android:name="com.dreamfly.timeschedule.DownloadService" />
+        <!--AdView广告相关 End-->
 
     </application>
 </manifest>

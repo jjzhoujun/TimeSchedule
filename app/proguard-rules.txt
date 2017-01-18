@@ -108,3 +108,15 @@ public protected *;
 -dontwarn com.ta.**
 -keep class com.alibaba.sdk.android.feedback.** {*;}
 #阿里百川 SDK 相关 -- end
+
+#AdView start
+-keepclassmembers class * {public *;}
+-keep public class * {public *;}
+-keep public class com.adwo.adsdk.AdwoAdBrowserActivity
+-keep public class com.wooboo.** {*;}
+-keep public class cn.aduu.android.**{*;}
+-keep public class com.wqmobile.** {*;}
+-keep class com.baidu.mobads.** {
+  public protected *;
+}
+#AdView end

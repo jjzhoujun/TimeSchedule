@@ -14,17 +14,19 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.baidu.mobads.SplashAd;
-import com.baidu.mobads.SplashAdListener;
 import com.dreamfly.debuginfo.LogPrint;
+import com.dreamfly.timeschedule.InitConfiguration;
 import com.dreamfly.timeschedule.R;
 import com.dreamfly.timeschedule.ad.AdManager;
 import com.dreamfly.timeschedule.adapter.ViewPagerAdapter;
+import com.dreamfly.timeschedule.interfaces.AdViewSpreadListener;
+import com.dreamfly.timeschedule.manager.AdViewSpreadManager;
 import com.dreamfly.timeschedule.utils.ApplicationVersionUtils;
 import com.dreamfly.timeschedule.utils.ApplicationVersionUtils.ClientVersionInfo;
 import com.dreamfly.timeschedule.utils.ConfigUtils;
@@ -32,7 +34,7 @@ import com.dreamfly.timeschedule.utils.ConfigUtils;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-public class SplashActivity extends Activity implements OnClickListener, OnPageChangeListener{
+public class SplashActivity extends Activity implements OnClickListener, OnPageChangeListener, AdViewSpreadListener {
 	private static final String TAG = SplashActivity.class.getSimpleName();
 //	private static final int[] mPics = {R.drawable.introduce_1,
 //										R.drawable.introduce_2,
@@ -52,6 +54,9 @@ public class SplashActivity extends Activity implements OnClickListener, OnPageC
 	private int mCount = 0;
 	private int mCurrIndex;
 	private AdManager mAdManager;
+	public static InitConfiguration initConfiguration;
+	private static final String mKey1 = "SDK20171917070119c16d0pryy8h4q9y";
+	private static String[] mKeySet = new String[]{mKey1};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +81,7 @@ public class SplashActivity extends Activity implements OnClickListener, OnPageC
 	@Override
 	protected void onResume() {
 		super.onResume();
+		Log.d(TAG, "tstest===>>> onResume, canJump = " + canJumpImmediately);
 		if (canJumpImmediately) {
 			jumpWhenCanClick();
 		}
@@ -85,7 +91,8 @@ public class SplashActivity extends Activity implements OnClickListener, OnPageC
 	@Override
 	protected void onPause() {
 		super.onPause();
-		canJumpImmediately = false;
+		Log.d(TAG, "tstest===>>> onPause, canJump = " + canJumpImmediately);
+		canJumpImmediately = true;
 	}
 
 	private void doFirstEnter() {
@@ -245,36 +252,10 @@ public class SplashActivity extends Activity implements OnClickListener, OnPageC
 
 	private void loadAd() {
 //		mHandler.sendEmptyMessageDelayed(MSG_SHOW_MAIN, TIMEOUT_CHECK_AD);
-		RelativeLayout adsParent = (RelativeLayout) this.findViewById(R.id.adsRl);
-
-		// the observer of AD
-		SplashAdListener listener = new SplashAdListener() {
-			@Override
-			public void onAdDismissed() {
-				Log.i("RSplashActivity", "onAdDismissed");
-				jumpWhenCanClick(); // 跳转至您的应用主界面
-			}
-
-			@Override
-			public void onAdFailed(String arg0) {
-				Log.i("RSplashActivity", "onAdFailed");
-				jump();
-			}
-
-			@Override
-			public void onAdPresent() {
-				Log.i("RSplashActivity", "onAdPresent");
-			}
-
-			@Override
-			public void onAdClick() {
-				Log.i("RSplashActivity", "onAdClick");
-				// 设置开屏可接受点击时，该回调可用
-			}
-		};
-		String adPlaceId = "2058622"; // 重要：请填上您的广告位ID，代码位错误会导致无法请求到广告  -- demo
-//		String adPlaceId = "3273906"; // 重要：请填上您的广告位ID，代码位错误会导致无法请求到广告
-		new SplashAd(this, adsParent, listener, adPlaceId, true);
+		initConfiguration = InitConfiguration.createDefault(this);
+		AdViewSpreadManager.getInstance(this).init(initConfiguration, mKeySet);
+		AdViewSpreadManager.getInstance(this).request(this, mKey1,
+				(RelativeLayout) findViewById(R.id.adsRl), this);
 	}
 
 	private void showAd() {
@@ -287,7 +268,7 @@ public class SplashActivity extends Activity implements OnClickListener, OnPageC
 	public boolean canJumpImmediately = false;
 
 	private void jumpWhenCanClick() {
-		Log.d("test", "this.hasWindowFocus():" + this.hasWindowFocus());
+		Log.d("test", "this.hasWindowFocus():" + this.hasWindowFocus() + "canjump = " + canJumpImmediately);
 		if (canJumpImmediately) {
 			startMainListActivity();
 		} else {
@@ -300,6 +281,37 @@ public class SplashActivity extends Activity implements OnClickListener, OnPageC
 	}
 
 
+	@Override
+	public void onAdDisplay(String s) {
+		Log.d(TAG, "tstest==>>  onAdDisplay, s = " + s);
+	}
 
+	@Override
+	public void onAdClose(String s) {
+		Log.d(TAG, "tstest==>>  onAdClose, s = " + s);
+		jump();
+	}
 
+	@Override
+	public void onAdRecieved(String s) {
+		Log.d(TAG, "tstest==>>  onAdRecieved, s = " + s);
+	}
+
+	@Override
+	public void onAdClick(String s) {
+		Log.d(TAG, "tstest==>>  onAdClick, s = " + s);
+		canJumpImmediately = false;
+		jumpWhenCanClick();
+	}
+
+	@Override
+	public void onAdFailed(String s) {
+		Log.d(TAG, "tstest==>>  onAdFailed, s = " + s);
+		jump();
+	}
+
+	@Override
+	public void onAdSpreadNotifyCallback(String s, ViewGroup viewGroup, int i, int i1) {
+
+	}
 }
