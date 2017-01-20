@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
@@ -50,6 +51,7 @@ public class SplashActivity extends Activity implements OnClickListener, OnPageC
 	private ImageView[] mPoints;
 	private ViewPager mViewPager;
 	private ViewPagerAdapter mVpAdapter;
+	private Button mBtnEnter;
 	private ArrayList<View> mViews;
 	private int mCount = 0;
 	private int mCurrIndex;
@@ -79,7 +81,7 @@ public class SplashActivity extends Activity implements OnClickListener, OnPageC
 	}
 
 	@Override
-	protected void onResume() {
+	public void onResume() {
 		super.onResume();
 		Log.d(TAG, "tstest===>>> onResume, canJump = " + canJumpImmediately);
 		if (canJumpImmediately) {
@@ -89,7 +91,7 @@ public class SplashActivity extends Activity implements OnClickListener, OnPageC
 	}
 
 	@Override
-	protected void onPause() {
+	public void onPause() {
 		super.onPause();
 		Log.d(TAG, "tstest===>>> onPause, canJump = " + canJumpImmediately);
 		canJumpImmediately = true;
@@ -109,6 +111,7 @@ public class SplashActivity extends Activity implements OnClickListener, OnPageC
 		mViews = new ArrayList<View>();
 		mViewPager = (ViewPager)findViewById(R.id.viewpager);
 		mVpAdapter = new ViewPagerAdapter(mViews);
+		mBtnEnter = (Button) findViewById(R.id.btn_enter);
 	}
 	
 	public void initData(){
@@ -128,6 +131,13 @@ public class SplashActivity extends Activity implements OnClickListener, OnPageC
 		// set data adapter
 		mViewPager.setAdapter(mVpAdapter);
 		mViewPager.setOnPageChangeListener(this);
+
+		mBtnEnter.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				startMainListActivity();
+			}
+		});
 		
 		initPoint();
 	}
@@ -203,6 +213,11 @@ public class SplashActivity extends Activity implements OnClickListener, OnPageC
 		// TODO Auto-generated method stub
 		LogPrint.Debug("====onPageSelected==== arg0 = " + arg0);
 		setCurDot(arg0);
+		if(arg0 == mPics.length - 1) {
+			mBtnEnter.setVisibility(View.VISIBLE);
+		} else {
+			mBtnEnter.setVisibility(View.GONE);
+		}
 	}
 
 	@Override

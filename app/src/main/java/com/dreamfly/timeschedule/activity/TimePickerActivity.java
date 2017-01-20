@@ -9,7 +9,6 @@ import android.widget.ImageButton;
 import com.dreamfly.debuginfo.LogPrint;
 import com.dreamfly.timeschedule.R;
 import com.dreamfly.timeschedule.bo.ConstantVar;
-import com.dreamfly.timeschedule.bo.TimeItemEntity;
 import com.dreamfly.timeschedule.utils.Tools;
 import com.dreamfly.widget.TimePicker;
 import com.umeng.analytics.MobclickAgent;
@@ -26,19 +25,6 @@ public class TimePickerActivity extends BaseActivity {
 	private TimePicker mStartTimePicker;
 	private TimePicker mEndTimePicker;
 	private ImageButton mBtnBack;
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		MobclickAgent.onResume(this);
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-		MobclickAgent.onPause(this);
-	}
-
 	private Button mBtnSave;
 
 	@Override

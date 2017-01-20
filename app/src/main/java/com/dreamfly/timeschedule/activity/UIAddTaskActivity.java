@@ -86,18 +86,6 @@ public class UIAddTaskActivity extends BaseActivity{
 	}
 
 	@Override
-	protected void onResume() {
-		super.onResume();
-		MobclickAgent.onResume(this);
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-		MobclickAgent.onPause(this);
-	}
-
-	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 //		LogPrint.Warning("=>>start to onSavedInstanceState");
 		outState.putSerializable(ConstantVar.TASK_DATA, mTimeItemEntity);

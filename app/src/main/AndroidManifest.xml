@@ -51,17 +51,7 @@
 
         <!--友盟统计初始化-->
         <meta-data android:value="56908ebe67e58e0efd0036ec" android:name="UMENG_APPKEY"></meta-data>
-        <meta-data android:value="Wandoujia" android:name="UMENG_CHANNEL"/>
-
-        <!--友盟社会化分享 Start-->
-        <!--微信分享-->
-        <activity
-            android:name=".wxapi.WXEntryActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <!--友盟社会化分享 End-->
+        <meta-data android:value="develop" android:name="UMENG_CHANNEL"/>
 
         <!--AdView广告相关 Start-->
         <activity android:name="com.dreamfly.timeschedule.AdviewWebView" />

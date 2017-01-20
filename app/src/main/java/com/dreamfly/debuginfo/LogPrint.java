@@ -3,8 +3,8 @@ package com.dreamfly.debuginfo;
 import android.util.Log;
 
 public class LogPrint {
-	private static boolean debug = true;
-	private static boolean warning = true;
+	private static boolean debug = false;
+	private static boolean warning = false;
 	private static boolean fatal = true;
 
 	public static void Debug(String msg) {

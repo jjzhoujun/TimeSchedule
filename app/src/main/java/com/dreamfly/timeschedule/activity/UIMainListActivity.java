@@ -95,18 +95,6 @@ public class UIMainListActivity extends BaseActivity{
         EventBus.getDefault().unregister(this);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-    }
-
     private void initUI(){
 		mEditText = (EditTextWithDel)findViewById(R.id.main_edit_task);
 		mImgAdd = (ImageView)findViewById(R.id.main_add);

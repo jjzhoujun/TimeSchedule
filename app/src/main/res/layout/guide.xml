@@ -38,6 +38,18 @@
             android:clickable="true"
             android:layout_gravity="center_vertical"
             android:src="@drawable/point"/>
-
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_enter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/ll_dot"
+        android:layout_marginBottom="5dp"
+        android:visibility="gone"
+        android:text="@string/str_enter_now"
+        android:textSize="20sp"
+        android:background="@drawable/selector_second_level"/>
 </RelativeLayout>

@@ -30,11 +30,6 @@ import com.dreamfly.widget.EditTextWithDel;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshRecyclerView;
 import com.umeng.analytics.MobclickAgent;
-import com.umeng.socialize.ShareAction;
-import com.umeng.socialize.ShareContent;
-import com.umeng.socialize.UMShareListener;
-import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.media.UMImage;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -143,20 +138,6 @@ public class UIMainRecyActivity extends BaseActivity{
         EventBus.getDefault().unregister(this);
     }
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-		MobclickAgent.onPageStart("LeftFragment");
-		MobclickAgent.onResume(this);
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-		MobclickAgent.onPageEnd("LeftFragment");
-		MobclickAgent.onPause(this);
-	}
-
 	private void initUI(){
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.id_drawer_layout);
 //		mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN, Gravity.LEFT);
@@ -264,33 +245,6 @@ public class UIMainRecyActivity extends BaseActivity{
 		});
 	}
 
-	private void addShare() {
-		LogPrint.Debug("==>> addShare.... weixin...");
-		UMImage image = new UMImage(this, "http://www.umeng.com/images/pic/social/integrated_3.png");
-		new ShareAction(this).setDisplayList(SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.SINA, SHARE_MEDIA.QZONE,
-					SHARE_MEDIA.QQ, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.TENCENT,SHARE_MEDIA.RENREN)
-				.setContentList(new ShareContent(), new ShareContent())
-				.withMedia(image)
-				.setListenerList(umShareListener,umShareListener)
-				.open();
-	}
-
-	private UMShareListener umShareListener = new UMShareListener() {
-		@Override
-		public void onResult(SHARE_MEDIA platform) {
-			Toast.makeText(UIMainRecyActivity.this, platform + " 分享成功啦", Toast.LENGTH_SHORT).show();
-		}
-
-		@Override
-		public void onError(SHARE_MEDIA platform, Throwable t) {
-			Toast.makeText(UIMainRecyActivity.this,platform + " 分享失败啦", Toast.LENGTH_SHORT).show();
-		}
-
-		@Override
-		public void onCancel(SHARE_MEDIA platform) {
-			Toast.makeText(UIMainRecyActivity.this,platform + " 分享取消了", Toast.LENGTH_SHORT).show();
-		}
-	};
 
 
 	private void addTimeTask() {
