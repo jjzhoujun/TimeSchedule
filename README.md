@@ -12,9 +12,11 @@
 *Author*: Jayden
 
 效果如下：
+
 ![image](https://github.com/jjzhoujun/TimeSchedule/blob/master/apk_res/tvs1.gif)
 
-*Verions:*
+**Verions:**
+
 
 **V0.1.0**  初始化对应的控件，ViewPager控制前面翻页效果.
 **V0.2.0**  将Android Eclipse编辑方式换成AndroidStudio.
