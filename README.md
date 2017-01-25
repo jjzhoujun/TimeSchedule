@@ -1,7 +1,7 @@
 ###TimeSchedule
 ============
 本Apk已经上线应用宝以及百度系三大市场,欢迎体验吐槽:
-![百度市场](http://shouji.baidu.com/software/10850235.html)
+[点滴时间-百度市场](http://shouji.baidu.com/software/10850235.html)
 
 **项目介绍:**想要好好管理自己的时间，下载了这么多应用，却被复杂冗余的操作而感到不耐烦。
 
@@ -12,7 +12,7 @@
 *Author*: Jayden
 
 效果如下：
-![demo](http://heiheimonkey.com/wp-content/uploads/2016/12/TSV1-点滴时间使用录制视频.gif)
+![demo](http://heiheimonkey.com/wp-content/uploads/2017/01/tvs1.gif)
 
 *Verions:*
 
