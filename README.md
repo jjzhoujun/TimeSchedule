@@ -12,7 +12,7 @@
 *Author*: Jayden
 
 效果如下：
-![demo](http://heiheimonkey.com/wp-content/uploads/2017/01/tvs1.gif)
+![image](https://github.com/jjzhoujun/TimeSchedule/blob/master/apk_res/tvs1.gif)
 
 *Verions:*
 
